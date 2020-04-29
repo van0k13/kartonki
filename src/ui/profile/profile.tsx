@@ -5,9 +5,9 @@ import styles from './profile.module.css'
 const ProfilePage = () => {
   return (
     <div className={styles.profileWrappe}>
-      ProfilePage
+      <h2>Profile Page</h2>
     </div>
   );
-}
+};
 
 export default ProfilePage;

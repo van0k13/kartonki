@@ -13,6 +13,6 @@ const Header = () => {
       <NavLink to='/registration'>RegistrationPage</NavLink>
     </div>
   );
-}
+};
 
 export default Header;

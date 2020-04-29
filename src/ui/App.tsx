@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.module.css';
 import { Provider, connect } from 'react-redux';
 import store from '../bll/store';
 import { HashRouter, Route } from 'react-router-dom';
@@ -10,20 +10,21 @@ import NewPasswordPage from './newPassword/newPswd';
 import ProfilePage from './profile/profile';
 import PasswordRecoveringPage from './passwordRecover/pswdRecover';
 import RegistrationPage from './registration/registration';
+import s from './App.module.css';
 
 
 const App = () => {
   return (
-    <div className="App">
-      <Header />
-      <Route path='/auth' render={()=> <LoginizationPage />} />
-      <Route path='/new-password' render={()=> <NewPasswordPage />} />
-      <Route path='/profile' render={()=> <ProfilePage />} />
-      <Route path='/recover-password' render={()=> <PasswordRecoveringPage />} />
-      <Route path='/registration' render={()=> <RegistrationPage />} />
+    <div className={s.App}>
+            <Header />
+            <Route path='/auth' render={()=> <LoginizationPage />} />
+            <Route path='/new-password' render={()=> <NewPasswordPage />} />
+            <Route path='/profile' render={()=> <ProfilePage />} />
+            <Route path='/recover-password' render={()=> <PasswordRecoveringPage />} />
+            <Route path='/registration' render={()=> <RegistrationPage />} />
     </div>
   );
-}
+};
 
 
 
@@ -31,9 +32,9 @@ const App = () => {
 
 const mapState = (state: IState) => {
   return state
-}
+};
 
-const AppContainer = connect(mapState)(App)
+const AppContainer = connect(mapState)(App);
 const Main = () => {
   return (
     <HashRouter>
@@ -42,6 +43,6 @@ const Main = () => {
       </Provider>
     </HashRouter>
   )
-}
+};
 
 export default Main;
