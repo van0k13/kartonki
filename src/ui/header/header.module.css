@@ -1,0 +1,17 @@
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.459);
+    height: 50px;
+    padding: 0 10px;
+}
+.headerWrapper a:hover {
+    border: 2px black solid;
+    border-radius: 5px;
+    padding: 5px;
+}
+.headerWrapper a {
+    color: aliceblue;
+    text-decoration: none;
+}
