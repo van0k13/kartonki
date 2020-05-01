@@ -5,7 +5,7 @@ import s from './Input.module.css'
 const Input = () => {
     return (
         <div className={s.inputWrapper}>
-            <input type="text"/>
+            <input onChange={()=>{}} value='' type="text"/>
         </div>
     );
 };
