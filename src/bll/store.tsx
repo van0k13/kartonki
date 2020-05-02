@@ -16,4 +16,6 @@ const reducerPack = combineReducers({
 export type RootState = ReturnType<typeof reducerPack>
 
 const store = createStore(reducerPack, applyMiddleware(thunkMiddleware) );
+
+
 export default store;
