@@ -1,11 +1,19 @@
 import React from 'react';
 import s from './Input.module.css'
 
-
-const Input = () => {
+interface IPropsInput {
+    inputPlaceholder?: string,
+    inputValue?: string,
+    inputType?:string,
+    inputOnChange?: () => void
+}
+const Input: React.FC<IPropsInput> = ({
+                                          inputPlaceholder,inputValue,inputType, inputOnChange
+                                      }) => {
     return (
         <div className={s.inputWrapper}>
-            <input onChange={()=>{}} value='' type="text"/>
+            <input onChange={inputOnChange} placeholder={inputPlaceholder}
+                   value={inputValue} type={inputType}/>
         </div>
     );
 };
