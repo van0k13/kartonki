@@ -7,9 +7,7 @@
     padding: 0 10px;
 }
 .headerWrapper a:hover {
-    border: 2px black solid;
-    border-radius: 5px;
-    padding: 5px;
+    color: rgba(0, 0, 0, 0.44);
 }
 .headerWrapper a {
     color: aliceblue;

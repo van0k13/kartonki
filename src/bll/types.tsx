@@ -2,6 +2,7 @@ export interface IState {
 
 }
 
+
 export const FIRST_ACTION = 'FIRST_ACTION_CREATOR'
 export const SECOND_ACTION = 'SECOND_ACTION_CREATOR'
 
