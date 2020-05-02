@@ -12,6 +12,7 @@ const App: React.FC = () => {
   return (
     <div className={s.App}>
             <Header />
+
             <AllRoutes />
     </div>
   );

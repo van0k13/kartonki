@@ -2,9 +2,9 @@ import React from 'react';
 import s from './Input.module.css'
 
 interface IPropsInput {
-    inputPlaceholder?: string,
-    inputValue?: string,
-    inputType?:string,
+    inputPlaceholder?: string | undefined,
+    inputValue?: string | undefined,
+    inputType?:string | undefined,
     inputOnChange?: () => void
 }
 const Input: React.FC<IPropsInput> = ({
