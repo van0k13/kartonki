@@ -4,7 +4,7 @@ import Input from "../input/Input";
 import Button from "../button/Button";
 
 
-const NewPasswordPage = () => {
+const NewPswd = () => {
   return (
     <div className={styles.newPasswordWrapper}>
       <h2>New Password Page</h2>
@@ -21,4 +21,4 @@ const NewPasswordPage = () => {
   );
 };
 
-export default NewPasswordPage;
+export default NewPswd;
