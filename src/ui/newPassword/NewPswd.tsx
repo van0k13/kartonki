@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './newPswd.module.css'
-import Input from "../input/Input";
-import Button from "../button/Button";
+import Input from "../common/input/Input";
+import Button from "../common/button/Button";
 
 
 const NewPswd = () => {
