@@ -3,7 +3,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 import LoginizationPage from "../features/loginization/loginizationPage";
 import ProfilePage from "../features/profile/profile";
 import PasswordRecoveringPage from "../features/passwordRecover/pswdRecover";
-import RegistrationPage from "../features/registration/registration";
+import RegistrationPage from "../features/registration/registrationPage";
 import NewPswdPage from "../features/newPassword/NewPswdPage";
 
 export const TO_AUTH = '/auth';
