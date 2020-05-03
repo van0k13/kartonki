@@ -5,15 +5,15 @@ import Button from "../../common/button/Button";
 
 
 const NewPswd = (props: any) => {
-
+    debugger
   return (
     <div className={styles.newPasswordWrapper}>
       <h2>New Password Page</h2>
         <div>
-            <Input inputValue={props.newPassword}/>
+            <Input value={props.newPassword}/>
         </div>
         <div>
-            <Input inputValue={props.newPasswordRepeat}/>
+            <Input value={props.newPasswordRepeat}/>
         </div>
         <div>
             <Button/>
