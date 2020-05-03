@@ -4,15 +4,16 @@ import Input from "../../common/input/Input";
 import Button from "../../common/button/Button";
 
 
-const NewPswd = () => {
+const NewPswd = (props: any) => {
+
   return (
     <div className={styles.newPasswordWrapper}>
       <h2>New Password Page</h2>
         <div>
-            <Input/>
+            <Input inputValue={props.newPassword}/>
         </div>
         <div>
-            <Input/>
+            <Input inputValue={props.newPasswordRepeat}/>
         </div>
         <div>
             <Button/>
