@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
-import LoginizationPage from "../features/loginization/loginization";
+import LoginizationPage from "../features/loginization/loginizationPage";
 import ProfilePage from "../features/profile/profile";
 import PasswordRecoveringPage from "../features/passwordRecover/pswdRecover";
 import RegistrationPage from "../features/registration/registration";

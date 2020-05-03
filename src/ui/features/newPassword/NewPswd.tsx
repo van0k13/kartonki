@@ -5,7 +5,7 @@ import Button from "../../common/button/Button";
 
 
 const NewPswd = (props: any) => {
-    debugger
+
   return (
     <div className={styles.newPasswordWrapper}>
       <h2>New Password Page</h2>
