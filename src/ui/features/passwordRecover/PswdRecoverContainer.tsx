@@ -8,7 +8,7 @@ const PswdRecoverContainer = (props: any) => {
 
 
     return (
-        <PswdRecover userEmail={userEmail} />
+        <PswdRecover userEmail={userEmail} putUserEmail={putUserEmail}/>
     );
 };
 
