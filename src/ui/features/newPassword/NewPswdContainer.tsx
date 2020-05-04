@@ -4,12 +4,14 @@ import NewPswd from "./NewPswd";
 
 const NewPswdContainer = () => {
     //
-    let [newPassword, setNewPassword] = useState('pass');
-    let [newPasswordRepeat, setNewPasswordRepeat] = useState('new pass');
+    let [newPassword, setNewPassword] = useState('');
+    let [newPasswordRepeat, setNewPasswordRepeat] = useState('');
 
 
     return (
-        <NewPswd newPassword={newPassword} newPasswordRepeat={newPasswordRepeat}/>
+        <NewPswd newPassword={newPassword} setNewPassword={setNewPassword}
+                 newPasswordRepeat={newPasswordRepeat} setNewPasswordRepeat={setNewPasswordRepeat}
+        />
     );
 };
 
