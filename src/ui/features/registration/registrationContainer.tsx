@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {registrationErrorAC, registrationTC} from "../../../bll/registr_reducer";
 import {RootState} from "../../../bll/store";
 import {Redirect} from 'react-router-dom';
-import {TO_PROFILE} from "../../common/routes";
+import {TO_AUTH} from "../../common/routes";
 
 
 const RegistrationContainer = () => {
@@ -26,7 +26,8 @@ const RegistrationContainer = () => {
     }
 
     return (
-        <>{!answerFromServer
+        <>
+            {!answerFromServer
            ? <Registration setLogin={setLogin}
                           setPassword={setPassword}
                           login={login} password={password}
@@ -36,7 +37,8 @@ const RegistrationContainer = () => {
                           registerMe={registerMe}
                           wrongRepeatingPassword={wrongRepeatingPassword}
             />
-            : <Redirect to={TO_PROFILE}/>}
+            : <Redirect to={TO_AUTH}/>
+            }
         </>
     );
 };

@@ -6,12 +6,18 @@ import Button from "../../common/button/Button";
 interface IProps {
     setLogin: (value: string) => void,
     setPassword: (value: string) => void,
+    setRememberMe: (value: boolean) => void,
+    signIn: () => void,
     login: string,
     password: string,
+    rememberMe: boolean,
+    loginError: string,
 
 }
 
-const Loginization: React.FC<IProps> = ({login, password, setPassword, setLogin}) => {
+const Loginization: React.FC<IProps> = ({login, password, setPassword,
+                                            setLogin, setRememberMe, signIn,
+                                            rememberMe,loginError}) => {
   return (
     <div className={styles.loginizationWrapper}>
       <h2>Loginization Page</h2>
@@ -24,8 +30,12 @@ const Loginization: React.FC<IProps> = ({login, password, setPassword, setLogin}
                    inputPlaceholder={'your password'}/>
         </div>
         <div>
-            <Button/>
+            <Input inputType={'checkbox'} checked={rememberMe} inputOnChangeChecked={setRememberMe}/>
         </div>
+        <div>
+            <Button buttonName={'Sign In'} buttonOnClick={signIn}/>
+        </div>
+        {loginError? <span>loginError</span> : null}
 
     </div>
   );
