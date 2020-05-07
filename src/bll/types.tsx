@@ -12,7 +12,8 @@ export interface IStateRegistr {
 export interface IStateLogin {
   myName: string,
   authSuccess: boolean,
-  errorMessage: string
+  errorMessage: string,
+  token: string
 }
 
 export const FIRST_ACTION = 'FIRST_ACTION'
@@ -38,7 +39,8 @@ export interface secondActionCreator {
 export interface ILoginSuccess {
   type: typeof LOGIN_SUCCESS,
   loginSuccess: boolean,
-  myName: string
+  myName: string,
+  token: string
 }
 export interface ILoginError {
   type: typeof LOGIN_ERROR,
