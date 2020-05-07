@@ -1,6 +1,10 @@
 export interface IState {
 
 }
+export interface IStatePasswordRecover {
+  success: boolean
+  message: string
+}
 export interface IStateRegistr {
   message: string,
   registeredSuccess: boolean
@@ -11,21 +15,12 @@ export interface IStateLogin {
   errorMessage: string
 }
 
-
+export const FIRST_ACTION = 'FIRST_ACTION'
+export const SECOND_ACTION = 'SECOND_ACTION'
 export const REGISTRATE_SUCCESS = 'registr_reducer/REGISTRATE_SUCCESS'
 export const REGISTRATE_ERROR = 'registr_reducer/REGISTRATE_ERROR'
 export const LOGIN_ERROR = 'auth_reducer/LOGIN_ERROR'
 export const LOGIN_SUCCESS = 'auth_reducer/LOGIN_SUCCESS'
-export const FIRST_ACTION = 'FIRST_ACTION'
-export const SECOND_ACTION = 'SECOND_ACTION'
-export interface IStatePasswordRecover {
-  success: boolean
-  message: string
-}
-export const REGISTRATE_SUCCESS = 'registr_reducer/REGISTRATE_SUCCESS';
-export const REGISTRATE_ERROR = 'registr_reducer/REGISTRATE_ERROR';
-export const FIRST_ACTION = 'FIRST_ACTION';
-export const SECOND_ACTION = 'SECOND_ACTION';
 export const PASSWORD_RECOVER_SUCCESS = 'PASSWORD_RECOVER_SUCCESS';
 export const PASSWORD_RECOVER_ERROR = 'PASSWORD_RECOVER_ERROR';
 
