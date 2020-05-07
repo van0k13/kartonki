@@ -14,24 +14,31 @@ const NewPswdContainer = () => {
     let responseStatusMessage = useSelector((state: RootState) => state.newPass.message);
     const [differentPassword, setDifferentPassword] = useState('');
     const dispatch = useDispatch();
-    const resetPasswordToken = '';
-    const getDataFromServer = () => {
-        // Вызов санки
-       similar ? dispatch(newPasswordTC(newPassword, resetPasswordToken)) && setDifferentPassword('')
-           :  setDifferentPassword('Enter similar pass')
-    };
+    const resetPasswordToken = useSelector((state: RootState) => state.auth.token);
+
 
     const [similar, setSimilar] = useState(false);
     useEffect(()=> {
-        if(newPassword === newPasswordRepeat && newPasswordRepeat) setSimilar(true);
+        if(newPassword === newPasswordRepeat) setSimilar(true);
         else setSimilar(false)
     }, [newPassword || newPasswordRepeat]);
+
+    const getDataFromServer = () => {
+        // Вызов санки
+        debugger
+        dispatch(newPasswordTC(newPassword, resetPasswordToken))
+    };
+    // const checkSimilar = () => {
+    //     similar ? dispatch(newPasswordTC(newPassword, resetPasswordToken)) && setDifferentPassword('')
+    //         :  setDifferentPassword('Enter similar pass')
+    // };
 
     return (
         <NewPswd newPassword={newPassword} setNewPassword={setNewPassword}
                  newPasswordRepeat={newPasswordRepeat} setNewPasswordRepeat={setNewPasswordRepeat}
                  responseStatus={responseStatus} responseStatusMessage={responseStatusMessage}
                  getDataFromServer={getDataFromServer} similar={similar} differentPassword={differentPassword}
+
         />
     );
 };

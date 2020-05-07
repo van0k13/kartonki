@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './newPswd.module.css'
 import Input from "../../common/input/Input";
 import Button from "../../common/button/Button";
+import {newPasswordTC} from "../../../bll/newPswd_reducer";
 
 interface IPropsNewPswd {
     setNewPassword: (value: string) => void,
@@ -13,10 +14,11 @@ interface IPropsNewPswd {
     getDataFromServer: ()=> void,
     similar: boolean,
     differentPassword: string,
+
 }
 
 const NewPswd: React.FC<IPropsNewPswd> = (props) => {
-
+    console.log(props.similar);
   return (
     <div className={styles.newPasswordWrapper}>
       <h2>New Password Page</h2>
@@ -33,7 +35,10 @@ const NewPswd: React.FC<IPropsNewPswd> = (props) => {
         </div>
         <div>
             <span>{props.differentPassword}</span>
-            <Button buttonName='set new password' buttonOnClick={props.getDataFromServer}/>
+            <Button buttonName='set new password'
+                    buttonOnClick={props.getDataFromServer}
+
+            />
             <span>{props.responseStatusMessage}</span>
         </div>
     </div>
