@@ -25,13 +25,17 @@ const NewPswdContainer = () => {
 
     const getDataFromServer = () => {
         // Вызов санки
-        debugger
-        dispatch(newPasswordTC(newPassword, resetPasswordToken))
+        if(newPassword === newPasswordRepeat) {
+            setSimilar(true);
+            debugger
+            dispatch(newPasswordTC(newPassword, resetPasswordToken))
+            setDifferentPassword('Successful!')
+        } else {
+            setSimilar(false);
+            setDifferentPassword('Enter similar pass')
+        }
+
     };
-    // const checkSimilar = () => {
-    //     similar ? dispatch(newPasswordTC(newPassword, resetPasswordToken)) && setDifferentPassword('')
-    //         :  setDifferentPassword('Enter similar pass')
-    // };
 
     return (
         <NewPswd newPassword={newPassword} setNewPassword={setNewPassword}
