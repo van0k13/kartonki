@@ -8,6 +8,11 @@ interface IPropsNewPswd {
     setNewPasswordRepeat: (value: string) => void,
     newPassword: string,
     newPasswordRepeat: string,
+    responseStatus: boolean,
+    responseStatusMessage: string,
+    getDataFromServer: ()=> void,
+    similar: boolean,
+    differentPassword: string,
 }
 
 const NewPswd: React.FC<IPropsNewPswd> = (props) => {
@@ -24,9 +29,12 @@ const NewPswd: React.FC<IPropsNewPswd> = (props) => {
             <Input inputType='password' value={props.newPasswordRepeat}
                    inputOnChange={props.setNewPasswordRepeat} inputPlaceholder='Repeat new password'
             />
+
         </div>
         <div>
-            <Button/>
+            <span>{props.differentPassword}</span>
+            <Button buttonName='set new password' buttonOnClick={props.getDataFromServer}/>
+            <span>{props.responseStatusMessage}</span>
         </div>
     </div>
   );

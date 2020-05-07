@@ -23,6 +23,8 @@ export const LOGIN_ERROR = 'auth_reducer/LOGIN_ERROR'
 export const LOGIN_SUCCESS = 'auth_reducer/LOGIN_SUCCESS'
 export const PASSWORD_RECOVER_SUCCESS = 'PASSWORD_RECOVER_SUCCESS';
 export const PASSWORD_RECOVER_ERROR = 'PASSWORD_RECOVER_ERROR';
+export const NEW_PASSWORD_SUCCESS = 'NEW_PASSWORD_SUCCESS';
+export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
 
 
 export interface firstActionCreator {
@@ -58,6 +60,14 @@ export interface IPasswordRecoverError {
   type: typeof PASSWORD_RECOVER_ERROR,
   errorMessage: string
 }
+export interface INewPasswordSuccess {
+  type: typeof NEW_PASSWORD_SUCCESS,
+  recoverSuccess: boolean
+}
+export interface INewPasswordError {
+  type: typeof NEW_PASSWORD_ERROR,
+  errorMessage: string
+}
 
 export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistrateSuccess | IRegistrateError |
-    IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError
+    IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess | INewPasswordError

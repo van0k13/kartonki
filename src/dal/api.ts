@@ -31,3 +31,7 @@ export const passwordRecoverAPI = async (email: string) => {
     const response = await instance.post<IRegistration>('/forgot', {email});
     return response.data;
 };
+export const setNewPasswordAPI = async (password: string, resetPasswordToken: string) => {
+    const response = await instance.post<IRegistration>('/set-new-password', {password, resetPasswordToken});
+    return response.data;
+};
