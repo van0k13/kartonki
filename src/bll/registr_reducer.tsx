@@ -40,7 +40,7 @@ export const registrationTC = (email:string, password:string) =>
             } else
                 dispatch(registrationSuccessAC(data.success))
         } catch (e) {
-console.log(e.response.data.error)
+            dispatch(registrationErrorAC(e.response.data.error))
         }
 }
 

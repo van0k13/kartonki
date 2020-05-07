@@ -13,14 +13,14 @@ interface IProps {
     password: string,
     repeatingPassword: string,
     similar: boolean
+    messageFromServer: string
 }
 
 const Registration: React.FC<IProps> = ({login, password,
                                             repeatingPassword,
                                             setPassword, setLogin, setRepeatingPassword,
                                             registerMe, similar,
-                                            wrongRepeatingPassword}) => {
-    console.log(similar)
+                                            wrongRepeatingPassword, messageFromServer}) => {
     return (
     <div className={styles.registrationWrapper}>
         <h2>Registration Page</h2>
@@ -39,6 +39,7 @@ const Registration: React.FC<IProps> = ({login, password,
         </div>
         <div>
             <Button  buttonOnClick={similar? registerMe : wrongRepeatingPassword} buttonName={'Sign Up'}/>
+            {<span>{messageFromServer}</span>}
         </div>
     </div>
     );
