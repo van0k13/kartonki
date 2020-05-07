@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './newPswd.module.css'
 import Input from "../../common/input/Input";
 import Button from "../../common/button/Button";
-import {newPasswordTC} from "../../../bll/newPswd_reducer";
 
 interface IPropsNewPswd {
     setNewPassword: (value: string) => void,

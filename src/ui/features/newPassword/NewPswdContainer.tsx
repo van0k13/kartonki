@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import NewPswd from "./NewPswd";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../bll/store";
-import {passwordRecoverTC} from "../../../bll/pswdRecover_reducer";
 import {newPasswordTC} from "../../../bll/newPswd_reducer";
 
 
@@ -27,7 +26,6 @@ const NewPswdContainer = () => {
         // Вызов санки
         if(newPassword === newPasswordRepeat) {
             setSimilar(true);
-            debugger
             dispatch(newPasswordTC(newPassword, resetPasswordToken))
             setDifferentPassword('Successful!')
         } else {

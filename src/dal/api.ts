@@ -11,7 +11,6 @@ export interface ILoginization {
     success: boolean;
     name: string;
     error: string;
-    token: string;
 }
 export interface IRegistration {
     success: boolean;
