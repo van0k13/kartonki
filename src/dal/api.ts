@@ -17,3 +17,8 @@ export const registrationAPI = async (email: string, password: string) => {
         const response = await instance.post<IRegistration>('/register', {email, password});
         return response.data;
 };
+
+export const passwordRecoverAPI = async (email: string) => {
+    const response = await instance.post<IRegistration>('/forgot', {email});
+    return response.data;
+};
