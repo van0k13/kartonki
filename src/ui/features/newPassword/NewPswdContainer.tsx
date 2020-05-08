@@ -17,16 +17,16 @@ const NewPswdContainer = () => {
 
 
     const [similar, setSimilar] = useState(false);
-    useEffect(()=> {
-        if(newPassword === newPasswordRepeat) setSimilar(true);
-        else setSimilar(false)
-    }, [newPassword || newPasswordRepeat]);
+    // useEffect(()=> {
+    //     if(newPassword === newPasswordRepeat) setSimilar(true);
+    //     else setSimilar(false)
+    // }, [newPassword, newPasswordRepeat]);
 
     const getDataFromServer = () => {
         // Вызов санки
         if(newPassword === newPasswordRepeat) {
             setSimilar(true);
-            dispatch(newPasswordTC(newPassword, resetPasswordToken))
+            dispatch(newPasswordTC(newPassword, resetPasswordToken));
             setDifferentPassword('Successful!')
         } else {
             setSimilar(false);
