@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c6f6fe249472915257915233a223e263",
+    "revision": "a60a9bc3d4c4c18d5b2e73ec5f776d8f",
     "url": "/kartonki/index.html"
   },
   {
-    "revision": "682f748cb0455762c10e",
-    "url": "/kartonki/static/css/main.cfb8bc7b.chunk.css"
+    "revision": "6b24f86864988b2a07e7",
+    "url": "/kartonki/static/css/main.0770b322.chunk.css"
   },
   {
     "revision": "7aff306317ea0fee9481",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/kartonki/static/js/2.41713237.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "682f748cb0455762c10e",
-    "url": "/kartonki/static/js/main.18816b3c.chunk.js"
+    "revision": "6b24f86864988b2a07e7",
+    "url": "/kartonki/static/js/main.af5b71cf.chunk.js"
   },
   {
     "revision": "b74b25845d50ecee2532",
