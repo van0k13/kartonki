@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { ILoading } from '../../../bll/types';
 import s from './Loading.module.css'
+import {useSelector} from "react-redux";
+import {RootState} from "../../../bll/store";
 
 
-const Loading: React.FC<ILoading> = () => {
-    let [isLoading, setIsLoading] = useState<boolean>(true);
+const Loading = () => {
+    // let [isLoading, setIsLoading] = useState<boolean>(true);
     let [points, setPoints] = useState<string>('.');
+    let isLoading = useSelector((state: RootState) => state.auth.isLoading);
     const loadingProgress = () => {
         setTimeout(()=>{points.length<5?setPoints(points+'.'):setPoints('.')}, 1000);
         return points

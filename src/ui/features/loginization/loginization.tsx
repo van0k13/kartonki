@@ -13,16 +13,15 @@ interface IProps {
     password: string,
     rememberMe: boolean,
     loginError: string,
-
+    isLoading: boolean,
 }
 
 const Loginization: React.FC<IProps> = ({login, password, setPassword,
                                             setLogin, setRememberMe, signIn,
-                                            rememberMe,loginError}) => {
+                                            rememberMe,loginError, isLoading}) => {
   return (
     <div className={styles.loginizationWrapper}>
       <h2>Loginization Page</h2>
-        {/*{isLoading && <Loading/>}*/}
         <div>
             <Input inputOnChange={setLogin}
                    inputType={'text'} value={login} inputPlaceholder={'login or email'}/>
@@ -37,6 +36,7 @@ const Loginization: React.FC<IProps> = ({login, password, setPassword,
         <div>
             <Button buttonName={'Sign In'} buttonOnClick={signIn}/>
         </div>
+        {isLoading && <Loading/>}
         {loginError? <span>loginError</span> : null}
 
     </div>

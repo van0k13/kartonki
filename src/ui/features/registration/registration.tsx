@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './registr.module.css'
 import Input from "../../common/input/Input";
 import Button from "../../common/button/Button";
+import Loading from "../../common/loadingToggle/Loading";
 
 interface IProps {
     setLogin: (value: string) => void,
@@ -14,13 +15,14 @@ interface IProps {
     repeatingPassword: string,
     similar: boolean
     messageFromServer: string
+    isLoading: boolean
 }
 
 const Registration: React.FC<IProps> = ({login, password,
                                             repeatingPassword,
                                             setPassword, setLogin, setRepeatingPassword,
                                             registerMe, similar,
-                                            wrongRepeatingPassword, messageFromServer}) => {
+                                            wrongRepeatingPassword, messageFromServer, isLoading}) => {
     return (
     <div className={styles.registrationWrapper}>
         <h2>Registration Page</h2>
@@ -39,6 +41,7 @@ const Registration: React.FC<IProps> = ({login, password,
         </div>
         <div>
             <Button  buttonOnClick={similar? registerMe : wrongRepeatingPassword} buttonName={'Sign Up'}/>
+            {isLoading && <Loading/>}
             {<span>{messageFromServer}</span>}
         </div>
     </div>

@@ -1,7 +1,7 @@
 import {
-    ChatActionTypes,
+    ChatActionTypes, IisLoadingActionCreator,
     ILoginError,
-    ILoginSuccess,
+    ILoginSuccess, IS_LOADING,
     IStateLogin,
     LOGIN_ERROR,
     LOGIN_SUCCESS
@@ -13,7 +13,8 @@ const initialState: IStateLogin = {
     authSuccess: false,
     myName: '',
     errorMessage: '',
-    token: ''
+    token: '',
+    isLoading: false,
 }
 
 
@@ -28,10 +29,18 @@ const authReducer = (state: IStateLogin = initialState, action: ChatActionTypes)
             return {
                 ...state, errorMessage: action.errorMessage
             }
+        case "IS_LOADING":
+            return {
+                ...state,
+                isLoading: action.value
+            }
         default:
             return state;
     }
 }
+
+// global loading Action Creator
+export const isLoadingAC = (value: boolean):IisLoadingActionCreator => ({type: IS_LOADING, value});
 
 
 const loginizationSuccessAC = (loginSuccess: boolean, myName:string, token:string):ILoginSuccess =>
@@ -43,6 +52,7 @@ const loginizationErrorAC = (errorMessage: string):ILoginError => ({type: LOGIN_
 export const loginizationTC = (email:string, password:string, rememberMe: boolean) =>
     async(dispatch: Dispatch<ChatActionTypes>)  => {
         try {
+            dispatch(isLoadingAC(true));
             const data = await loginizationAPI(email, password, rememberMe);
             if (data.error)
                 dispatch(loginizationErrorAC(data.error))
@@ -50,5 +60,6 @@ export const loginizationTC = (email:string, password:string, rememberMe: boolea
         } catch (e) {
             dispatch(loginizationErrorAC(e.response.data.error))
         }
+        dispatch(isLoadingAC(false))
     }
 export default authReducer;

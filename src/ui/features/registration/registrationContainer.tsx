@@ -11,6 +11,7 @@ const RegistrationContainer = () => {
 
     const dispatch = useDispatch()
     const {registeredSuccess, message} = useSelector((state: RootState) => state.registr)
+    const {isLoading} = useSelector((state: RootState) => state.auth);
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [repeatingPassword, setRepeatingPassword] = useState<string>('');
@@ -37,6 +38,7 @@ const RegistrationContainer = () => {
                           registerMe={registerMe}
                            messageFromServer={message}
                           wrongRepeatingPassword={wrongRepeatingPassword}
+                           isLoading={isLoading}
             />
             : <Redirect to={TO_AUTH}/>
             }

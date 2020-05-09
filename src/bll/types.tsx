@@ -14,6 +14,7 @@ export interface IStateLogin {
   authSuccess: boolean,
   errorMessage: string,
   token: string
+  isLoading: boolean
 }
 export interface ILoading {
   isLoading: boolean
@@ -32,8 +33,13 @@ export const PASSWORD_RECOVER_SUCCESS = 'PASSWORD_RECOVER_SUCCESS';
 export const PASSWORD_RECOVER_ERROR = 'PASSWORD_RECOVER_ERROR';
 export const NEW_PASSWORD_SUCCESS = 'NEW_PASSWORD_SUCCESS';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
+export const IS_LOADING = 'IS_LOADING';
 
 
+export interface IisLoadingActionCreator {
+  type: typeof IS_LOADING
+  value: boolean
+}
 export interface firstActionCreator {
   type: typeof FIRST_ACTION
   payload: any
@@ -78,4 +84,5 @@ export interface INewPasswordError {
 }
 
 export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistrateSuccess | IRegistrateError |
-    IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess | INewPasswordError
+    IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess |
+    INewPasswordError | IisLoadingActionCreator

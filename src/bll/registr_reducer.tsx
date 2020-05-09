@@ -7,6 +7,7 @@ import {
 } from "./types";
 import {Dispatch} from "redux";
 import {registrationAPI} from "../dal/api";
+import {isLoadingAC} from "./auth_reducer";
 
 const initialState:IStateRegistr = {
     message: '',
@@ -34,6 +35,7 @@ export const registrationErrorAC = (errorMessage: string)
 export const registrationTC = (email:string, password:string) =>
      async(dispatch: Dispatch<ChatActionTypes>)  => {
         try {
+            dispatch(isLoadingAC(true));
             const data = await registrationAPI(email, password);
             if(data.error) {
                 dispatch(registrationErrorAC(data.error));
@@ -42,6 +44,7 @@ export const registrationTC = (email:string, password:string) =>
         } catch (e) {
             dispatch(registrationErrorAC(e.response.data.error))
         }
+         dispatch(isLoadingAC(false));
 }
 
 export default registrationReducer;
