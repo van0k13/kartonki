@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './loginization.module.css'
 import Input from "../../common/input/Input";
 import Button from "../../common/button/Button";
+import Loading from "../../common/loadingToggle/Loading";
 
 interface IProps {
     setLogin: (value: string) => void,
@@ -21,6 +22,7 @@ const Loginization: React.FC<IProps> = ({login, password, setPassword,
   return (
     <div className={styles.loginizationWrapper}>
       <h2>Loginization Page</h2>
+        {/*{isLoading && <Loading/>}*/}
         <div>
             <Input inputOnChange={setLogin}
                    inputType={'text'} value={login} inputPlaceholder={'login or email'}/>

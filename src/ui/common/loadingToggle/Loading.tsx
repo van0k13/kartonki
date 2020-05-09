@@ -7,12 +7,12 @@ const Loading: React.FC<ILoading> = () => {
     let [isLoading, setIsLoading] = useState<boolean>(true);
     let [points, setPoints] = useState<string>('.');
     const loadingProgress = () => {
-        setTimeout(()=>{points.length<5?setPoints(points+'.'):setPoints('.')}, 1000)
+        setTimeout(()=>{points.length<5?setPoints(points+'.'):setPoints('.')}, 1000);
         return points
-    }
+    };
     return (
 
-            <span className={s.loadingProgress} isLoading={isLoading}>
+            <span className={s.loadingProgress}>
                 {isLoading&&'LOADING'+loadingProgress()}
             </span>
     );
