@@ -17,6 +17,7 @@ const PswdRecover: React.FC<IPropsPswdRecover> = (props) => {
         <h2>Password Recovering Page</h2>
         <div>
             <Input inputType='email' value={props.userEmail} inputOnChange={props.putUserEmail}
+                   inputPlaceholder={'email'}
             />
             <span> {props.responseStatusMessage} </span>
         </div>
