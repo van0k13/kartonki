@@ -10,8 +10,7 @@ import {TO_AUTH} from "../../common/routes";
 const RegistrationContainer = () => {
 
     const dispatch = useDispatch()
-    const answerFromServer = useSelector((state: RootState) => state.registr.registeredSuccess)
-    const messageFromServer = useSelector((state: RootState) => state.registr.message)
+    const {registeredSuccess, message} = useSelector((state: RootState) => state.registr)
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [repeatingPassword, setRepeatingPassword] = useState('');
@@ -28,7 +27,7 @@ const RegistrationContainer = () => {
 
     return (
         <>
-            {!answerFromServer
+            {!registeredSuccess
            ? <Registration setLogin={setLogin}
                           setPassword={setPassword}
                           login={login} password={password}
@@ -36,7 +35,7 @@ const RegistrationContainer = () => {
                           setRepeatingPassword={setRepeatingPassword}
                           similar={similar}
                           registerMe={registerMe}
-                           messageFromServer={messageFromServer}
+                           messageFromServer={message}
                           wrongRepeatingPassword={wrongRepeatingPassword}
             />
             : <Redirect to={TO_AUTH}/>
