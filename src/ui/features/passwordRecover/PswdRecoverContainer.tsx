@@ -5,10 +5,11 @@ import {RootState} from "../../../bll/store";
 import {passwordRecoverTC} from "../../../bll/pswdRecover_reducer";
 
 
-const PswdRecoverContainer = (props: any) => {
+const PswdRecoverContainer = () => {
     //
     let [userEmail, putUserEmail] = useState<string>('');
     let {success, message} = useSelector((state: RootState) => state.recoverPass);
+    const isLoading = useSelector((state: RootState) => state.auth.isLoading)
     const dispatch = useDispatch();
     const getDataFromServer = () => {
         // Вызов санки
@@ -18,6 +19,7 @@ const PswdRecoverContainer = (props: any) => {
     return (
         <PswdRecover userEmail={userEmail} putUserEmail={putUserEmail} responseStatus={success}
                      getDataFromServer={getDataFromServer} responseStatusMessage={message}
+                     isLoading={isLoading}
         />
     );
 };

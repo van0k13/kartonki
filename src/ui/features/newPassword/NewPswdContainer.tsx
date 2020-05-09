@@ -7,13 +7,15 @@ import {newPasswordTC} from "../../../bll/newPswd_reducer";
 
 
 const NewPswdContainer = (props: any) => {
+    const dispatch = useDispatch();
+    const [similar, setSimilar] = useState(false);
     let [newPassword, setNewPassword] = useState<string>('');
     let [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
-    const [similar, setSimilar] = useState(false);
-    let responseStatusMessage = useSelector((state: RootState) => state.newPass.message);
     const [differentPassword, setDifferentPassword] = useState<string>('');
-    const dispatch = useDispatch();
-    const resetPasswordToken = props.match.params.token;
+
+    let responseStatusMessage = useSelector((state: RootState) => state.newPass.message);
+    const isLoading = useSelector((state: RootState) => state.auth.isLoading)
+
     useEffect(()=> {
         if(newPassword === newPasswordRepeat && newPasswordRepeat) {
             setSimilar(true);
@@ -24,6 +26,7 @@ const NewPswdContainer = (props: any) => {
         }
     }, [newPassword, newPasswordRepeat]);
 
+    const resetPasswordToken = props.match.params.token;
     const getDataFromServer = async() => {
         // Вызов санки
        similar && dispatch(newPasswordTC(newPassword, resetPasswordToken))
@@ -34,6 +37,7 @@ const NewPswdContainer = (props: any) => {
                  newPasswordRepeat={newPasswordRepeat} setNewPasswordRepeat={setNewPasswordRepeat}
                   responseStatusMessage={responseStatusMessage}
                  getDataFromServer={getDataFromServer} similar={similar} differentPassword={differentPassword}
+                 isLoading={isLoading}
 
         />
     );
