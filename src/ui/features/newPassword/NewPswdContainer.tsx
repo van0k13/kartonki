@@ -20,7 +20,7 @@ const NewPswdContainer = () => {
     useEffect(()=> {
         if(newPassword === newPasswordRepeat) setSimilar(true);
         else setSimilar(false)
-    }, [newPassword || newPasswordRepeat]);
+    }, [newPassword, newPasswordRepeat]);
 
     const getDataFromServer = () => {
         // Вызов санки
