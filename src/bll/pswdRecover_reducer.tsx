@@ -1,8 +1,5 @@
 import {
-    IState,
     ChatActionTypes,
-    FIRST_ACTION,
-    SECOND_ACTION,
     PASSWORD_RECOVER_ERROR,
     PASSWORD_RECOVER_SUCCESS,
     IPasswordRecoverSuccess,
@@ -10,7 +7,6 @@ import {
 } from "./types";
 import {Dispatch} from "redux";
 import {passwordRecoverAPI} from "../dal/api";
-import {strict} from "assert";
 
 const initialState: IStatePasswordRecover = {
     success: false,

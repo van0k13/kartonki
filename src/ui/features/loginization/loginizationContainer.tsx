@@ -11,9 +11,9 @@ const LoginizationContainer = () => {
 
     const dispatch = useDispatch()
     const {authSuccess, errorMessage} = useSelector((state: RootState) => state.auth)
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
+    const [login, setLogin] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [rememberMe, setRememberMe] = useState<boolean>(false);
 
 const signIn = async () => {
     await dispatch(loginizationTC(login, password, rememberMe))

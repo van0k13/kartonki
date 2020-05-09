@@ -11,10 +11,10 @@ const RegistrationContainer = () => {
 
     const dispatch = useDispatch()
     const {registeredSuccess, message} = useSelector((state: RootState) => state.registr)
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
-    const [repeatingPassword, setRepeatingPassword] = useState('');
-    const [similar, setSimilar] = useState(false);
+    const [login, setLogin] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [repeatingPassword, setRepeatingPassword] = useState<string>('');
+    const [similar, setSimilar] = useState<boolean>(false);
     useEffect(()=> {
         if(repeatingPassword === password && repeatingPassword) setSimilar(true)
             else setSimilar(false)

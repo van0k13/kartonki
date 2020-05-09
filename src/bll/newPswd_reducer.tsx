@@ -1,8 +1,5 @@
 import {
-    IState,
     ChatActionTypes,
-    FIRST_ACTION,
-    SECOND_ACTION,
     NEW_PASSWORD_SUCCESS,
     NEW_PASSWORD_ERROR,
     INewPasswordSuccess, INewPasswordError, IStatePasswordRecover

@@ -7,8 +7,8 @@ import {newPasswordTC} from "../../../bll/newPswd_reducer";
 
 const NewPswdContainer = () => {
     //
-    let [newPassword, setNewPassword] = useState('');
-    let [newPasswordRepeat, setNewPasswordRepeat] = useState('');
+    let [newPassword, setNewPassword] = useState<string>('');
+    let [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
     let responseStatus = useSelector((state: RootState) => state.newPass.success);
     let responseStatusMessage = useSelector((state: RootState) => state.newPass.message);
     const [differentPassword, setDifferentPassword] = useState('');
