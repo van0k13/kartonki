@@ -7,7 +7,7 @@ import {passwordRecoverTC} from "../../../bll/pswdRecover_reducer";
 
 const PswdRecoverContainer = (props: any) => {
     //
-    let [userEmail, putUserEmail] = useState<string>('email');
+    let [userEmail, putUserEmail] = useState<string>('');
     let {success, message} = useSelector((state: RootState) => state.recoverPass);
     const dispatch = useDispatch();
     const getDataFromServer = () => {

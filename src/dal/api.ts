@@ -29,7 +29,10 @@ export const registrationAPI = async (email: string, password: string) => {
 };
 
 export const passwordRecoverAPI = async (email: string) => {
-    const response = await instance.post<IRegistration>('/forgot', {email});
+    const response = await instance.post<IRegistration>('/forgot', {
+        email,
+    html1: "<a href='http://localhost:3000/kartonki#/new-password",
+    html2: "'>reset-password-link</a>"});
     return response.data;
 };
 export const setNewPasswordAPI = async (password: string, resetPasswordToken: string) => {

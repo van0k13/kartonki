@@ -37,6 +37,7 @@ export const passwordRecoverTC = (email:string) =>
     async(dispatch: Dispatch<ChatActionTypes>)  => {
         try {
             const data = await passwordRecoverAPI(email);
+            console.log(data)
             if(data.error) {
                 dispatch(passwordRecoverErrorAC(data.error));
             } else

@@ -7,7 +7,7 @@ import NewPswdPage from "../features/newPassword/NewPswdPage";
 import PswdRecoverPage from "../features/passwordRecover/PswdRecoverPage";
 
 export const TO_AUTH = '/auth';
-export const TO_NEW_PASSWORD = '/new-password';
+export const TO_NEW_PASSWORD = '/new-password:token';
 export const TO_PROFILE = '/profile';
 export const TO_RECOVER_PASSWORD = '/recover-password';
 export const TO_REGISTRATION = '/registration';

@@ -42,7 +42,6 @@ export const newPasswordTC = (password: string, resetPasswordToken: string) =>
                 dispatch(setNewPasswordSuccessAC(data.success))
         } catch (e) {
             dispatch(setNewPasswordErrorAC(e.response.data.error));
-            console.log(e.response.data.error)
         }
     };
 

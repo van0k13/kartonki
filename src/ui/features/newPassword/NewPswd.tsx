@@ -8,7 +8,6 @@ interface IPropsNewPswd {
     setNewPasswordRepeat: (value: string) => void,
     newPassword: string,
     newPasswordRepeat: string,
-    responseStatus: boolean,
     responseStatusMessage: string,
     getDataFromServer: ()=> void,
     similar: boolean,
@@ -17,7 +16,6 @@ interface IPropsNewPswd {
 }
 
 const NewPswd: React.FC<IPropsNewPswd> = (props) => {
-    console.log(props.similar);
   return (
     <div className={styles.newPasswordWrapper}>
       <h2>New Password Page</h2>
@@ -34,7 +32,6 @@ const NewPswd: React.FC<IPropsNewPswd> = (props) => {
         </div>
         <div>
             <span>{props.differentPassword}</span>
-            {/*<span>{props.differentPassword}</span>*/}
             <Button buttonName='set new password'
                     buttonOnClick={props.getDataFromServer}
 
