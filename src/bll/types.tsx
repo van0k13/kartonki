@@ -15,6 +15,12 @@ export interface IStateLogin {
   errorMessage: string,
   token: string
 }
+export interface ILoading {
+  isLoading: boolean
+  setIsLoading: ()=>void
+  points: string
+  setPoints: ()=>void
+}
 
 export const FIRST_ACTION = 'FIRST_ACTION'
 export const SECOND_ACTION = 'SECOND_ACTION'
