@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Registration from "./registration";
 import {useDispatch, useSelector} from "react-redux";
-import {registrationErrorAC, registrationTC} from "../../../bll/registr_reducer";
-import {RootState} from "../../../bll/store";
+import {registrationErrorAC, registrationTC} from "../../../../bll/registr_reducer";
+import {RootState} from "../../../../bll/store";
 import {Redirect} from 'react-router-dom';
-import {TO_AUTH} from "../../common/routes";
+import {TO_AUTH} from "../../../common/routes";
 
 
 const RegistrationContainer = () => {

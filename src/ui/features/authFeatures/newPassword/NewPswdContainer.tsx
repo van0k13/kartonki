@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import NewPswd from "./NewPswd";
 import {useDispatch, useSelector} from "react-redux";
 import {withRouter} from 'react-router-dom'
-import {RootState} from "../../../bll/store";
-import {newPasswordTC} from "../../../bll/newPswd_reducer";
+import {RootState} from "../../../../bll/store";
+import {newPasswordTC} from "../../../../bll/newPswd_reducer";
 
 
 const NewPswdContainer = (props: any) => {

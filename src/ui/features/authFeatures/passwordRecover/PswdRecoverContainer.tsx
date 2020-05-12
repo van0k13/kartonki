@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import PswdRecover from "./PswdRecover";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../bll/store";
-import {passwordRecoverTC} from "../../../bll/pswdRecover_reducer";
+import {RootState} from "../../../../bll/store";
+import {passwordRecoverTC} from "../../../../bll/pswdRecover_reducer";
 
 
 const PswdRecoverContainer = () => {

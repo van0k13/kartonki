@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './registr.module.css'
-import Input from "../../common/input/Input";
-import Button from "../../common/button/Button";
-import Loading from "../../common/loadingToggle/Loading";
+import Input from "../../../common/input/Input";
+import Button from "../../../common/button/Button";
+import Loading from "../../../common/loadingToggle/Loading";
 
 interface IProps {
     setLogin: (value: string) => void,

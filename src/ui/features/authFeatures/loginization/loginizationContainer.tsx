@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Loginization from "./loginization";
 import {useDispatch, useSelector} from "react-redux";
-import {loginizationTC} from "../../../bll/auth_reducer";
-import {RootState} from "../../../bll/store";
-import {TO_PROFILE} from "../../common/routes";
+import {loginizationTC} from "../../../../bll/auth_reducer";
+import {RootState} from "../../../../bll/store";
+import {TO_PROFILE} from "../../../common/routes";
 import {Redirect} from "react-router-dom";
 
 
