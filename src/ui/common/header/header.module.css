@@ -5,6 +5,7 @@
     background-color: rgba(0, 0, 0, 0.459);
     height: 50px;
     padding: 0 10px;
+    cursor: pointer;
 }
 .headerWrapper a:hover {
     color: rgba(0, 0, 0, 0.44);
@@ -12,4 +13,7 @@
 .headerWrapper a {
     color: aliceblue;
     text-decoration: none;
+}
+.headerWrapper button {
+    cursor: pointer;
 }

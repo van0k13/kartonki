@@ -1,19 +1,37 @@
 import React from 'react';
 import styles from './header.module.css';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {TO_AUTH, TO_NEW_PASSWORD, TO_PROFILE, TO_RECOVER_PASSWORD, TO_REGISTRATION} from "../routes";
 
 
-const Header = () => {
-  return (
-    <div className={styles.headerWrapper}>
-      <NavLink to={TO_AUTH}>LoginizationPage</NavLink>
-      <NavLink to={TO_NEW_PASSWORD}>NewPasswordPage</NavLink>
-      <NavLink to={TO_PROFILE}>ProfilePage</NavLink>
-      <NavLink to={TO_RECOVER_PASSWORD}>PasswordRecoveringPage</NavLink>
-      <NavLink to={TO_REGISTRATION}>RegistrationPage</NavLink>
-    </div>
-  );
+interface IHeaderProps {
+    setLinks: (value: boolean) => void,
+    links: boolean
+}
+
+const Header: React.FC<IHeaderProps> = ({setLinks, links}) => {
+    return (
+        <>
+            <div className={styles.headerWrapper}>
+                {links
+                    ? <>
+                        <button onClick={() => {
+                            setLinks(false)
+                        }}>hide links
+                        </button>
+                        <NavLink to={TO_AUTH}>LoginizationPage</NavLink>
+                        <NavLink to={TO_NEW_PASSWORD}>NewPasswordPage</NavLink>
+                        <NavLink to={TO_PROFILE}>ProfilePage</NavLink>
+                        <NavLink to={TO_RECOVER_PASSWORD}>PasswordRecoveringPage</NavLink>
+                        <NavLink to={TO_REGISTRATION}>RegistrationPage</NavLink>
+                    </>
+                    : <button onClick={() => {
+                        setLinks(true)
+                    }}>show links</button>
+                }
+            </div>
+        </>
+    );
 };
 
 export default Header;
