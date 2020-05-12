@@ -1,0 +1,24 @@
+.uniCardsDeckWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mainListWrapper {
+    border: 3px solid black;
+    width: 100%;
+}
+.mainList {
+    border: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.mainList div {
+    width: 33%;
+    border-left: 1px solid black;
+}
+.buttonsInTheList {
+    display: flex;
+}
