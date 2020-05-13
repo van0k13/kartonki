@@ -13,7 +13,7 @@ const UniCards = () => {
             <div className={styles.mainListWrapper}>
                 <Button buttonName={'add new Item'}/>
                 <div className={styles.mainList}>
-                    <div className={styles.itemName}>Item name</div>
+                    <div className={styles.itemName}>Question</div>
                     <div className={styles.itemScore}>Item score</div>
                     <div className={styles.buttonsInTheList}>
                         <Button buttonName={'edit'}/>

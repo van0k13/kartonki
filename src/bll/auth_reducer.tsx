@@ -7,7 +7,7 @@ import {
     LOGIN_SUCCESS
 } from "./types";
 import {Dispatch} from "redux";
-import {loginizationAPI} from "../dal/api";
+import {authAPI} from "../dal/api";
 
 const initialState: IStateLogin = {
     authSuccess: false,
@@ -53,7 +53,7 @@ export const loginizationTC = (email:string, password:string, rememberMe: boolea
     async(dispatch: Dispatch<ChatActionTypes>)  => {
         try {
             dispatch(isLoadingAC(true));
-            const data = await loginizationAPI(email, password, rememberMe);
+            const data = await authAPI.loginizationAPI(email, password, rememberMe);
             if (data.error)
                 dispatch(loginizationErrorAC(data.error))
             else dispatch(loginizationSuccessAC(data.success, data.name, data.token ))

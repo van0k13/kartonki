@@ -6,7 +6,7 @@ import {
     IPasswordRecoverError, IStatePasswordRecover
 } from "./types";
 import {Dispatch} from "redux";
-import {passwordRecoverAPI} from "../dal/api";
+import {authAPI} from "../dal/api";
 import {isLoadingAC} from "./auth_reducer";
 
 const initialState: IStatePasswordRecover = {
@@ -38,15 +38,13 @@ export const passwordRecoverTC = (email:string) =>
     async(dispatch: Dispatch<ChatActionTypes>)  => {
         try {
             dispatch(isLoadingAC(true))
-            const data = await passwordRecoverAPI(email);
-            console.log(data)
+            const data = await authAPI.passwordRecoverAPI(email);
             if(data.error) {
                 dispatch(passwordRecoverErrorAC(data.error));
             } else
                 dispatch(passwordRecoverSuccessAC(data.success))
         } catch (e) {
             dispatch(passwordRecoverErrorAC(e.response.data.error));
-            console.log(e.response.data.error)
         }
         dispatch(isLoadingAC(false))
     };

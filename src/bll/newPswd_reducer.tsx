@@ -5,7 +5,7 @@ import {
     INewPasswordSuccess, INewPasswordError, IStatePasswordRecover
 } from "./types";
 import {Dispatch} from "redux";
-import {setNewPasswordAPI} from "../dal/api";
+import {authAPI} from "../dal/api";
 import {isLoadingAC} from "./auth_reducer";
 
 const initialState: IStatePasswordRecover = {
@@ -37,7 +37,7 @@ export const newPasswordTC = (password: string, resetPasswordToken: string) =>
     async(dispatch: Dispatch<ChatActionTypes>)  => {
         try {
             dispatch(isLoadingAC(true))
-            const data = await setNewPasswordAPI(password, resetPasswordToken);
+            const data = await authAPI.setNewPasswordAPI(password, resetPasswordToken);
             if(data.error) {
                 dispatch(setNewPasswordErrorAC(data.error));
             } else
