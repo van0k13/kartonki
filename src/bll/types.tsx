@@ -22,6 +22,9 @@ export interface ILoading {
   points: string
   setPoints: ()=>void
 }
+export interface IStateCardsDeck {
+  decks: Array<CardsDeckType>
+}
 
 export const FIRST_ACTION = 'FIRST_ACTION'
 export const SECOND_ACTION = 'SECOND_ACTION'
@@ -35,7 +38,24 @@ export const NEW_PASSWORD_SUCCESS = 'NEW_PASSWORD_SUCCESS';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
 export const IS_LOADING = 'IS_LOADING';
 
+                                                      // typos
 
+export type CardsDeckType = {
+  _id: string
+  user_id: string
+  name: string
+  path: string // папка
+  grade: number // средняя оценка карточек
+  shots: number // количество попыток
+  rating: number // лайки
+  type:  string//"pack " // ещё будет "folder" (папка)
+  created: string
+  updated: string
+}
+
+
+
+                                                    // interfaces
 export interface IisLoadingActionCreator {
   type: typeof IS_LOADING
   value: boolean
