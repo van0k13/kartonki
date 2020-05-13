@@ -29,6 +29,9 @@ export interface IStateCards {
   question: string,
   answer: string
 }
+export interface IStateCardsDeck {
+  decks: Array<CardsDeckType>
+}
 
 export const FIRST_ACTION = 'FIRST_ACTION'
 export const SECOND_ACTION = 'SECOND_ACTION'
@@ -47,6 +50,20 @@ export const CREATE_CARD = 'CREATE_CARD';
 export const CREATE_DECK = 'CREATE_DECK';
 export const DELETE_DECK = 'DELETE_DECK';
 
+                                                      // typos
+
+export type CardsDeckType = {
+  _id: string
+  user_id: string
+  name: string
+  path: string // папка
+  grade: number // средняя оценка карточек
+  shots: number // количество попыток
+  rating: number // лайки
+  type:  string//"pack " // ещё будет "folder" (папка)
+  created: string
+  updated: string
+}
 
 export interface ICreateDeleteDeckActionCreator {
   type: typeof CREATE_DECK | typeof DELETE_DECK

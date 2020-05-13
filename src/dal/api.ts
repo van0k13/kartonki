@@ -1,9 +1,14 @@
 import axios from "axios";
+import {CardsDeckType} from "../bll/types";
 
 export const baseURL = 'https://neko-cafe-back.herokuapp.com/auth/';
+export const baseCardsURL = 'https://cards-nya-back.herokuapp.com/1.0/';
 
 export const instance = axios.create({
     baseURL
+});
+export const instanceCards = axios.create({
+    baseURL: baseCardsURL
 });
 
 
@@ -17,6 +22,12 @@ export interface ILoginization {
 export interface IRegistration {
     success: boolean;
 
+    error: string;
+}
+type CardsDecksDataType = {
+    cardsDeck: Array<CardsDeckType>;
+    success: boolean;
+    token: string;
     error: string;
 }
 
@@ -42,3 +53,25 @@ export const authAPI = {
         return response.data;
     }
 };
+export const cardsDeckAPI = {
+    getCardsDecks: async (token: string) => {
+        const response = await instanceCards.get<CardsDecksDataType>(
+            `/cards/pack?token=${token}`);
+        return response.data;
+    },
+    addNewCardsDeck: async(token:string, cardsDeck: {}) => {
+        const response = await instanceCards.post<CardsDecksDataType>(
+            `/cards/pack`, {token, cardsDeck});
+        return response.data;
+    },
+    updateCardsDeck: async(token:string, cardsDeck: {}) => {
+        const response = await instanceCards.put<CardsDecksDataType>(
+            `/cards/pack`, {token, cardsDeck});
+        return response.data;
+    },
+    deleteCardsDeck: async(token:string, id: string) => {
+        const response = await instanceCards.delete<CardsDecksDataType>(
+            `/cards/pack?token=${token}&id=${id}`);
+        return response.data;
+    },
+}
