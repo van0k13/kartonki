@@ -3,7 +3,7 @@ import s from './Input.module.css'
 
 interface IPropsInput {
     inputPlaceholder?: string | undefined,
-    value?: string  | undefined,
+    value?: string  | number | undefined,
     checked?: boolean | undefined,
     inputType?:string | undefined,
     inputOnChange?: (value: string ) => void,
