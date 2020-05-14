@@ -25,13 +25,15 @@ const UniCardsDeck: React.FC<IProps> = ({
             <Input inputPlaceholder={'item name'}/>
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
-                <button onClick={()=>setNewDeckinputField(true)}>Add new Deck</button>
+                <Button buttonOnClickBoolean={()=>setNewDeckinputField(true)}
+                        buttonName={'Add new Deck'}/>
                 {newDeckinputField && <>
                     <Input inputPlaceholder={`Enter your Deck's name`}
                     inputType={'text'}  value={deckName} inputOnChange={setDeckName}
                     />
                     <Button buttonName={'Add'} buttonOnClick={createNewDeck}/>
-                    <button onClick={()=>setNewDeckinputField(false)}>cancel</button>
+                    <Button buttonOnClickBoolean={()=>setNewDeckinputField(false)}
+                    buttonName={'cancel'}/>
                 </>}
                 {decksElements}
             </div>
