@@ -2,27 +2,41 @@ import React from 'react';
 import styles from './uniCardsDeck.module.css'
 import Input from "../../../common/input/Input";
 import Button from "../../../common/button/Button";
+import {CardsDeckType} from "../../../../bll/types";
+
+interface IProps {
+    decksElements: Array<CardsDeckType>,
+    createNewDeck: () => void,
+    setNewDeckinputField: (value:boolean) => void,
+    newDeckinputField: boolean,
+    setDeckName: (value: string) => void,
+    deckName: string
+}
 
 
-const UniCardsDeck = () => {
-  return (
-    <div className={styles.uniCardsWrapper}>
-      <h2>UniCardsDeck</h2>
-        <Input inputPlaceholder={'item name'}/>
-        <Button buttonName={'search'}/>
-        <div className={styles.mainListWrapper}>
-            <Button buttonName={'add new Item'}/>
-            <div className={styles.mainList}>
-                <div className={styles.itemName}>Item name</div>
-                <div className={styles.itemScore}>Item score</div>
-                <div className={styles.buttonsInTheList}>
-                    <Button buttonName={'edit'}/>
-                    <Button buttonName={'delete'}/>
-                </div>
+const UniCardsDeck: React.FC<IProps> = ({
+                                            newDeckinputField,
+                                            decksElements, createNewDeck,
+                                            setNewDeckinputField, setDeckName, deckName
+                                        }) => {
+    return (
+        <div className={styles.uniCardsWrapper}>
+            <h2>UniCardsDeck</h2>
+            <Input inputPlaceholder={'item name'}/>
+            <Button buttonName={'search'}/>
+            <div className={styles.mainListWrapper}>
+                <button onClick={()=>setNewDeckinputField(true)}>Add new Deck</button>
+                {newDeckinputField && <>
+                    <Input inputPlaceholder={`Enter your Deck's name`}
+                    inputType={'text'}  value={deckName} inputOnChange={setDeckName}
+                    />
+                    <Button buttonName={'Add'} buttonOnClick={createNewDeck}/>
+                    <button onClick={()=>setNewDeckinputField(false)}>cancel</button>
+                </>}
+                {decksElements}
             </div>
         </div>
-    </div>
-  );
+    );
 };
 
 export default UniCardsDeck;

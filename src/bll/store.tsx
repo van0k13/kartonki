@@ -5,13 +5,17 @@ import newPasswordReducer from "./newPswd_reducer";
 import profileReducer from "./profile_reducer";
 import passwordRecoveringReducer from "./pswdRecover_reducer";
 import registrationReducer from "./registr_reducer";
+import cardsReducer from "./cards_reducer";
+import cardsDeckReducer from "./cardsDeck_reducer";
 
 const reducerPack = combineReducers({
     auth: authReducer,
     newPass: newPasswordReducer,
     profile: profileReducer,
     recoverPass: passwordRecoveringReducer,
-    registr: registrationReducer
+    registr: registrationReducer,
+    cards: cardsReducer,
+    decks: cardsDeckReducer
 })
 export type RootState = ReturnType<typeof reducerPack>
 

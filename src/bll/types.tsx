@@ -10,17 +10,12 @@ export interface IStateRegistr {
   registeredSuccess: boolean
 }
 export interface IStateLogin {
+  id: string,
   myName: string,
   authSuccess: boolean,
   errorMessage: string,
   token: string
   isLoading: boolean
-}
-export interface ILoading {
-  isLoading: boolean
-  setIsLoading: ()=>void
-  points: string
-  setPoints: ()=>void
 }
 export interface IStateCards {
   id: string
@@ -29,7 +24,7 @@ export interface IStateCards {
   question: string,
   answer: string
 }
-export interface IStateCardsDeck {
+export type IStateCardsDeck  = {
   decks: Array<CardsDeckType>
 }
 
@@ -43,31 +38,37 @@ export const PASSWORD_RECOVER_SUCCESS = 'PASSWORD_RECOVER_SUCCESS';
 export const PASSWORD_RECOVER_ERROR = 'PASSWORD_RECOVER_ERROR';
 export const NEW_PASSWORD_SUCCESS = 'NEW_PASSWORD_SUCCESS';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
-export const IS_LOADING = 'IS_LOADING';
-export const EDIT_CARD = 'EDIT_CARD';
-export const DELETE_CARD = 'DELETE_CARD';
-export const CREATE_CARD = 'CREATE_CARD';
-export const CREATE_DECK = 'CREATE_DECK';
-export const DELETE_DECK = 'DELETE_DECK';
+export const IS_LOADING = 'auth_reducer/IS_LOADING';
+export const SET_TOKEN = 'auth_reducer/SET_TOKEN';
+export const EDIT_CARD = 'cards_reducer/EDIT_CARD';
+export const DELETE_CARD = 'cards_reducer/DELETE_CARD';
+export const CREATE_CARD = 'cards_reducer/CREATE_CARD';
+export const GET_DECKS = 'cardsDeck_reducer/GET_DECKS';
+export const CREATE_DECK = 'cardsDeck_reducer/CREATE_DECK';
+export const DELETE_DECK = 'cardsDeck_reducer/DELETE_DECK';
 
                                                       // typos
 
 export type CardsDeckType = {
-  _id: string
-  user_id: string
-  name: string
-  path: string // папка
-  grade: number // средняя оценка карточек
-  shots: number // количество попыток
-  rating: number // лайки
-  type:  string//"pack " // ещё будет "folder" (папка)
-  created: string
-  updated: string
+  _id?: string
+  user_id?: string
+  name?: string
+  path?: string // папка
+  grade?: number // средняя оценка карточек
+  shots?: number // количество попыток
+  rating?: number // лайки
+  type?:  string//"pack " // ещё будет "folder" (папка)
+  created?: string
+  updated?: string
 }
 
+export interface IGetCardsDecks {
+  type: typeof GET_DECKS
+  decks: Array<CardsDeckType>
+}
 export interface ICreateDeleteDeckActionCreator {
   type: typeof CREATE_DECK | typeof DELETE_DECK
-  cardsDeckID: string
+  cardsDeck: CardsDeckType
 }
 export interface ICreateCardActionCreator {
   type: typeof CREATE_CARD
@@ -88,6 +89,10 @@ export interface IisLoadingActionCreator {
   type: typeof IS_LOADING
   value: boolean
 }
+export interface ISetToken {
+  type: typeof SET_TOKEN
+  token: string
+}
 export interface firstActionCreator {
   type: typeof FIRST_ACTION
   payload: any
@@ -98,6 +103,7 @@ export interface secondActionCreator {
 }
 export interface ILoginSuccess {
   type: typeof LOGIN_SUCCESS,
+  id: string,
   loginSuccess: boolean,
   myName: string,
   token: string
@@ -134,4 +140,4 @@ export interface INewPasswordError {
 export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistrateSuccess | IRegistrateError |
     IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess |
     INewPasswordError | IisLoadingActionCreator | IEditCardActionCreator | IDeleteCardActionCreator |
-    ICreateCardActionCreator | ICreateDeleteDeckActionCreator
+    ICreateCardActionCreator | ICreateDeleteDeckActionCreator | IGetCardsDecks | ISetToken
