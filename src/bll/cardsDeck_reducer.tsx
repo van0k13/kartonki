@@ -66,5 +66,21 @@ export const createNewCardDeckTC = (cardsDeck: CardsDeckType, token:string) =>
         }
         dispatch(isLoadingAC(false))
     }
+export const deleteDeckTC = (token: string, deckId: string | undefined) =>
+    async (dispatch: Dispatch<ChatActionTypes>) => {
+        try {
+            dispatch(isLoadingAC(true))
+            const data = await cardsDeckAPI.deleteCardsDeck(token, deckId)
+            dispatch(setTokenAC(data.token));
+            if(data.success) {
+                const data2 = await cardsDeckAPI.getCardsDecks(data.token)
+                dispatch(setCardsDecksAC(data2.cardPacks))
+                dispatch(setTokenAC(data2.token))
+            }
+        } catch (e) {
+            dispatch(isLoadingAC(false))
+        }
+        dispatch(isLoadingAC(false))
+    };
 
 export default cardsDeckReducer;

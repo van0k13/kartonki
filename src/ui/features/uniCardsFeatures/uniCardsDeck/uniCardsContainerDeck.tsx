@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import UniCardsDeck from "./uniCardsDeck";
-import {createNewCardDeckTC, getDecksTC} from "../../../../bll/cardsDeck_reducer";
+import {createNewCardDeckTC, deleteDeckTC, getDecksTC} from "../../../../bll/cardsDeck_reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../bll/store";
 
@@ -23,12 +23,16 @@ const UniCardsContainerDeck = () => {
         dispatch(createNewCardDeckTC(cardsDeck, token));
         setDeckName('');
     }
+    const deleteDeck = (deckId: string | undefined) => {
+        dispatch(deleteDeckTC(token, deckId))
+    }
     return (
-        <UniCardsDeck  createNewDeck={createNewDeck}
-                       decks={decks}
+        <UniCardsDeck createNewDeck={createNewDeck}
+                      decks={decks}
                       newDeckinputField={newDeckinputField}
                       setNewDeckinputField={setNewDeckinputField}
                       deckName={deckName} setDeckName={setDeckName}
+                      deleteDeck={deleteDeck}
         />
     );
 };

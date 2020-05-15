@@ -24,7 +24,7 @@ type CardsDecksDataType = {
     cardPacks: Array<CardsDeckType>;
     success: boolean;
     token: string;
-    error: string;
+    error?: string;
 }
 interface IAddNewCardsDeck {
     newCardsPack: CardsDeckType,
@@ -61,19 +61,19 @@ export const cardsDeckAPI = {
             `/cards/pack?token=${token}`);
         return response.data;
     },
-    addNewCardsDeck: async(cardsPack: CardsDeckType, token: string) => {
+    addNewCardsDeck: async (cardsPack: CardsDeckType, token: string) => {
         const response = await instance.post<IAddNewCardsDeck>(
             `/cards/pack`, {cardsPack, token});
         return response.data;
     },
-    updateCardsDeck: async(cardsPack: CardsDeckType,token:string,) => {
+    updateCardsDeck: async (cardsPack: CardsDeckType, token: string,) => {
         const response = await instance.put<CardsDecksDataType>(
-            `/cards/pack`, {cardsPack, token });
+            `/cards/pack`, {cardsPack, token});
         return response.data;
     },
-    deleteCardsDeck: async(token:string, id: string) => {
+    deleteCardsDeck: async (token: string, id: string | undefined) => {
         const response = await instance.delete<CardsDecksDataType>(
             `/cards/pack?token=${token}&id=${id}`);
         return response.data;
-    },
+    }
 }
