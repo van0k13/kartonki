@@ -7,30 +7,30 @@ import {RootState} from "../../../../bll/store";
 
 const UniCardsContainerDeck = () => {
     const dispatch = useDispatch()
-    const [newDeckinputField, setNewDeckinputField] = useState<boolean>(false)
     const [deckName, setDeckName] = useState<string>('')
     useEffect(() => {
         dispatch(getDecksTC(token))
     }, [])
-    const token = useSelector((state: RootState) => state.auth.token)
-    const decks = useSelector((state: RootState) => state.decks.decks)
-    const user_id = useSelector((state: RootState) => state.auth.id)
+    const {token, id}= useSelector((state: RootState) => state.auth)
+    const {decks} = useSelector((state: RootState) => state.decks)
     const createNewDeck = () => {
         const cardsDeck = {
-            user_id: user_id,
+            user_id: id,
             name: deckName
         };
         dispatch(createNewCardDeckTC(cardsDeck, token));
         setDeckName('');
     }
-    const deleteDeck = (deckId: string | undefined) => {
+    const deleteDeck = (deckId: string) => {
         dispatch(deleteDeckTC(token, deckId))
+    }
+    const goToDeck = (deckId: string) => {
+        alert('deckId = ' + deckId)
     }
     return (
         <UniCardsDeck createNewDeck={createNewDeck}
+                      goToDeck={goToDeck}
                       decks={decks}
-                      newDeckinputField={newDeckinputField}
-                      setNewDeckinputField={setNewDeckinputField}
                       deckName={deckName} setDeckName={setDeckName}
                       deleteDeck={deleteDeck}
         />

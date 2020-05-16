@@ -51,7 +51,8 @@ export const authAPI = {
         return response.data;
     },
     setNewPasswordAPI: async (password: string, resetPasswordToken: string) => {
-        const response = await instance.post<IRegistration>('/auth/set-new-password', {password, resetPasswordToken});
+        const response = await instance.post<IRegistration>(
+            '/auth/set-new-password', {password, resetPasswordToken});
         return response.data;
     }
 };
@@ -61,7 +62,7 @@ export const cardsDeckAPI = {
             `/cards/pack?token=${token}`);
         return response.data;
     },
-    addNewCardsDeck: async (cardsPack: CardsDeckType, token: string) => {
+    addNewCardsDeck: async (cardsPack: { user_id: string; name: string }, token: string) => {
         const response = await instance.post<IAddNewCardsDeck>(
             `/cards/pack`, {cardsPack, token});
         return response.data;

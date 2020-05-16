@@ -4,14 +4,15 @@ import Input from "../../../common/input/Input";
 import Button from "../../../common/button/Button";
 
 interface IProps {
-    deleteDeck: (value: string | undefined) => void,
-    name: string | undefined,
-    grade: number | undefined,
-    id: string | undefined
+    deleteDeck: (value: string) => void,
+    name: string,
+    grade: number,
+    deckId: string,
+    goToDeck: (value: string) => void
 }
 
-const SingleDeck: React.FC<IProps> = ({
-                                          id, name,
+const SingleDeck: React.FC<IProps> = ({goToDeck,
+                                          deckId, name,
                                           grade, deleteDeck
                                       }) => {
     const [editDeckInputField, setEditDeckInputField] = useState<boolean>(false)
@@ -19,7 +20,8 @@ const SingleDeck: React.FC<IProps> = ({
         <div className={styles.mainList}>
             {!editDeckInputField
                 ? <>
-                    <div className={styles.itemName}>Name: {name} </div>
+                    <div className={styles.itemName}
+                         onClick={()=>goToDeck(deckId)}>Name: {name} </div>
                     <div className={styles.itemScore}>Grade:{grade} </div>
                 </>
                 : <> <Input value={name}/> <Input value={grade}/> </>
@@ -27,7 +29,7 @@ const SingleDeck: React.FC<IProps> = ({
             <div className={styles.buttonsInTheList}>
                 <Button buttonName={'edit'}
                         buttonOnClickBoolean={() => setEditDeckInputField(!editDeckInputField)}/>
-                <Button buttonName={'delete'} buttonOnClick={() => deleteDeck(id)}/>
+                <Button buttonName={'delete'} buttonOnClick={() => deleteDeck(deckId)}/>
             </div>
         </div>
     )

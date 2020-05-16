@@ -8,25 +8,24 @@ import Loading from "../../../common/loadingToggle/Loading";
 
 interface IProps {
     createNewDeck: () => void,
-    setNewDeckinputField: (value: boolean) => void,
-    newDeckinputField: boolean,
     setDeckName: (value: string) => void,
-    deleteDeck: (value: string | undefined) => void,
+    deleteDeck: (value: string) => void,
     deckName: string,
-    decks: Array<CardsDeckType>
+    decks: Array<CardsDeckType>,
+    goToDeck: (value: string) => void
 }
 
 
 const UniCardsDeck: React.FC<IProps> = ({
-                                            decks,
-                                            newDeckinputField, deleteDeck,
-                                            createNewDeck, setNewDeckinputField, setDeckName,
+                                            decks, goToDeck,
+                                            deleteDeck,
+                                            createNewDeck, setDeckName,
                                             deckName
                                         }) => {
 
     const deckElements = decks.map(deck =>
-        <SingleDeck name={deck.name} key={deck._id} id={deck._id} grade={deck.grade}
-                    deleteDeck={deleteDeck}
+        <SingleDeck name={deck.name} key={deck._id} deckId={deck._id} grade={deck.grade}
+                    deleteDeck={deleteDeck} goToDeck={goToDeck}
         />)
 
     return (
@@ -35,16 +34,11 @@ const UniCardsDeck: React.FC<IProps> = ({
             <Input inputPlaceholder={'item name'}/>
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
-                <Button buttonOnClickBoolean={() => setNewDeckinputField(!newDeckinputField)}
-                        buttonName={'Add new Deck'}/>
+                <Input inputPlaceholder={`Enter your Deck's name`}
+                       inputType={'text'} value={deckName} inputOnChange={setDeckName}
+                />
+                <Button buttonName={'Add'} buttonOnClick={createNewDeck}/>
                 <div className={styles.loading}><Loading/></div>
-
-                {newDeckinputField && <>
-                    <Input inputPlaceholder={`Enter your Deck's name`}
-                           inputType={'text'} value={deckName} inputOnChange={setDeckName}
-                    />
-                    <Button buttonName={'Add'} buttonOnClick={createNewDeck}/>
-                </>}
                 {deckElements}
             </div>
         </div>

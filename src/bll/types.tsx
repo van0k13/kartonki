@@ -50,16 +50,16 @@ export const DELETE_DECK = 'cardsDeck_reducer/DELETE_DECK';
                                                       // typos
 
 export type CardsDeckType = {
-  _id?: string
-  user_id?: string
-  name?: string
-  path?: string // папка
-  grade?: number // средняя оценка карточек
-  shots?: number // количество попыток
-  rating?: number // лайки
-  type?:  string//"pack " // ещё будет "folder" (папка)
-  created?: string
-  updated?: string
+  _id: string
+  user_id: string
+  name: string
+  path: string // папка
+  grade: number // средняя оценка карточек
+  shots: number // количество попыток
+  rating: number // лайки
+  type:  string//"pack " // ещё будет "folder" (папка)
+  created: string
+  updated: string
 }
 
 export interface IGetCardsDecks {

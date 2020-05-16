@@ -53,7 +53,7 @@ export const getDecksTC = (token: string) =>
     }
         dispatch(isLoadingAC(false))
     };
-export const createNewCardDeckTC = (cardsDeck: CardsDeckType, token:string) =>
+export const createNewCardDeckTC = (cardsDeck: { user_id: string; name: string }, token: string) =>
     async(dispatch: Dispatch<ChatActionTypes>) => {
         try {
             dispatch(isLoadingAC(true))

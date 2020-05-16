@@ -15,18 +15,22 @@ import Button from "../button/Button";
 
 interface IHeaderProps {
     setLinks: (value: boolean) => void,
-    links: boolean
+    links: boolean,
+    myName: string
 }
 
-const Header: React.FC<IHeaderProps> = ({setLinks, links}) => {
+const Header: React.FC<IHeaderProps> = ({setLinks, links, myName}) => {
     return (
         <>
             <div className={styles.headerWrapper}>
                 {links
                     ? <>
-                        <Button buttonName={'hide links'} buttonOnClickBoolean={() => {
-                            setLinks(!links)
-                        }}/>
+                        <div>
+                            <Button buttonName={'hide links'} buttonOnClickBoolean={() => {
+                                setLinks(!links)
+                            }}/>
+                            <span>{myName}</span>
+                        </div>
                         <NavLink to={TO_AUTH}>LoginizationPage</NavLink>
                         <NavLink to={TO_NEW_PASSWORD}>NewPasswordPage</NavLink>
                         <NavLink to={TO_PROFILE}>ProfilePage</NavLink>
@@ -35,9 +39,13 @@ const Header: React.FC<IHeaderProps> = ({setLinks, links}) => {
                         <NavLink to={TO_CARDS}>Cards</NavLink>
                         <NavLink to={TO_CARDSDECK}>Card's Deck</NavLink>
                     </>
-                    : <Button buttonName={'show links'} buttonOnClickBoolean={() => {
-                        setLinks(!links)
-                    }}/>
+                    :
+                    <>
+                        <Button buttonName={'show links'} buttonOnClickBoolean={() => {
+                            setLinks(!links)
+                        }}/>
+
+                    </>
                 }
             </div>
         </>
