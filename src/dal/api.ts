@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CardsDeckType, CardsType} from "../bll/types";
+import {CardsDeckType} from "../bll/types";
 
 export const baseURL = 'https://cards-nya-back.herokuapp.com/1.0/';
 
@@ -66,7 +66,7 @@ export const cardsDeckAPI = {
             `/cards/pack`, {cardsPack, token});
         return response.data;
     },
-    updateCardsDeck: async(cardsPack: CardsDeckType,token:string,) => {
+    updateCardsDeck: async(cardsPack: { grade: number; name: string; _id: string },token:string,) => {
         const response = await instance.put<CardsDecksDataType>(
             `/cards/pack`, {cardsPack, token });
         return response.data;

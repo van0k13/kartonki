@@ -12,21 +12,30 @@ interface IProps {
     deleteDeck: (value: string) => void,
     deckName: string,
     decks: Array<CardsDeckType>,
+    editDeck: (value: string) => void,
     setSearchInput: (value:string) => void,
-    searchInput: string
+    searchInput: string,
+    editNameInput: string,
+    setEditNameInput: (value:string) => void,
+    editGradeInput: number,
+    setEditGradeInput: (value: number) => void
 }
 
 
 const UniCardsDeck: React.FC<IProps> = ({searchInput,setSearchInput,
-                                            decks,
-                                            deleteDeck,
+                                            decks, setEditNameInput,
+                                            deleteDeck, editNameInput,
                                             createNewDeck, setDeckName,
-                                            deckName
+                                            deckName, editGradeInput,
+                                            setEditGradeInput, editDeck
                                         }) => {
 
     const deckElements = decks.map(deck =>
         <SingleDeck name={deck.name} key={deck._id} deckId={deck._id} grade={deck.grade}
-                    deleteDeck={deleteDeck}
+                    deleteDeck={deleteDeck} editNameInput={editNameInput}
+                    setEditNameInput={setEditNameInput}
+                    editGradeInput={editGradeInput} editDeck={editDeck}
+                    setEditGradeInput={setEditGradeInput}
         />)
     return (
         <div className={styles.uniCardsWrapper}>

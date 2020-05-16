@@ -4,7 +4,7 @@ import UniCards from "./uniCards";
 
 const UniCardsContainer = () => {
   const [searchInput, setSearchInput] = useState<string>('')
-  console.log(searchInput)
+
   return (
       <UniCards searchInput={searchInput} setSearchInput={setSearchInput}
       />

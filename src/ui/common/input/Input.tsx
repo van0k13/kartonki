@@ -6,10 +6,11 @@ interface IPropsInput {
     value?: string  | number | undefined,
     checked?: boolean | undefined,
     inputType?:string | undefined,
-    inputOnChange?: (value: string ) => void,
+    inputOnChange?: (value: string  ) => void,
+    inputOnChangeNumber?: (value: number  ) => void,
     inputOnChangeChecked?: (value: boolean ) => void
 }
-const Input: React.FC<IPropsInput> = ({
+const Input: React.FC<IPropsInput> = ({inputOnChangeNumber,
                                           inputPlaceholder,
                                           value ,
                                           checked,
@@ -22,6 +23,8 @@ const Input: React.FC<IPropsInput> = ({
             inputOnChange(e.currentTarget.value)
         } else if(inputOnChangeChecked) {
             inputOnChangeChecked(e.currentTarget.checked)
+        } else if (inputOnChangeNumber) {
+            inputOnChangeNumber(Number(e.currentTarget.value))
         }
     }
 
