@@ -8,6 +8,7 @@ import {RootState} from "../../../../bll/store";
 const UniCardsContainerDeck = () => {
     const dispatch = useDispatch()
     const [deckName, setDeckName] = useState<string>('')
+    const [searchInput, setSearchInput] = useState<string>('')
     useEffect(() => {
         dispatch(getDecksTC(token))
     }, [])
@@ -26,6 +27,8 @@ const UniCardsContainerDeck = () => {
     }
     if(authSuccess) {return (
         <UniCardsDeck createNewDeck={createNewDeck}
+                      searchInput={searchInput}
+                      setSearchInput={setSearchInput}
                       decks={decks}
                       deckName={deckName} setDeckName={setDeckName}
                       deleteDeck={deleteDeck}

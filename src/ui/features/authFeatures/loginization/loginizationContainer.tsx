@@ -18,6 +18,7 @@ const LoginizationContainer = () => {
 const signIn =  () => {
      dispatch(loginizationTC(login, password, rememberMe))
 }
+console.log(login)
     return (
         <>
             {!authSuccess

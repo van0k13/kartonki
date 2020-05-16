@@ -12,10 +12,12 @@ interface IProps {
     deleteDeck: (value: string) => void,
     deckName: string,
     decks: Array<CardsDeckType>,
+    setSearchInput: (value:string) => void,
+    searchInput: string
 }
 
 
-const UniCardsDeck: React.FC<IProps> = ({
+const UniCardsDeck: React.FC<IProps> = ({searchInput,setSearchInput,
                                             decks,
                                             deleteDeck,
                                             createNewDeck, setDeckName,
@@ -26,11 +28,11 @@ const UniCardsDeck: React.FC<IProps> = ({
         <SingleDeck name={deck.name} key={deck._id} deckId={deck._id} grade={deck.grade}
                     deleteDeck={deleteDeck}
         />)
-
     return (
         <div className={styles.uniCardsWrapper}>
             <h2>UniCardsDeck</h2>
-            <Input inputPlaceholder={'item name'}/>
+            <Input inputPlaceholder={'item name'} inputType={'text'}
+                   value={searchInput} inputOnChange={setSearchInput}/>
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
                 <Input inputPlaceholder={`Enter your Deck's name`}

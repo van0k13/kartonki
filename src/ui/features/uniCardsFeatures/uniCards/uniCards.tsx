@@ -3,12 +3,17 @@ import styles from './uniCards.module.css'
 import Input from "../../../common/input/Input";
 import Button from "../../../common/button/Button";
 
+interface IProps {
+    setSearchInput: (value: string) => void,
+    searchInput: string,
+}
 
-const UniCards = () => {
+const UniCards: React.FC<IProps> = ({setSearchInput,searchInput}) => {
     return (
         <div className={styles.uniCardsWrapper}>
             <h2>UniCards</h2>
-            <Input inputPlaceholder={'item name'}/>
+            <Input inputPlaceholder={'item name'} value={searchInput}
+                   inputType={'text'} inputOnChange={setSearchInput} />
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
                 <Button buttonName={'add new Item'}/>
