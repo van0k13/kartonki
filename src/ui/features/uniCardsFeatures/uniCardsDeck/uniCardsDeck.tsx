@@ -12,12 +12,11 @@ interface IProps {
     deleteDeck: (value: string) => void,
     deckName: string,
     decks: Array<CardsDeckType>,
-    goToDeck: (value: string) => void
 }
 
 
 const UniCardsDeck: React.FC<IProps> = ({
-                                            decks, goToDeck,
+                                            decks,
                                             deleteDeck,
                                             createNewDeck, setDeckName,
                                             deckName
@@ -25,7 +24,7 @@ const UniCardsDeck: React.FC<IProps> = ({
 
     const deckElements = decks.map(deck =>
         <SingleDeck name={deck.name} key={deck._id} deckId={deck._id} grade={deck.grade}
-                    deleteDeck={deleteDeck} goToDeck={goToDeck}
+                    deleteDeck={deleteDeck}
         />)
 
     return (

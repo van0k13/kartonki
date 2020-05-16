@@ -24,19 +24,15 @@ const UniCardsContainerDeck = () => {
     const deleteDeck = (deckId: string) => {
         dispatch(deleteDeckTC(token, deckId))
     }
-    const goToDeck = (deckId: string) => {
-        alert('deckId = ' + deckId)
-    }
     if(authSuccess) {return (
         <UniCardsDeck createNewDeck={createNewDeck}
-                      goToDeck={goToDeck}
                       decks={decks}
                       deckName={deckName} setDeckName={setDeckName}
                       deleteDeck={deleteDeck}
         />
     ) } else {
        return <span>need authorization</span>
-    };
+    }
 };
 
 export default UniCardsContainerDeck;

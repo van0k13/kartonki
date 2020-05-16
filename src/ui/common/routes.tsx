@@ -8,13 +8,13 @@ import PswdRecoverPage from "../features/authFeatures/passwordRecover/PswdRecove
 import UniCardsPage from "../features/uniCardsFeatures/uniCards/uniCardsPage";
 import UniCardsDeckPage from "../features/uniCardsFeatures/uniCardsDeck/uniCardsDeckPage";
 
-export const TO_AUTH = '/auth';
+export const TO_AUTH = '/auth/';
 export const TO_NEW_PASSWORD = '/new-password:token';
-export const TO_PROFILE = '/profile';
-export const TO_RECOVER_PASSWORD = '/recover-password';
-export const TO_REGISTRATION = '/registration';
-export const TO_CARDS = '/cards';
-export const TO_CARDSDECK = '/cards-deck';
+export const TO_PROFILE = '/profile/';
+export const TO_RECOVER_PASSWORD = '/recover-password/';
+export const TO_REGISTRATION = '/registration/';
+export const TO_CARDS = '/cards/';
+export const TO_CARDSDECK = '/cards-deck/';
 
 export const AllRoutes: React.FC = () => {
     return (

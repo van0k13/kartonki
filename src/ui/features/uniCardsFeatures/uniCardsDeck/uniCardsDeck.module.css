@@ -28,6 +28,10 @@
     position: absolute;
     top: -30px;
 }
+.itemName a {
+    text-decoration: none;
+    color: black;
+}
 .itemName:hover {
     cursor: pointer;
     background-color: #2BA2DF;
