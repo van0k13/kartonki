@@ -66,7 +66,7 @@ export const createNewCardDeckTC = (cardsDeck: { user_id: string; name: string }
         }
         dispatch(isLoadingAC(false))
     }
-export const deleteDeckTC = (token: string, deckId: string | undefined) =>
+export const deleteDeckTC = (token: string, deckId: string) =>
     async (dispatch: Dispatch<ChatActionTypes>) => {
         try {
             dispatch(isLoadingAC(true))

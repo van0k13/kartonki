@@ -21,6 +21,7 @@ export interface IStateCards {
   cards: Array<CardsType>
   cardsDeckID: string
   cardID: string
+  success: boolean
 }
 export type IStateCardsDeck  = {
   decks: Array<CardsDeckType>
@@ -89,7 +90,8 @@ export interface ICreateDeleteDeckActionCreator {
 }
 export interface ICreateCardActionCreator {
   type: typeof CREATE_CARD
-  card: CardsType
+  newCard: CardsType
+  successBoolean: boolean
 }
 export interface IDeleteCardActionCreator {
   type: typeof DELETE_CARD

@@ -8,14 +8,15 @@ import {
     IEditCardActionCreator, ISetCards,
     IStateCards, SET_CARDS,
 } from "./types";
-import {isLoadingAC} from "./auth_reducer";
+import {isLoadingAC, setTokenAC} from "./auth_reducer";
 import {cardsAPI} from "../dal/api";
 
 
 const initialState: IStateCards = {
     cards: [],
     cardID: '',
-    cardsDeckID: ''
+    cardsDeckID: '',
+    success: false
 };
 
 
@@ -31,7 +32,7 @@ const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes
             };
         case CREATE_CARD:
             return {
-                ...state, cards: [...state.cards, action.card]
+                ...state, cards: [...state.cards, action.newCard], success: action.successBoolean
             };
         default:
             return state;
@@ -44,8 +45,8 @@ const editCardAC = (item: IStateCards, cardsDeckID: string, cardID: string): IEd
 
 const deleteCardAC = (cardsDeckID: string, cardId: string): IDeleteCardActionCreator =>
     ({type: DELETE_CARD, cardsDeckID, cardId});
-const createCardAC = (card: CardsType): ICreateCardActionCreator =>
-    ({type: CREATE_CARD, card});
+const createCardAC = (newCard: CardsType, successBoolean: boolean): ICreateCardActionCreator =>
+    ({type: CREATE_CARD, newCard, successBoolean});
 const getCardsAC = (cards: Array<CardsType>): ISetCards => ({type: SET_CARDS, cards});
 
 // Thunk
@@ -60,12 +61,13 @@ export const getCardsTC = (token: string, id: string) =>
         }
         dispatch(isLoadingAC(false));
     };
-export const createCardTC = (token: string, id: string) =>
+export const createCardTC = (token: string, deckId: string) =>
     async (dispatch: any) => {
         try {
             dispatch(isLoadingAC(true));
-            const data = await cardsAPI.addCard(token, id);
-            dispatch(createCardAC(data.cards))
+            const data = await cardsAPI.addCard(token, deckId);
+            dispatch(createCardAC(data.newCard, data.success));
+            dispatch(setTokenAC(data.token));
         } catch (e) {
 
         }
@@ -82,12 +84,16 @@ export const editCardTC = (token: string, id: string) =>
         }
         dispatch(isLoadingAC(false));
     };
-export const deleteCardTC = (token: string, id: string) =>
+export const deleteCardTC = (token: string, cardID: string, id: string) =>
     async (dispatch: any) => {
         try {
             dispatch(isLoadingAC(true));
-            const data = await cardsAPI.deleteCard(token, id);
-            dispatch(deleteCardAC(data.cardsDeckID, data.cardID))
+            const data = await cardsAPI.deleteCard(token, cardID);
+            dispatch(setTokenAC(data.token));
+            if(data.success) {
+                const data2 = await cardsAPI.getCards(data.token, id);
+                dispatch(getCardsAC(data2.cards))
+            }
         } catch (e) {
 
         }
