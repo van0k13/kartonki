@@ -4,10 +4,11 @@ import {RootState} from "../../bll/store";
 import {TO_AUTH, TO_REGISTRATION} from "./routes";
 import {NavLink} from "react-router-dom";
 
-const WithAuthHOC = (Component: any) => {
-    const {authSuccess} = useSelector((state: RootState) => state.auth)
 
+
+const WithAuthHOC = (Component: any) => {
     const WrapperContainer = () => {
+        const {authSuccess} = useSelector((state: RootState) => state.auth)
         if (authSuccess)
             return <Component/>
         return (
@@ -21,5 +22,6 @@ const WithAuthHOC = (Component: any) => {
     }
     return WrapperContainer;
 };
+
 
 export default WithAuthHOC;

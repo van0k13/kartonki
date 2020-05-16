@@ -1,5 +1,6 @@
 import React from 'react';
 import UniCardsContainerDeck from "./uniCardsContainerDeck";
+import WithAuthHOC from "../../../common/withAuth";
 
 
 const UniCardsDeckPage = () => {
@@ -8,4 +9,4 @@ const UniCardsDeckPage = () => {
   );
 };
 
-export default UniCardsDeckPage;
+export default WithAuthHOC(UniCardsDeckPage);
