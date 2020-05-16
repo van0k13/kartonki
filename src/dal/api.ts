@@ -76,4 +76,38 @@ export const cardsDeckAPI = {
             `/cards/pack?token=${token}&id=${id}`);
         return response.data;
     },
-}
+};
+
+ export const cardsAPI = {
+     getCards: async (token: string, id: string) => {
+         const response =await instance.get(`/cards/card?token=${token}&cardsPack_id=${id}`);
+         return response.data;
+     },
+     addCard: async (token: string, id: string) => {
+         const response = await instance.post(`/cards/card`, {
+             token,
+             card: {
+                 id,
+                 question: 'new!',
+             },
+         });
+
+         return response.data;
+     },
+     updateCard: async (token: string, id: string) => {
+         const response = await instance.put(`/cards/card`, {
+             token,
+             card: {
+                 _id: id,
+                 question: 'updated question',
+             }
+         });
+
+         return response.data;
+     },
+     deleteCard: async (token: string, id: string) => {
+         const response = await instance.delete(`/cards/card?token=${token}&id=${id}`);
+
+         return response.data;
+     },
+ };

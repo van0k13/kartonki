@@ -18,11 +18,9 @@ export interface IStateLogin {
   isLoading: boolean
 }
 export interface IStateCards {
-  id: string
-  name: string
-  score: number
-  question: string,
-  answer: string
+  cards: Array<CardsType>
+  cardsDeckID: string
+  cardID: string
 }
 export type IStateCardsDeck  = {
   decks: Array<CardsDeckType>
@@ -46,6 +44,7 @@ export const CREATE_CARD = 'cards_reducer/CREATE_CARD';
 export const GET_DECKS = 'cardsDeck_reducer/GET_DECKS';
 export const CREATE_DECK = 'cardsDeck_reducer/CREATE_DECK';
 export const DELETE_DECK = 'cardsDeck_reducer/DELETE_DECK';
+export const SET_CARDS = 'SET_CARDS';
 
                                                       // typos
 
@@ -62,6 +61,24 @@ export type CardsDeckType = {
   updated?: string
 }
 
+export type CardsType = {
+  answer: string
+  question: string
+  cardsPack_id: string
+  grade: number
+  rating: number
+  shots: number
+  type: string
+  created: string
+  updated: string
+  __v: number
+  _id: string
+}
+
+export interface ISetCards {
+  type: typeof SET_CARDS
+  cards: Array<CardsType>
+}
 export interface IGetCardsDecks {
   type: typeof GET_DECKS
   decks: Array<CardsDeckType>
@@ -72,7 +89,7 @@ export interface ICreateDeleteDeckActionCreator {
 }
 export interface ICreateCardActionCreator {
   type: typeof CREATE_CARD
-  cardsDeckID: string
+  card: CardsType
 }
 export interface IDeleteCardActionCreator {
   type: typeof DELETE_CARD
@@ -140,4 +157,4 @@ export interface INewPasswordError {
 export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistrateSuccess | IRegistrateError |
     IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess |
     INewPasswordError | IisLoadingActionCreator | IEditCardActionCreator | IDeleteCardActionCreator |
-    ICreateCardActionCreator | ICreateDeleteDeckActionCreator | IGetCardsDecks | ISetToken
+    ICreateCardActionCreator | ICreateDeleteDeckActionCreator | IGetCardsDecks | ISetToken | ISetCards

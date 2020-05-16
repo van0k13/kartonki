@@ -1,41 +1,25 @@
 import {
+    CardsType,
     ChatActionTypes,
     CREATE_CARD,
     DELETE_CARD,
     EDIT_CARD, ICreateCardActionCreator,
     IDeleteCardActionCreator,
-    IEditCardActionCreator,
-    IStateCards,
+    IEditCardActionCreator, ISetCards,
+    IStateCards, SET_CARDS,
 } from "./types";
+import {isLoadingAC} from "./auth_reducer";
+import {cardsAPI} from "../dal/api";
 
 
-
-const initialState: Array<IStateCards> = [
-    {
-        id: '1',
-        name: 'card 1',
-        score: 0,
-        question: 'question 1',
-        answer: 'answer',
-    },
-    {
-        id: '2',
-        name: 'card 2',
-        score: 0,
-        question: 'question 2',
-        answer: 'answer',
-    },
-    {
-        id: '3',
-        name: 'card 3',
-        score: 0,
-        question: 'question 3',
-        answer: 'answer',
-    },
-];
+const initialState: IStateCards = {
+    cards: [],
+    cardID: '',
+    cardsDeckID: ''
+};
 
 
-const cardsReducer = (state:Array<IStateCards> = initialState, action: ChatActionTypes) => {
+const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes) => {
     switch (action.type) {
         case EDIT_CARD:
             return {
@@ -43,11 +27,11 @@ const cardsReducer = (state:Array<IStateCards> = initialState, action: ChatActio
             };
         case DELETE_CARD:
             return {
-                ...state
+                ...state,
             };
         case CREATE_CARD:
             return {
-                ...state,
+                ...state, cards: [...state.cards, action.card]
             };
         default:
             return state;
@@ -55,17 +39,60 @@ const cardsReducer = (state:Array<IStateCards> = initialState, action: ChatActio
 };
 
 // Action Creator
-const editCardAC = (item:IStateCards, cardsDeckID: string, cardID: string):IEditCardActionCreator =>
+const editCardAC = (item: IStateCards, cardsDeckID: string, cardID: string): IEditCardActionCreator =>
     ({type: EDIT_CARD, item, cardsDeckID, cardID});
 
-
-const deleteCardAC = (cardsDeckID: string, cardId: string):IDeleteCardActionCreator =>
+const deleteCardAC = (cardsDeckID: string, cardId: string): IDeleteCardActionCreator =>
     ({type: DELETE_CARD, cardsDeckID, cardId});
-const createCardAC = (cardsDeckID: string):ICreateCardActionCreator =>
-    ({type: CREATE_CARD, cardsDeckID});
-
+const createCardAC = (card: CardsType): ICreateCardActionCreator =>
+    ({type: CREATE_CARD, card});
+const getCardsAC = (cards: Array<CardsType>): ISetCards => ({type: SET_CARDS, cards});
 
 // Thunk
+export const getCardsTC = (token: string, id: string) =>
+    async (dispatch: any) => {
+        try {
+            dispatch(isLoadingAC(true));
+            const data = await cardsAPI.getCards(token, id);
+            dispatch(getCardsAC(data.cards))
+        } catch (e) {
+
+        }
+        dispatch(isLoadingAC(false));
+    };
+export const createCardTC = (token: string, id: string) =>
+    async (dispatch: any) => {
+        try {
+            dispatch(isLoadingAC(true));
+            const data = await cardsAPI.addCard(token, id);
+            dispatch(createCardAC(data.cards))
+        } catch (e) {
+
+        }
+        dispatch(isLoadingAC(false));
+    };
+export const editCardTC = (token: string, id: string) =>
+    async (dispatch: any) => {
+        try {
+            dispatch(isLoadingAC(true));
+            const data = await cardsAPI.updateCard(token, id);
+            dispatch(editCardAC(data.cards, data.cardsDeckID, data.cardID))
+        } catch (e) {
+
+        }
+        dispatch(isLoadingAC(false));
+    };
+export const deleteCardTC = (token: string, id: string) =>
+    async (dispatch: any) => {
+        try {
+            dispatch(isLoadingAC(true));
+            const data = await cardsAPI.deleteCard(token, id);
+            dispatch(deleteCardAC(data.cardsDeckID, data.cardID))
+        } catch (e) {
+
+        }
+        dispatch(isLoadingAC(false));
+    };
 
 
 export default cardsReducer;
