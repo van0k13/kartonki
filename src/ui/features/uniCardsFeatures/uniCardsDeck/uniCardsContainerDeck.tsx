@@ -11,7 +11,7 @@ const UniCardsContainerDeck = () => {
     useEffect(() => {
         dispatch(getDecksTC(token))
     }, [])
-    const {token, id}= useSelector((state: RootState) => state.auth)
+    const {token, id, authSuccess}= useSelector((state: RootState) => state.auth)
     const {decks} = useSelector((state: RootState) => state.decks)
     const createNewDeck = () => {
         const cardsDeck = {
@@ -27,14 +27,16 @@ const UniCardsContainerDeck = () => {
     const goToDeck = (deckId: string) => {
         alert('deckId = ' + deckId)
     }
-    return (
+    if(authSuccess) {return (
         <UniCardsDeck createNewDeck={createNewDeck}
                       goToDeck={goToDeck}
                       decks={decks}
                       deckName={deckName} setDeckName={setDeckName}
                       deleteDeck={deleteDeck}
         />
-    );
+    ) } else {
+       return <span>need authorization</span>
+    };
 };
 
 export default UniCardsContainerDeck;
