@@ -24,7 +24,7 @@ type CardsDecksDataType = {
     cardPacks: Array<CardsDeckType>;
     success: boolean;
     token: string;
-    error?: string;
+    error: string;
 }
 interface IAddNewCardsDeck {
     newCardsPack: CardsDeckType,
@@ -51,8 +51,7 @@ export const authAPI = {
         return response.data;
     },
     setNewPasswordAPI: async (password: string, resetPasswordToken: string) => {
-        const response = await instance.post<IRegistration>(
-            '/auth/set-new-password', {password, resetPasswordToken});
+        const response = await instance.post<IRegistration>('/auth/set-new-password', {password, resetPasswordToken});
         return response.data;
     }
 };
@@ -67,14 +66,48 @@ export const cardsDeckAPI = {
             `/cards/pack`, {cardsPack, token});
         return response.data;
     },
-    updateCardsDeck: async (cardsPack: CardsDeckType, token: string,) => {
+    updateCardsDeck: async(cardsPack: CardsDeckType,token:string,) => {
         const response = await instance.put<CardsDecksDataType>(
-            `/cards/pack`, {cardsPack, token});
+            `/cards/pack`, {cardsPack, token });
         return response.data;
     },
-    deleteCardsDeck: async (token: string, id: string | undefined) => {
+    deleteCardsDeck: async(token:string, id: string) => {
         const response = await instance.delete<CardsDecksDataType>(
             `/cards/pack?token=${token}&id=${id}`);
         return response.data;
-    }
-}
+    },
+};
+
+ export const cardsAPI = {
+     getCards: async (token: string, id: string) => {
+         const response =await instance.get(`/cards/card?token=${token}&cardsPack_id=${id}`);
+         return response.data;
+     },
+     addCard: async (token: string, id: string) => {
+         const response = await instance.post(`/cards/card`, {
+             token,
+             card: {
+                 id,
+                 question: 'new!',
+             },
+         });
+
+         return response.data;
+     },
+     updateCard: async (token: string, id: string) => {
+         const response = await instance.put(`/cards/card`, {
+             token,
+             card: {
+                 _id: id,
+                 question: 'updated question',
+             }
+         });
+
+         return response.data;
+     },
+     deleteCard: async (token: string, id: string) => {
+         const response = await instance.delete(`/cards/card?token=${token}&id=${id}`);
+
+         return response.data;
+     },
+ };
