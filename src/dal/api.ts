@@ -45,7 +45,7 @@ export const authAPI = {
     passwordRecoverAPI: async (email: string) => {
         const response = await instance.post<IRegistration>('/auth/forgot', {
             email,
-            html1: "<a href='https://van0k13.github.io/kartonki/#/recover-password",
+            html1: "<a href='http://localhost:3000/kartonki#/new-password/",
             html2: "'>reset-password-link</a>"
         });
         return response.data;

@@ -36,7 +36,7 @@ const SingleDeck: React.FC<IProps> = ({
             {!editDeckInputField
                 ? <>
                     <div className={styles.itemName}>
-                        <NavLink to={TO_CARDS + deckId}>Name: {name}</NavLink>
+                        <NavLink to={TO_CARDS + `/${deckId}`}>Name: {name}</NavLink>
                     </div>
                     <div className={styles.itemScore}>Grade:{grade} </div>
                 </>
