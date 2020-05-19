@@ -4,7 +4,7 @@ import ModalContainer from './modalContainer';
 const ModalsPage: React.FC = () => {
 
     return (
-            <ModalContainer/>
+            <ModalContainer onModelButtonClickName={'name'} modalTitle={'title'}/>
 
     );
 };
