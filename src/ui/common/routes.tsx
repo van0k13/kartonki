@@ -7,14 +7,18 @@ import NewPswdPage from "../features/authFeatures/newPassword/NewPswdPage";
 import PswdRecoverPage from "../features/authFeatures/passwordRecover/PswdRecoverPage";
 import UniCardsPage from "../features/uniCardsFeatures/uniCards/uniCardsPage";
 import UniCardsDeckPage from "../features/uniCardsFeatures/uniCardsDeck/uniCardsDeckPage";
+import ModalsPage from "../features/modalsFeatures/defaultModal/modalsPage";
+import ModalsPageDelete from "../features/modalsFeatures/modalForDecks/modalsPageDelete";
 
-export const TO_AUTH = '/auth';
-export const TO_NEW_PASSWORD = '/new-password';
-export const TO_PROFILE = '/profile';
-export const TO_RECOVER_PASSWORD = '/recover-password';
-export const TO_REGISTRATION = '/registration';
-export const TO_CARDS = '/cards-card';
-export const TO_CARDSDECK = '/cards-deck';
+export const TO_AUTH = '/auth/';
+export const TO_NEW_PASSWORD = '/new-password/:token';
+export const TO_PROFILE = '/profile/';
+export const TO_RECOVER_PASSWORD = '/recover-password/';
+export const TO_REGISTRATION = '/registration/';
+export const TO_CARDS = '/cards/';
+export const TO_CARDSDECK = '/cards-deck/';
+export const TO_MODALS = '/test-modals/';
+export const TO_DELETE_MODULE = '/delete-modal/';
 
 export const AllRoutes: React.FC = () => {
     return (
@@ -26,6 +30,8 @@ export const AllRoutes: React.FC = () => {
             <Route path={TO_REGISTRATION} render={()=> <RegistrationPage />} />
             <Route path={TO_CARDS + '/:deckId'} render={()=> <UniCardsPage />} />
             <Route path={TO_CARDSDECK} render={()=> <UniCardsDeckPage />} />
+            <Route path={TO_MODALS} render={()=> <ModalsPage />} />
+            <Route path={TO_DELETE_MODULE} render={()=> <ModalsPageDelete />} />
             <Route exact path='/' render={()=> <Redirect to={TO_AUTH}/>} />
             <Route render={()=> <div>404 BAD GATEWAY</div>} />
         </Switch>
