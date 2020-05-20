@@ -46,7 +46,7 @@ const UniCardsContainerDeck = () => {
         dispatch(setCurrentDeckIdAC(deckId))
         setIsOpenModal(true)
     }
-    const answerFromModal = (answer: boolean) => {
+    const answerFromDeleteModal = (answer: boolean) => {
         if (answer) {
             dispatch(deleteDeckTC(token, currentDeckId))
             setIsOpenModal(false)
@@ -67,8 +67,9 @@ const UniCardsContainerDeck = () => {
                           editGradeInput={editGradeInput}
                           setEditGradeInput={setEditGradeInput}/>
             <ModalContainerDelete setIsOpenModal={setIsOpenModal}
-                                  answerFromModal={answerFromModal}
-                                  isOpenModal={isOpenModal}/>
+                                  answerFromModal={answerFromDeleteModal}
+                                  isOpenModal={isOpenModal}
+                                  titleName={'Delete Deck ?'}/>
         </>
     )
 
