@@ -13,7 +13,7 @@ export const TO_NEW_PASSWORD = '/new-password/:token';
 export const TO_PROFILE = '/profile/';
 export const TO_RECOVER_PASSWORD = '/recover-password/';
 export const TO_REGISTRATION = '/registration/';
-export const TO_CARDS = '/cards/';
+export const TO_CARDS = '/cards/:id';
 export const TO_CARDSDECK = '/cards-deck/';
 
 export const AllRoutes: React.FC = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import UniCardsContainer from "./uniCardsContainer";
 import WithAuthHOC from "../../../common/withAuth";
+import UniCardsContainer from "./uniCardsContainer";
 
 
 const UniCardsPage = () => {
