@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 import {
     TO_AUTH,
     TO_CARDS,
-    TO_CARDSDECK,
+    TO_CARDSDECK, TO_MODALS,
     TO_NEW_PASSWORD,
     TO_PROFILE,
     TO_RECOVER_PASSWORD,
@@ -38,6 +38,7 @@ const Header: React.FC<IHeaderProps> = ({setLinks, links, myName}) => {
                         <NavLink to={TO_REGISTRATION}>RegistrationPage</NavLink>
                         <NavLink to={TO_CARDS}>Cards</NavLink>
                         <NavLink to={TO_CARDSDECK}>Card's Deck</NavLink>
+                        <NavLink to={TO_MODALS}>Modals</NavLink>
                     </>
                     :
                     <>

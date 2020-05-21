@@ -22,6 +22,10 @@ const initialState: IStateCards = {
 
 const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes) => {
     switch (action.type) {
+        case SET_CARDS:
+            return {
+                ...state, cards:action.cards
+            }
         case EDIT_CARD:
             return {
                 ...state, item: action.item,
@@ -43,8 +47,8 @@ const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes
 const editCardAC = (item: IStateCards, cardsDeckID: string, cardID: string): IEditCardActionCreator =>
     ({type: EDIT_CARD, item, cardsDeckID, cardID});
 
-const deleteCardAC = (cardsDeckID: string, cardId: string): IDeleteCardActionCreator =>
-    ({type: DELETE_CARD, cardsDeckID, cardId});
+// const deleteCardAC = (cardsDeckID: string, cardId: string): IDeleteCardActionCreator =>
+//     ({type: DELETE_CARD, cardsDeckID, cardId});
 const createCardAC = (newCard: CardsType, successBoolean: boolean): ICreateCardActionCreator =>
     ({type: CREATE_CARD, newCard, successBoolean});
 const getCardsAC = (cards: Array<CardsType>): ISetCards => ({type: SET_CARDS, cards});
