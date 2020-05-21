@@ -13,7 +13,21 @@ import {cardsAPI} from "../dal/api";
 
 
 const initialState: IStateCards = {
-    cards: [],
+    cards: [
+        {
+            answer: "no answer",
+            question: "no 555",
+            cardsPack_id: "5eb6a2f72f849402d46c6ac4",
+            grade: 3.33,
+            rating: 0,
+            shots: 1,
+            type: "card",
+            created: "2020-05-13T11:05:44.867Z",
+            updated: "2020-05-13T11:05:44.867Z",
+            __v: 0,
+            _id: "5ebbd48876810f1ad0e7ece3",
+        }
+    ],
     cardID: '',
     cardsDeckID: '',
     success: false
@@ -59,7 +73,8 @@ export const getCardsTC = (token: string, id: string) =>
         try {
             dispatch(isLoadingAC(true));
             const data = await cardsAPI.getCards(token, id);
-            dispatch(getCardsAC(data.cards))
+            dispatch(getCardsAC(data.cards));
+            dispatch(setTokenAC(data.token));
         } catch (e) {
 
         }

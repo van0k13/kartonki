@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import UniCards from "./uniCards";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../bll/store";
@@ -17,7 +17,7 @@ const UniCardsContainer = (props:any) => {
         dispatch(getCardsTC(token, deckId))
     }, [deckId])
   return (
-      <UniCards searchInput={searchInput} setSearchInput={setSearchInput}
+      <UniCards cards={cards} searchInput={searchInput} setSearchInput={setSearchInput}
       />
   );
 };
