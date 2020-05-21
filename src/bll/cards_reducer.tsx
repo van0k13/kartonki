@@ -16,7 +16,7 @@ const initialState: IStateCards = {
     cards: [
         {
             answer: "no answer",
-            question: "no 555",
+            question: "That Deck is empty",
             cardsPack_id: "5eb6a2f72f849402d46c6ac4",
             grade: 3.33,
             rating: 0,
@@ -37,8 +37,13 @@ const initialState: IStateCards = {
 const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes) => {
     switch (action.type) {
         case SET_CARDS:
+            if (action.cards.length === 0){
+                return {
+                    ...state, cards: initialState.cards
+                }
+            }
             return {
-                ...state, cards:action.cards
+                ...state, cards: action.cards
             }
         case EDIT_CARD:
             return {

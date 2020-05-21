@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const UniCards: React.FC<IProps> = ({setSearchInput,searchInput, cards}) => {
-    // debugger
+    debugger
     return (
         <div className={styles.uniCardsWrapper}>
             <h2>UniCards</h2>
