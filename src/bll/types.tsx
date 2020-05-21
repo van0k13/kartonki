@@ -106,7 +106,7 @@ export interface IDeleteCardActionCreator {
 }
 export interface IEditCardActionCreator {
   type: typeof EDIT_CARD
-  item:IStateCards
+  cards: Array<CardsType>
   cardsDeckID: string
   cardID: string
 }

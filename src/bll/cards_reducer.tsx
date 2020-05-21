@@ -4,7 +4,6 @@ import {
     CREATE_CARD,
     DELETE_CARD,
     EDIT_CARD, ICreateCardActionCreator,
-    IDeleteCardActionCreator,
     IEditCardActionCreator, ISetCards,
     IStateCards, SET_CARDS,
 } from "./types";
@@ -37,17 +36,13 @@ const initialState: IStateCards = {
 const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes) => {
     switch (action.type) {
         case SET_CARDS:
-            if (action.cards.length === 0){
-                return {
-                    ...state, cards: initialState.cards
-                }
-            }
+            if (action.cards.length > 0)
             return {
                 ...state, cards: action.cards
             }
         case EDIT_CARD:
             return {
-                ...state, item: action.item,
+                ...state, cards: action.cards,
             };
         case DELETE_CARD:
             return {
@@ -63,8 +58,8 @@ const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes
 };
 
 // Action Creator
-const editCardAC = (item: IStateCards, cardsDeckID: string, cardID: string): IEditCardActionCreator =>
-    ({type: EDIT_CARD, item, cardsDeckID, cardID});
+const editCardAC = (cards: Array<CardsType>, cardsDeckID: string, cardID: string): IEditCardActionCreator =>
+    ({type: EDIT_CARD, cards, cardsDeckID, cardID});
 
 // const deleteCardAC = (cardsDeckID: string, cardId: string): IDeleteCardActionCreator =>
 //     ({type: DELETE_CARD, cardsDeckID, cardId});
