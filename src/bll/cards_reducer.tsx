@@ -3,30 +3,34 @@ import {
     ChatActionTypes,
     CREATE_CARD,
     DELETE_CARD,
-    EDIT_CARD, ICreateCardActionCreator,
-    IEditCardActionCreator, ISetCards,
-    IStateCards, SET_CARDS,
+    EDIT_CARD,
+    ICreateCardActionCreator,
+    IEditCardActionCreator,
+    ISetCard,
+    ISetCards,
+    IStateCards,
+    SET_CARD,
+    SET_CARDS,
 } from "./types";
 import {isLoadingAC, setTokenAC} from "./auth_reducer";
 import {cardsAPI} from "../dal/api";
 
 
 const initialState: IStateCards = {
-    cards: [
-        {
-            answer: "no answer",
-            question: "That Deck is empty",
-            cardsPack_id: "5eb6a2f72f849402d46c6ac4",
-            grade: 3.33,
-            rating: 0,
-            shots: 1,
-            type: "card",
-            created: "2020-05-13T11:05:44.867Z",
-            updated: "2020-05-13T11:05:44.867Z",
-            __v: 0,
-            _id: "5ebbd48876810f1ad0e7ece3",
-        }
-    ],
+    cards: [],
+    currentCard: {
+        answer: "default",
+        question: "default",
+        cardsPack_id: "default",
+        grade: 0.00,
+        rating: 0,
+        shots: 0,
+        type: "card",
+        created: "2020-05-13T11:05:44.867Z",
+        updated: "2020-05-13T11:05:44.867Z",
+        __v: 0,
+        _id: "default",
+    },
     cardID: '',
     cardsDeckID: '',
     success: false
@@ -36,9 +40,16 @@ const initialState: IStateCards = {
 const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes) => {
     switch (action.type) {
         case SET_CARDS:
-            if (action.cards.length > 0)
+            if(action.cards.length > 0){
+            return {...state, cards: action.cards}
+            } else {
+                return {...state}
+            }
+        case SET_CARD:
             return {
-                ...state, cards: action.cards
+                ...state, currentCard: state.cards.find( c => {
+                    return (c._id === action.cardId)
+                })
             }
         case EDIT_CARD:
             return {
@@ -60,7 +71,7 @@ const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes
 // Action Creator
 const editCardAC = (cards: Array<CardsType>, cardsDeckID: string, cardID: string): IEditCardActionCreator =>
     ({type: EDIT_CARD, cards, cardsDeckID, cardID});
-
+export const setCardAC = (cardId: string):ISetCard => ({type:SET_CARD, cardId})
 // const deleteCardAC = (cardsDeckID: string, cardId: string): IDeleteCardActionCreator =>
 //     ({type: DELETE_CARD, cardsDeckID, cardId});
 const createCardAC = (newCard: CardsType, successBoolean: boolean): ICreateCardActionCreator =>
@@ -80,11 +91,11 @@ export const getCardsTC = (token: string, id: string) =>
         }
         dispatch(isLoadingAC(false));
     };
-export const createCardTC = (token: string, deckId: string) =>
+export const createCardTC = (card: { cardsPack_id:string, question:string }, token: string) =>
     async (dispatch: any) => {
         try {
             dispatch(isLoadingAC(true));
-            const data = await cardsAPI.addCard(token, deckId);
+            const data = await cardsAPI.addCard(card, token);
             dispatch(createCardAC(data.newCard, data.success));
             dispatch(setTokenAC(data.token));
         } catch (e) {

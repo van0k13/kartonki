@@ -80,19 +80,15 @@ export const cardsDeckAPI = {
 
  export const cardsAPI = {
      getCards: async (token: string, id: string) => {
-         // debugger
          const response =await instance.get(`/cards/card?token=${token}&cardsPack_id=${id}`);
          return response.data;
      },
-     addCard: async (token: string, cardsPack_id: string) => {
+     addCard: async (card: { cardsPack_id:string, question:string }, token: string) => {
+         debugger
          const response = await instance.post(`/cards/card`, {
+             card,
              token,
-             card: {
-                 cardsPack_id,
-                 question: 'new!',
-             },
          });
-
          return response.data;
      },
      updateCard: async (token: string, id: string) => {

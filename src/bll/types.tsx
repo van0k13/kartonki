@@ -19,6 +19,7 @@ export interface IStateLogin {
 }
 export interface IStateCards {
   cards: Array<CardsType>
+  currentCard: CardsType
   cardsDeckID: string
   cardID: string
   success: boolean
@@ -48,6 +49,7 @@ export const GET_DECK_ID = 'cardsDeck_reducer/GET_DECK_ID';
 export const CREATE_DECK = 'cardsDeck_reducer/CREATE_DECK';
 export const DELETE_DECK = 'cardsDeck_reducer/DELETE_DECK';
 export const SET_CARDS = 'SET_CARDS';
+export const SET_CARD = 'SET_CARD';
 
                                                       // typos
 
@@ -81,6 +83,10 @@ export type CardsType = {
 export interface ISetCards {
   type: typeof SET_CARDS
   cards: Array<CardsType>
+}
+export interface ISetCard {
+  type: typeof SET_CARD
+  cardId: string
 }
 export interface IGetCardsDecks {
   type: typeof GET_DECKS
@@ -166,4 +172,4 @@ export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistra
     IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess |
     INewPasswordError | IisLoadingActionCreator | IEditCardActionCreator | IDeleteCardActionCreator |
     ICreateCardActionCreator | ICreateDeleteDeckActionCreator | IGetCardsDecks | ISetToken | ISetCards |
-    IGetDeckId
+    IGetDeckId | ISetCard
