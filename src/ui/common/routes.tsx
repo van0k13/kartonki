@@ -8,8 +8,7 @@ import PswdRecoverPage from "../features/authFeatures/passwordRecover/PswdRecove
 import UniCardsPage from "../features/uniCardsFeatures/uniCards/uniCardsPage";
 import UniCardsDeckPage from "../features/uniCardsFeatures/uniCardsDeck/uniCardsDeckPage";
 import ModalsPage from "../features/modalsFeatures/defaultModal/modalsPage";
-import ModalsPageDelete from "../features/modalsFeatures/modalForDecks/modalsPageDelete";
-import SingleCardContainer from "../features/uniCardsFeatures/uniCards/singleCardContainer";
+import SingleCardContainer from "../features/uniCardsFeatures/uniCards/singleCard/singleCardContainer";
 
 export const TO_AUTH = '/auth/';
 export const TO_NEW_PASSWORD = '/new-password/:token';
@@ -34,7 +33,6 @@ export const AllRoutes: React.FC = () => {
             <Route path={TO_CARDSDECK} render={()=> <UniCardsDeckPage />} />
             <Route path={TO_CARD + '/:cardId'} render={()=> <SingleCardContainer />} />
             <Route path={TO_MODALS} render={()=> <ModalsPage />} />
-            <Route path={TO_DELETE_MODULE} render={()=> <ModalsPageDelete />} />
             <Route exact path='/' render={()=> <Redirect to={TO_AUTH}/>} />
             <Route render={()=> <div>404 BAD GATEWAY</div>} />
         </Switch>

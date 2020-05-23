@@ -18,7 +18,8 @@ const Button: React.FC<IPropsButton> = ({buttonOnClick, buttonName,
 
     return (
         <div className={s.buttonWrapper}>
-            <button onClick={onClick}>{buttonName ? buttonName : 'submit'}</button>
+            <button className={s.worksButton}
+                    onClick={onClick}><span>{buttonName ? buttonName : 'submit'}</span></button>
         </div>
     );
 };

@@ -10,7 +10,7 @@ import {Redirect} from "react-router-dom";
 const LoginizationContainer = () => {
 
     const dispatch = useDispatch()
-    const {authSuccess, errorMessage, isLoading} = useSelector((state: RootState) => state.auth)
+    const {authSuccess, errorMessage} = useSelector((state: RootState) => state.auth)
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [rememberMe, setRememberMe] = useState<boolean>(false);
@@ -25,7 +25,7 @@ const signIn =  () => {
                 ? <Loginization setLogin={setLogin} setPassword={setPassword}
                                 setRememberMe={setRememberMe} loginError={errorMessage}
                                 login={login} password={password} rememberMe={rememberMe}
-                                signIn={signIn} isLoading={isLoading}
+                                signIn={signIn}
                 />
                 : <Redirect to={TO_PROFILE}/>
             }

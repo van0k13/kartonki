@@ -4,9 +4,9 @@ import WithAuthHOC from "../../../common/withAuth";
 
 
 const UniCardsDeckPage = () => {
-  return (
-      <UniCardsContainerDeck />
-  );
+    return (
+            <UniCardsContainerDeck/>
+    );
 };
 
 export default WithAuthHOC(UniCardsDeckPage);

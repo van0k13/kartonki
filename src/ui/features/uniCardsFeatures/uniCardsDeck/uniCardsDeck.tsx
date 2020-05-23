@@ -4,17 +4,17 @@ import Input from "../../../common/input/Input";
 import Button from "../../../common/button/Button";
 import {CardsDeckType} from "../../../../bll/types";
 import SingleDeck from "./singleDeck";
-import Loading from "../../../common/loadingToggle/Loading";
 
 interface IProps {
     createNewDeck: () => void,
-    setDeckName: (value: string) => void,
+    setNewDeckName: (value: string) => void,
     deleteDeck: (value: string) => void,
-    deckName: string,
+    newDeckName: string,
     decks: Array<CardsDeckType>,
     editDeck: (value: string) => void,
     setSearchInput: (value:string) => void,
     searchInput: string,
+    setDeckName: (value: string) => void,
     editNameInput: string,
     setEditNameInput: (value:string) => void,
     editGradeInput: number,
@@ -25,30 +25,34 @@ interface IProps {
 const UniCardsDeck: React.FC<IProps> = ({searchInput,setSearchInput,
                                             decks, setEditNameInput,
                                             deleteDeck, editNameInput,
-                                            createNewDeck, setDeckName,
-                                            deckName, editGradeInput,
-                                            setEditGradeInput, editDeck
+                                            createNewDeck, setNewDeckName,
+                                            newDeckName, editGradeInput,
+                                            setEditGradeInput, editDeck, setDeckName
                                         }) => {
 
     const deckElements = decks.map(deck =>
         <SingleDeck name={deck.name} key={deck._id} deckId={deck._id} grade={deck.grade}
                     deleteDeck={deleteDeck} editNameInput={editNameInput}
-                    setEditNameInput={setEditNameInput}
+                    setEditNameInput={setEditNameInput} setNewDeckName={setNewDeckName}
                     editGradeInput={editGradeInput} editDeck={editDeck}
-                    setEditGradeInput={setEditGradeInput}
+                    setEditGradeInput={setEditGradeInput} setDeckName={setDeckName}
         />)
     return (
-        <div className={styles.uniCardsWrapper}>
-            <h2>UniCardsDeck</h2>
+        <div className={styles.uniCardsDeckWrapper}>
+            <h2>All Decks</h2>
             <Input inputPlaceholder={'item name'} inputType={'text'}
                    value={searchInput} inputOnChange={setSearchInput}/>
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
-                <Input inputPlaceholder={`Enter your Deck's name`}
-                       inputType={'text'} value={deckName} inputOnChange={setDeckName}
+                <Input inputPlaceholder={`Name new Deck`}
+                       inputType={'text'} value={newDeckName} inputOnChange={setNewDeckName}
                 />
                 <Button buttonName={'Add'} buttonOnClick={createNewDeck}/>
-                <div className={styles.loading}><Loading/></div>
+                <div className={styles.listHeader}>
+                    <span>Deck Name</span>
+                    <span>Deck Grade</span>
+                    <span>Cooperation with deck</span>
+                </div>
                 {deckElements}
             </div>
         </div>

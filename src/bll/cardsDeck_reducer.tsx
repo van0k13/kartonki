@@ -8,7 +8,9 @@ import {
     ICreateDeleteDeckActionCreator,
     IGetCardsDecks,
     IGetDeckId,
+    ISetDeckName,
     IStateCardsDeck,
+    SET_DECK_NAME,
 } from "./types";
 import {Dispatch} from "redux";
 import {isLoadingAC, setTokenAC} from "./auth_reducer";
@@ -17,7 +19,8 @@ import {cardsDeckAPI} from "../dal/api";
 
 const initialState: IStateCardsDeck = {
     decks: [],
-    currentDeckId: ''
+    currentDeckId: '',
+    currentDeckName: ''
 };
 
 
@@ -30,6 +33,10 @@ const cardsDeckReducer = (state: IStateCardsDeck = initialState, action: ChatAct
         case GET_DECK_ID:
             return {
                 ...state, currentDeckId: action.deckId
+            }
+        case SET_DECK_NAME:
+            return  {
+                ...state, currentDeckName: action.deckName
             }
         case CREATE_DECK:
             return {
@@ -47,6 +54,7 @@ const cardsDeckReducer = (state: IStateCardsDeck = initialState, action: ChatAct
 
 const setCardsDecksAC = (decks: Array<CardsDeckType>): IGetCardsDecks => ({type: GET_DECKS, decks})
 export const setCurrentDeckIdAC = (deckId: string): IGetDeckId => ({type: GET_DECK_ID, deckId})
+export const setCurrentDeckNameAC = (deckName: string): ISetDeckName => ({type: SET_DECK_NAME, deckName})
 const setNewCardsDeckAC = (newCardsDeck: CardsDeckType)
     : ICreateDeleteDeckActionCreator => ({type: CREATE_DECK, cardsDeck: newCardsDeck})
 

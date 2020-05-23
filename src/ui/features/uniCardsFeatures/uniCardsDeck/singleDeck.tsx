@@ -10,7 +10,9 @@ interface IProps {
     name: string,
     grade: number,
     deckId: string,
+    setDeckName: (value: string) => void,
     editDeck: (value: string) => void,
+    setNewDeckName: (value: string) => void
     editNameInput: string,
     setEditNameInput: (value: string) => void,
     editGradeInput: number,
@@ -18,10 +20,10 @@ interface IProps {
 }
 
 const SingleDeck: React.FC<IProps> = ({
-                                          editDeck,
+                                          setDeckName, editDeck,
                                           deckId, name, editNameInput,
-                                          grade, deleteDeck, setEditNameInput,
-                                          editGradeInput, setEditGradeInput
+                                          grade, deleteDeck, setEditNameInput
+                                          , setEditGradeInput
                                       }) => {
     const [editDeckInputField, setEditDeckInputField] = useState<boolean>(false)
     const editDeckInputFieldHandler = () => {
@@ -35,22 +37,20 @@ const SingleDeck: React.FC<IProps> = ({
         <div className={styles.mainList}>
             {!editDeckInputField
                 ? <>
-                    <div className={styles.itemName}>
-                        <NavLink to={TO_CARDS + `/${deckId}`}>Name: {name}</NavLink>
+                    <div onClick={() => setDeckName(name)} className={styles.itemName}>
+                        <NavLink to={TO_CARDS + `/${deckId}`}>{name}</NavLink>
+                        <div>(Click to interact)</div>
                     </div>
-                    <div className={styles.itemScore}>Grade:{grade} </div>
+                    <div className={styles.itemScore}>{grade} </div>
                 </>
-                : <>
-                    <Input value={editNameInput} inputType={'text'} inputPlaceholder={'type new name'}
-                           inputOnChange={setEditNameInput}/>
-                    <Input value={editGradeInput} inputType={'text'} inputPlaceholder={'type new grade'}
-                           inputOnChangeNumber={setEditGradeInput}/>
-                </>
+                :
+                <Input value={editNameInput} inputType={'text'} inputPlaceholder={'type new name'}
+                       inputOnChange={setEditNameInput}/>
             }
             <div className={styles.buttonsInTheList}>
                 {!editDeckInputField
                     ? <>
-                        <Button buttonName={'edit'}
+                        <Button buttonName={'edit Name'}
                                 buttonOnClickBoolean={() => setEditDeckInputField(true)}/>
                         <Button buttonName={'delete'} buttonOnClick={() => deleteDeck(deckId)}/>
                     </>

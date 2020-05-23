@@ -1,3 +1,25 @@
-.buttonWrapper {
-
+.buttonWrapper button{
+}
+.worksButton {
+    composes: mainButton from '../../../index.css';
+}
+.worksButton span {
+    transition: all 0.3s;
+    color: #000000;
+    font-weight: 900;
+}
+.worksButton::before {
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color: rgb(68, 75, 139);
+}
+.worksButton:hover span {
+    color: aliceblue
+}
+.worksButton:hover::after {
+    opacity: 0;
+    transform: scale(0.1, 1);
 }

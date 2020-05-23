@@ -7,6 +7,47 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.mainButton {
+  color: rgba(255, 255, 255, 0);
+  transition: all 0.5s;
+  position: relative;
+  height: 40px;
+    border-radius: 3px;
+  text-align: center;
+  width: 100px;
+  cursor: pointer;
+  background-color: rgba(28, 28, 35, 0.73);
+  font-family:'Josefin Sans', sans-serif;
+} .mainButton:hover {
+    opacity: 1;
+  } .mainButton::before{
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      width: 80%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.1;
+      transition: all 1s;
+      border-bottom-width: 2px;
+      border-bottom-style: solid;
+      border-bottom-color: rgb(68, 75, 139);
+      transform: scale(0.1, 1);
+    } .mainButton:hover::before {
+        opacity: 1;
+        transform: scale(1, 1);
+      } .mainButton::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          transition: all 0.5s;
+          background-color: rgba(255, 255, 255, 0.116);
+        }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

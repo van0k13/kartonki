@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './profile.module.css'
+import WithAuthHOC from "../../../common/withAuth";
 
 
 const ProfilePage = () => {
@@ -10,4 +11,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default WithAuthHOC(ProfilePage);

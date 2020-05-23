@@ -84,7 +84,6 @@ export const cardsDeckAPI = {
          return response.data;
      },
      addCard: async (card: { cardsPack_id:string, question:string }, token: string) => {
-         debugger
          const response = await instance.post(`/cards/card`, {
              card,
              token,

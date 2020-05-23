@@ -2,7 +2,6 @@ import {
     CardsType,
     ChatActionTypes,
     CREATE_CARD,
-    DELETE_CARD,
     EDIT_CARD,
     ICreateCardActionCreator,
     IEditCardActionCreator,
@@ -54,10 +53,6 @@ const cardsReducer = (state: IStateCards = initialState, action: ChatActionTypes
         case EDIT_CARD:
             return {
                 ...state, cards: action.cards,
-            };
-        case DELETE_CARD:
-            return {
-                ...state,
             };
         case CREATE_CARD:
             return {

@@ -8,15 +8,17 @@ import { NavLink } from 'react-router-dom';
 
 interface IProps {
     setSearchInput: (value: string) => void,
+    deleteCard: (value: string) => void,
     searchInput: string,
-    setNewCardName: (value: string) => void,
-    newCardName: string,
     cards: Array<CardsType>,
-    addCard: () => void
+    addCard: () => void,
+    currentDeckName: string,
+
 }
 
-const UniCards: React.FC<IProps> = ({setSearchInput,searchInput, cards,setNewCardName,
-                                        newCardName,addCard}) => {
+const UniCards: React.FC<IProps> = ({setSearchInput,searchInput, cards,
+                                        addCard, currentDeckName,deleteCard,
+                                        }) => {
     const cardsElements = cards.map( c => <div className={styles.mainList}>
         <div className={styles.itemName}>
             <NavLink to={TO_CARD + `/${c._id}`}> {c.question}</NavLink>
@@ -24,19 +26,22 @@ const UniCards: React.FC<IProps> = ({setSearchInput,searchInput, cards,setNewCar
         <div className={styles.itemScore}>{c.grade}</div>
         <div className={styles.buttonsInTheList}>
             <Button buttonName={'edit'}/>
-            <Button buttonName={'delete'}/>
+            <Button buttonName={'delete'} buttonOnClick={()=>deleteCard(c._id)}/>
         </div>
     </div>)
     return (
         <div className={styles.uniCardsWrapper}>
-            <h2>UniCards</h2>
+            <h2>{currentDeckName}</h2>
             <Input inputPlaceholder={'item name'} value={searchInput}
                    inputType={'text'} inputOnChange={setSearchInput} />
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
                 <Button buttonOnClick={addCard} buttonName={'add new Item'}/>
-                <Input inputPlaceholder={`Enter your Card's name`}
-                       inputType={'text'} value={newCardName} inputOnChange={setNewCardName}/>
+                <div className={styles.listHeader}>
+                    <span>Card Question</span>
+                    <span>Card Grade</span>
+                    <span>Cooperation with card</span>
+                </div>
                 {cardsElements}
             </div>
         </div>

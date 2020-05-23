@@ -5,16 +5,16 @@ import {
     deleteDeckTC,
     editDeckTC,
     getDecksTC,
-    setCurrentDeckIdAC
+    setCurrentDeckIdAC, setCurrentDeckNameAC
 } from "../../../../bll/cardsDeck_reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../bll/store";
-import ModalContainerDelete from "../../modalsFeatures/modalForDecks/modalContainerDelete";
+import ModalContainerDelete from "../../modalsFeatures/modalForDeletes/modalContainerDelete";
 
 const UniCardsContainerDeck = () => {
 
     const dispatch = useDispatch()
-    const [deckName, setDeckName] = useState<string>('')
+    const [newDeckName, setNewDeckName] = useState<string>('')
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
     const [searchInput, setSearchInput] = useState<string>('')
     const [editNameInput, setEditNameInput] = useState<string>('')
@@ -25,14 +25,16 @@ const UniCardsContainerDeck = () => {
     const {token, id} = useSelector((state: RootState) => state.auth)
     const {decks, currentDeckId} = useSelector((state: RootState) => state.decks)
 
-
+    const setDeckName = (deckName:string) => {
+        dispatch(setCurrentDeckNameAC(deckName))
+    }
     const createNewDeck = () => {
         const cardsDeck = {
             user_id: id,
-            name: deckName
+            name: newDeckName
         };
         dispatch(createNewCardDeckTC(cardsDeck, token));
-        setDeckName('');
+        setNewDeckName('');
     }
     const editDeck = (_deckId: string) => {
         const editedDeck = {
@@ -58,9 +60,9 @@ const UniCardsContainerDeck = () => {
             <UniCardsDeck createNewDeck={createNewDeck}
                           searchInput={searchInput}
                           setSearchInput={setSearchInput}
-                          decks={decks}
+                          decks={decks} setDeckName={setDeckName}
                           editDeck={editDeck}
-                          deckName={deckName} setDeckName={setDeckName}
+                          newDeckName={newDeckName} setNewDeckName={setNewDeckName}
                           deleteDeck={deleteDeck}
                           editNameInput={editNameInput}
                           setEditNameInput={setEditNameInput}

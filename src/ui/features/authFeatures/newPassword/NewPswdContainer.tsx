@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import NewPswd from "./NewPswd";
 import {useDispatch, useSelector} from "react-redux";
-import {withRouter} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import {RootState} from "../../../../bll/store";
 import {newPasswordTC} from "../../../../bll/newPswd_reducer";
 
 
-const NewPswdContainer = (props: any) => {
+const NewPswdContainer = () => {
     const dispatch = useDispatch();
+    const {resetPasswordToken} = useParams();
     const [similar, setSimilar] = useState(false);
     let [newPassword, setNewPassword] = useState<string>('');
     let [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
     const [differentPassword, setDifferentPassword] = useState<string>('');
-
-    let responseStatusMessage = useSelector((state: RootState) => state.newPass.message);
-    const isLoading = useSelector((state: RootState) => state.auth.isLoading)
+    let {message} = useSelector((state: RootState) => state.newPass);
+    const {isLoading} = useSelector((state: RootState) => state.auth);
 
     useEffect(()=> {
         if(newPassword === newPasswordRepeat && newPasswordRepeat) {
@@ -26,7 +26,7 @@ const NewPswdContainer = (props: any) => {
         }
     }, [newPassword, newPasswordRepeat]);
 
-    const resetPasswordToken = props.match.params.token;
+
     const getDataFromServer = async() => {
         // Вызов санки
        similar && dispatch(newPasswordTC(newPassword, resetPasswordToken))
@@ -35,12 +35,11 @@ const NewPswdContainer = (props: any) => {
     return (
         <NewPswd newPassword={newPassword} setNewPassword={setNewPassword}
                  newPasswordRepeat={newPasswordRepeat} setNewPasswordRepeat={setNewPasswordRepeat}
-                  responseStatusMessage={responseStatusMessage}
-                 getDataFromServer={getDataFromServer} similar={similar} differentPassword={differentPassword}
-                 isLoading={isLoading}
-
+                  responseStatusMessage={message}
+                 getDataFromServer={getDataFromServer} similar={similar}
+                 differentPassword={differentPassword} isLoading={isLoading}
         />
     );
 };
 
-export default withRouter(NewPswdContainer);
+export default NewPswdContainer;

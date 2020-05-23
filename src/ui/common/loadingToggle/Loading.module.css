@@ -1,3 +1,7 @@
 .loadingProgress{
+    text-align: center;
+    color: #a74255;
+    font-size: 25px;
     position: fixed;
+    top: 10px;
 }

@@ -2,11 +2,10 @@ import React from 'react'
 import s from '../modals.module.css'
 
 interface IModal {
-    children: React.ReactNode,
     setIsOpenModal: (value: boolean) => void
 }
 
-const ModalDelete: React.FC<IModal> = ({children, setIsOpenModal}) => {
+const ModalNewCard: React.FC<IModal> = ({children, setIsOpenModal}) => {
     return (
         <div className={s.main}>
             <div className={s.modelWrapper} onClick={()=>setIsOpenModal(false)}/>
@@ -18,4 +17,4 @@ const ModalDelete: React.FC<IModal> = ({children, setIsOpenModal}) => {
     );
 };
 
-export default ModalDelete;
+export default ModalNewCard;
