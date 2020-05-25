@@ -27,7 +27,12 @@ export interface IStateCards {
 export type IStateCardsDeck  = {
   decks: Array<CardsDeckType>,
   currentDeckId: string,
-  currentDeckName: string
+  currentDeckName: string,
+  cardPacksTotalCount: number,
+  maxGrade: number,
+  minGrade: number
+  page: number,
+  pageCount: number
 }
 
 export const FIRST_ACTION = 'FIRST_ACTION'
@@ -46,6 +51,7 @@ export const EDIT_CARD = 'cards_reducer/EDIT_CARD';
 export const DELETE_CARD = 'cards_reducer/DELETE_CARD';
 export const CREATE_CARD = 'cards_reducer/CREATE_CARD';
 export const GET_DECKS = 'cardsDeck_reducer/GET_DECKS';
+export const SET_DECK_PAGE = 'cardsDeck_reducer/SET_DECK_PAGE';
 export const GET_DECK_ID = 'cardsDeck_reducer/GET_DECK_ID';
 export const SET_DECK_NAME = 'cardsDeck_reducer/SET_DECK_NAME';
 export const CREATE_DECK = 'cardsDeck_reducer/CREATE_DECK';
@@ -93,6 +99,13 @@ export interface ISetCard {
 export interface IGetCardsDecks {
   type: typeof GET_DECKS
   decks: Array<CardsDeckType>
+  cardPacksTotalCount: number
+  pageCount: number,
+  page: number
+}
+export interface ISetDeckPage {
+  type: typeof SET_DECK_PAGE,
+  page: number
 }
 export interface IGetDeckId {
   type: typeof GET_DECK_ID
@@ -178,4 +191,4 @@ export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistra
     IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess |
     INewPasswordError | IisLoadingActionCreator | IEditCardActionCreator | IDeleteCardActionCreator |
     ICreateCardActionCreator | ICreateDeleteDeckActionCreator | IGetCardsDecks | ISetToken | ISetCards |
-    IGetDeckId | ISetCard | ISetDeckName
+    IGetDeckId | ISetCard | ISetDeckName | ISetDeckPage

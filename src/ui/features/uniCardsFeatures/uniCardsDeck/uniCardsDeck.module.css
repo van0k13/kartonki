@@ -38,10 +38,24 @@
     display: flex;
     justify-content: space-around;
 }
-.loading {
-    right:100px;
-    position: absolute;
-    top: -30px;
+.pages {
+    display: flex;
+    width: 60%;
+    justify-content: flex-end;
+}
+.pages span {
+    font-size: larger;
+    cursor: pointer;
+    margin: 0 8px;
+    font-weight: 600;
+}
+.pages span:hover {
+    border-radius: 10px;
+    transform: scale(1.3);
+    transition: 0.4s ease-in-out;
+}
+.selectedPage {
+    color: indianred;
 }
 .itemName {
     display: flex;

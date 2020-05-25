@@ -25,6 +25,11 @@ type CardsDecksDataType = {
     success: boolean;
     token: string;
     error: string;
+    cardPacksTotalCount: number // количество колод
+    maxGrade: number
+    minGrade: number
+    page: number // выбранная страница
+    pageCount: number // количество элементов на странице
 }
 interface IAddNewCardsDeck {
     newCardsPack: CardsDeckType,
@@ -51,14 +56,15 @@ export const authAPI = {
         return response.data;
     },
     setNewPasswordAPI: async (password: string, resetPasswordToken: string) => {
-        const response = await instance.post<IRegistration>('/auth/set-new-password', {password, resetPasswordToken});
+        const response = await instance.post<IRegistration>('/auth/set-new-password',
+            {password, resetPasswordToken});
         return response.data;
     }
 };
 export const cardsDeckAPI = {
-    getCardsDecks: async (token: string) => {
+    getCardsDecks: async (token: string, pageCount:number, page:number) => {
         const response = await instance.get<CardsDecksDataType>(
-            `/cards/pack?token=${token}`);
+            `/cards/pack?token=${token}&pageCount=${pageCount}&page=${page}`);
         return response.data;
     },
     addNewCardsDeck: async (cardsPack: { user_id: string; name: string }, token: string) => {

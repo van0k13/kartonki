@@ -1,4 +1,15 @@
+.loadingWrapper{
+    transition: 0.4s ease-in-out;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(255, 2, 2, 0.03);
+}
 .loadingProgress{
+
     text-align: center;
     color: #a74255;
     font-size: 25px;

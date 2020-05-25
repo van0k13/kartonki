@@ -4,6 +4,7 @@ import Input from "../../../common/input/Input";
 import Button from "../../../common/button/Button";
 import {CardsDeckType} from "../../../../bll/types";
 import SingleDeck from "./singleDeck";
+import Paginator3000 from "../../../common/PaginationComponent";
 
 interface IProps {
     createNewDeck: () => void,
@@ -12,22 +13,29 @@ interface IProps {
     newDeckName: string,
     decks: Array<CardsDeckType>,
     editDeck: (value: string) => void,
-    setSearchInput: (value:string) => void,
+    pageCount: number,
+    onCurrentPageClick: (value:number) => void
+    currentPage: number
+    cardPacksTotalCount: number,
+    setSearchInput: (value: string) => void,
     searchInput: string,
     setDeckName: (value: string) => void,
     editNameInput: string,
-    setEditNameInput: (value:string) => void,
+    setEditNameInput: (value: string) => void,
     editGradeInput: number,
     setEditGradeInput: (value: number) => void
 }
 
 
-const UniCardsDeck: React.FC<IProps> = ({searchInput,setSearchInput,
+const UniCardsDeck: React.FC<IProps> = ({
+                                            searchInput, setSearchInput,
                                             decks, setEditNameInput,
                                             deleteDeck, editNameInput,
                                             createNewDeck, setNewDeckName,
                                             newDeckName, editGradeInput,
-                                            setEditGradeInput, editDeck, setDeckName
+                                            setEditGradeInput, editDeck, setDeckName,
+                                            pageCount, cardPacksTotalCount,
+                                            currentPage, onCurrentPageClick
                                         }) => {
 
     const deckElements = decks.map(deck =>
@@ -37,6 +45,8 @@ const UniCardsDeck: React.FC<IProps> = ({searchInput,setSearchInput,
                     editGradeInput={editGradeInput} editDeck={editDeck}
                     setEditGradeInput={setEditGradeInput} setDeckName={setDeckName}
         />)
+
+
     return (
         <div className={styles.uniCardsDeckWrapper}>
             <h2>All Decks</h2>
@@ -48,6 +58,8 @@ const UniCardsDeck: React.FC<IProps> = ({searchInput,setSearchInput,
                        inputType={'text'} value={newDeckName} inputOnChange={setNewDeckName}
                 />
                 <Button buttonName={'Add'} buttonOnClick={createNewDeck}/>
+                <Paginator3000 cardPacksTotalCount={cardPacksTotalCount} pageCount={pageCount}
+                               onCurrentPageClick={onCurrentPageClick} currentPage={currentPage} />
                 <div className={styles.listHeader}>
                     <span>Deck Name</span>
                     <span>Deck Grade</span>
