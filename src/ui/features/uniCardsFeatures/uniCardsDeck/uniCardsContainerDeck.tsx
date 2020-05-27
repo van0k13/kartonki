@@ -18,7 +18,7 @@ const UniCardsContainerDeck = () => {
     const {decks, currentDeckId, cardPacksTotalCount, pageCount, page} =
         useSelector((state: RootState) => state.decks)
     const [newDeckName, setNewDeckName] = useState<string>('')
-    const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+    const [isOpenModalDelete, setIsOpenModalDelete] = useState<boolean>(false)
     const [searchInput, setSearchInput] = useState<string>('')
     const [editNameInput, setEditNameInput] = useState<string>('')
     const [editGradeInput, setEditGradeInput] = useState<number>(0)
@@ -26,7 +26,7 @@ const UniCardsContainerDeck = () => {
         dispatch(getDecksTC(token))
     }, [page])
 
-    const setDeckName = (deckName:string) => {
+    const setDeckName = (deckName: string) => {
         dispatch(setCurrentDeckNameAC(deckName))
     }
     const createNewDeck = () => {
@@ -47,15 +47,15 @@ const UniCardsContainerDeck = () => {
     }
     const deleteDeck = (deckId: string) => {
         dispatch(setCurrentDeckIdAC(deckId))
-        setIsOpenModal(true)
+        setIsOpenModalDelete(true)
     }
     const answerFromDeleteModal = (answer: boolean) => {
         if (answer) {
             dispatch(deleteDeckTC(token, currentDeckId))
-            setIsOpenModal(false)
-        } else setIsOpenModal(false)
+            setIsOpenModalDelete(false)
+        } else setIsOpenModalDelete(false)
     }
-    const onCurrentPageClick = (currentPage:number) => {
+    const onCurrentPageClick = (currentPage: number) => {
         dispatch(setDeckPageAC(currentPage))
     }
 
@@ -72,9 +72,9 @@ const UniCardsContainerDeck = () => {
                           setEditNameInput={setEditNameInput}
                           editGradeInput={editGradeInput}
                           setEditGradeInput={setEditGradeInput}/>
-            <ModalContainerDelete setIsOpenModal={setIsOpenModal}
+            <ModalContainerDelete setIsOpenModalDelete={setIsOpenModalDelete}
                                   answerFromModal={answerFromDeleteModal}
-                                  isOpenModal={isOpenModal}
+                                  isOpenModalDelete={isOpenModalDelete}
                                   titleName={'Delete Deck ?'}/>
         </>
     )

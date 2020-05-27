@@ -3,6 +3,8 @@ import styles from './registr.module.css'
 import Input from "../../../common/input/Input";
 import Button from "../../../common/button/Button";
 import Loading from "../../../common/loadingToggle/Loading";
+import {TO_AUTH} from "../../../common/routes";
+import {NavLink} from "react-router-dom";
 
 interface IProps {
     setLogin: (value: string) => void,
@@ -42,6 +44,7 @@ const Registration: React.FC<IProps> = ({login, password,
         <div>
             <Button  buttonOnClick={similar? registerMe : wrongRepeatingPassword} buttonName={'Sign Up'}/>
             {isLoading && <Loading/>}
+            <NavLink to={TO_AUTH}>Sign In</NavLink>
             {<span>{messageFromServer}</span>}
         </div>
     </div>

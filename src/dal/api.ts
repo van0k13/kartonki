@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CardsDeckType} from "../bll/types";
+import {CardsDeckType, CardsType} from "../bll/types";
 
 export const baseURL = 'https://cards-nya-back.herokuapp.com/1.0/';
 
@@ -30,6 +30,22 @@ type CardsDecksDataType = {
     minGrade: number
     page: number // выбранная страница
     pageCount: number // количество элементов на странице
+}
+type CardsDataType = {
+    cards: Array<CardsType>;
+    success: boolean;
+    token: string;
+    error: string;
+    cardsTotalCount: number // количество колод
+    maxGrade: number
+    minGrade: number
+    page: number // выбранная страница
+    pageCount: number // количество элементов на странице
+}
+type UpdatedCard = {
+    updatedCard: CardsType,
+    success: boolean,
+    token: string
 }
 interface IAddNewCardsDeck {
     newCardsPack: CardsDeckType,
@@ -85,8 +101,9 @@ export const cardsDeckAPI = {
 };
 
  export const cardsAPI = {
-     getCards: async (token: string, id: string) => {
-         const response =await instance.get(`/cards/card?token=${token}&cardsPack_id=${id}`);
+     getCards: async (token: string, id: string, pageCount:number, page:number) => {
+         const response =await instance.get<CardsDataType>(
+             `/cards/card?token=${token}&cardsPack_id=${id}&pageCount=${pageCount}&page=${page}`);
          return response.data;
      },
      addCard: async (card: { cardsPack_id:string, question:string }, token: string) => {
@@ -96,13 +113,10 @@ export const cardsDeckAPI = {
          });
          return response.data;
      },
-     updateCard: async (token: string, id: string) => {
-         const response = await instance.put(`/cards/card`, {
-             token,
-             card: {
-                 _id: id,
-                 question: 'updated question',
-             }
+     updateCard: async (card: {answer?: string, question?:string, _id: string, grade?:number, }, token: string) => {
+         const response = await instance.put<UpdatedCard>(`/cards/card`, {
+             card,
+             token
          });
 
          return response.data;

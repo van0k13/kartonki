@@ -19,7 +19,6 @@ export const TO_CARDS = '/cards/:id';
 export const TO_CARD = '/simple-card/:cardId';
 export const TO_CARDSDECK = '/cards-deck/';
 export const TO_MODALS = '/test-modals/';
-export const TO_DELETE_MODULE = '/delete-modal/';
 
 export const AllRoutes: React.FC = () => {
     return (

@@ -23,6 +23,11 @@ export interface IStateCards {
   cardsDeckID: string
   cardID: string
   success: boolean
+  cardsTotalCount: number
+  maxGrade: number
+  minGrade: number
+  page: number
+  pageCount: number
 }
 export type IStateCardsDeck  = {
   decks: Array<CardsDeckType>,
@@ -52,6 +57,7 @@ export const DELETE_CARD = 'cards_reducer/DELETE_CARD';
 export const CREATE_CARD = 'cards_reducer/CREATE_CARD';
 export const GET_DECKS = 'cardsDeck_reducer/GET_DECKS';
 export const SET_DECK_PAGE = 'cardsDeck_reducer/SET_DECK_PAGE';
+export const SET_CARD_PAGE = 'cardsDeck_reducer/SET_CARD_PAGE';
 export const GET_DECK_ID = 'cardsDeck_reducer/GET_DECK_ID';
 export const SET_DECK_NAME = 'cardsDeck_reducer/SET_DECK_NAME';
 export const CREATE_DECK = 'cardsDeck_reducer/CREATE_DECK';
@@ -91,6 +97,9 @@ export type CardsType = {
 export interface ISetCards {
   type: typeof SET_CARDS
   cards: Array<CardsType>
+  cardsTotalCount: number,
+  pageCount: number,
+  page: number
 }
 export interface ISetCard {
   type: typeof SET_CARD
@@ -105,6 +114,10 @@ export interface IGetCardsDecks {
 }
 export interface ISetDeckPage {
   type: typeof SET_DECK_PAGE,
+  page: number
+}
+export interface ISetCardPage {
+  type: typeof SET_CARD_PAGE,
   page: number
 }
 export interface IGetDeckId {
@@ -131,9 +144,7 @@ export interface IDeleteCardActionCreator {
 }
 export interface IEditCardActionCreator {
   type: typeof EDIT_CARD
-  cards: Array<CardsType>
-  cardsDeckID: string
-  cardID: string
+  updatedCard: CardsType
 }
 export interface IisLoadingActionCreator {
   type: typeof IS_LOADING
@@ -191,4 +202,4 @@ export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistra
     IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess |
     INewPasswordError | IisLoadingActionCreator | IEditCardActionCreator | IDeleteCardActionCreator |
     ICreateCardActionCreator | ICreateDeleteDeckActionCreator | IGetCardsDecks | ISetToken | ISetCards |
-    IGetDeckId | ISetCard | ISetDeckName | ISetDeckPage
+    IGetDeckId | ISetCard | ISetDeckName | ISetDeckPage | ISetCardPage

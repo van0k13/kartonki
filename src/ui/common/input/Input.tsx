@@ -29,10 +29,12 @@ const Input: React.FC<IPropsInput> = ({inputOnChangeNumber,
     }
 
     return (
+        <>
         <div className={s.inputWrapper}>
             <input onChange={onChange} placeholder={inputPlaceholder}
                    value={value} checked={checked} type={inputType}/>
         </div>
+            </>
     );
 };
 

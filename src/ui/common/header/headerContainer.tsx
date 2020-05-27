@@ -5,9 +5,9 @@ import {RootState} from "../../../bll/store";
 
 const HedaerContainer = () => {
     const [links, setLinks] = useState<boolean>(true)
-    const {myName} = useSelector((state:RootState) => state.auth)
+    const {myName, authSuccess} = useSelector((state: RootState) => state.auth)
+    return <Header authSuccess={authSuccess} setLinks={setLinks} links={links} myName={myName}/>
 
-  return <Header setLinks={setLinks} links={links} myName={myName} />
 };
 
 export default HedaerContainer;

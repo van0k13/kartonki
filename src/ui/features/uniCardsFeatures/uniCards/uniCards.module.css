@@ -15,6 +15,20 @@
 .mainListWrapper button{
     margin: 10px 0;
 }
+.startLink {
+    width: 170px;
+    height: 30px;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+}
+.startLink:hover {
+    cursor: pointer;
+    background-color: #a74255;
+    transition: 0.4s ease-in-out;
+    border-radius: 6px;
+}
 .mainList {
     background-color: #2BA2DF;
     display: flex;
@@ -49,7 +63,7 @@
     justify-content: center;
     align-items: center;
 }
-.itemName a {
+.itemName span {
     text-decoration: none;
     color: black;
 }

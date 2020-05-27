@@ -3,24 +3,26 @@ import styles from "../features/uniCardsFeatures/uniCardsDeck/uniCardsDeck.modul
 
 
 interface IProps {
-    cardPacksTotalCount: number,
-    pageCount:number,
-    onCurrentPageClick: (value:number) => void,
+    itemsTotalCount: number,
+    pageCount: number,
+    onCurrentPageClick: (value: number) => void,
     currentPage: number
 }
 
-const Paginator3000: React.FC<IProps> = ({cardPacksTotalCount,pageCount,
-                                             onCurrentPageClick, currentPage}) => {
+const Paginator3000: React.FC<IProps> = ({
+                                             itemsTotalCount, pageCount,
+                                             onCurrentPageClick, currentPage
+                                         }) => {
     const pages = [];
-    const pagesCount = Math.ceil(cardPacksTotalCount / pageCount);
+    const pagesCount = Math.ceil(itemsTotalCount / pageCount);
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    return(
+    return (
         <div className={styles.pages}>
             {pages.map(p => {
                 return (
-                    <span onClick={()=>onCurrentPageClick(p)}
+                    <span key={p +1 } onClick={() => onCurrentPageClick(p)}
                           className={currentPage === p
                               ? styles.selectedPage
                               : styles.spanPage}>{p}

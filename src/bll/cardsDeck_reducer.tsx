@@ -44,7 +44,7 @@ const cardsDeckReducer = (state: IStateCardsDeck = initialState, action: ChatAct
                 ...state, currentDeckId: action.deckId
             }
         case SET_DECK_PAGE:
-            return  {
+            return {
                 ...state, page: action.page
             }
         case SET_DECK_NAME:
@@ -75,6 +75,7 @@ export const setCurrentDeckIdAC = (deckId: string): IGetDeckId => ({type: GET_DE
 export const setCurrentDeckNameAC = (deckName: string): ISetDeckName => ({type: SET_DECK_NAME, deckName})
 const setNewCardsDeckAC = (newCardsDeck: CardsDeckType)
     : ICreateDeleteDeckActionCreator => ({type: CREATE_DECK, cardsDeck: newCardsDeck})
+
 
 export const getDecksTC = (token: string) =>
     async (dispatch: Dispatch<ChatActionTypes>, getState: () => RootState) => {

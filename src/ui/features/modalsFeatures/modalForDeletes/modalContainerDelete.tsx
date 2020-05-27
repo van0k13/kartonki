@@ -4,20 +4,20 @@ import Button from "../../../common/button/Button";
 
 interface IProps {
     titleName: string,
-    isOpenModal: boolean,
-    setIsOpenModal: (value: boolean) => void,
+    isOpenModalDelete: boolean,
+    setIsOpenModalDelete: (value: boolean) => void,
     answerFromModal: (value: boolean) => void
 }
 
-const ModalContainerDelete: React.FC<IProps> = ({answerFromModal,setIsOpenModal,
-                                                    isOpenModal,titleName}) => {
+const ModalContainerDelete: React.FC<IProps> = ({answerFromModal,setIsOpenModalDelete,
+                                                    isOpenModalDelete,titleName}) => {
 
-    if(isOpenModal) return (
-            <ModalDelete setIsOpenModal={setIsOpenModal}>
+    if(isOpenModalDelete) return (
+            <ModalDelete setIsOpenModal={setIsOpenModalDelete}>
                 <h3>{titleName}</h3>
                 <div>
                     <Button buttonOnClickBoolean={()=>answerFromModal(true)} buttonName={'Apply'}/>
-                    <Button buttonOnClickBoolean={()=>setIsOpenModal(false)} buttonName={'Cancel'}/>
+                    <Button buttonOnClickBoolean={()=>setIsOpenModalDelete(false)} buttonName={'Cancel'}/>
                 </div>
             </ModalDelete>
     );

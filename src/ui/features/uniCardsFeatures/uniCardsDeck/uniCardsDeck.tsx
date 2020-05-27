@@ -14,7 +14,7 @@ interface IProps {
     decks: Array<CardsDeckType>,
     editDeck: (value: string) => void,
     pageCount: number,
-    onCurrentPageClick: (value:number) => void
+    onCurrentPageClick: (value: number) => void
     currentPage: number
     cardPacksTotalCount: number,
     setSearchInput: (value: string) => void,
@@ -58,8 +58,8 @@ const UniCardsDeck: React.FC<IProps> = ({
                        inputType={'text'} value={newDeckName} inputOnChange={setNewDeckName}
                 />
                 <Button buttonName={'Add'} buttonOnClick={createNewDeck}/>
-                <Paginator3000 cardPacksTotalCount={cardPacksTotalCount} pageCount={pageCount}
-                               onCurrentPageClick={onCurrentPageClick} currentPage={currentPage} />
+                <Paginator3000 itemsTotalCount={cardPacksTotalCount} pageCount={pageCount}
+                               onCurrentPageClick={onCurrentPageClick} currentPage={currentPage}/>
                 <div className={styles.listHeader}>
                     <span>Deck Name</span>
                     <span>Deck Grade</span>
