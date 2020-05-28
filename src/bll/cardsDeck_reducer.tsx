@@ -27,7 +27,7 @@ const initialState: IStateCardsDeck = {
     cardPacksTotalCount: 0, // количество колод
     maxGrade: 0,
     minGrade: 0,
-    page: 2, // выбранная страница
+    page: 3, // выбранная страница
     pageCount: 3 // количество элементов на странице
 };
 

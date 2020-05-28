@@ -10,10 +10,8 @@ import Paginator3000 from "../../../common/PaginationComponent";
 interface IProps {
     setSearchInput: (value: string) => void,
     deleteCard: (value: string) => void,
-    setFirstCard_id: (value: string) => void,
     onCurrentPageClick: (value: number) => void,
     searchInput: string,
-    firstCard_id: string,
     cardsTotalCount: number,
     pageCount: number,
     page: number,
@@ -23,12 +21,12 @@ interface IProps {
 
 }
 
-const UniCards: React.FC<IProps> = ({setFirstCard_id,firstCard_id,
+const UniCards: React.FC<IProps> = ({
                                         onCurrentPageClick, cardsTotalCount, pageCount,
                                         setSearchInput, searchInput, cards,
                                         addCard, currentDeckName, deleteCard, page,
                                     }) => {
-    if(cards.length > 0) setFirstCard_id(cards[0]._id)
+
     return (
         <div className={styles.uniCardsWrapper}>
             <h2>{currentDeckName}</h2>
@@ -37,7 +35,7 @@ const UniCards: React.FC<IProps> = ({setFirstCard_id,firstCard_id,
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
                 <Button buttonOnClick={addCard} buttonName={'add new Item'}/>
-                <NavLink to={TO_CARD + `/${firstCard_id}`} className={styles.startLink}>Start now!</NavLink>
+                <NavLink to={TO_CARD} className={styles.startLink}>Start now!</NavLink>
                 <Paginator3000 itemsTotalCount={cardsTotalCount} pageCount={pageCount}
                                onCurrentPageClick={onCurrentPageClick}
                                currentPage={page}/>

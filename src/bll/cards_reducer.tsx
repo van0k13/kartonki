@@ -91,9 +91,10 @@ const getCardsAC = (cards: Array<CardsType>, cardsTotalCount: number,
     ({type: SET_CARDS, cards, cardsTotalCount, pageCount, page});
 
 // Thunk
-export const getCardsTC = (token: string, id: string) =>
+export const getCardsTC = (id: string) =>
     async (dispatch: Dispatch<ChatActionTypes>, getState: () => RootState) => {
         const {pageCount, page} = getState().cards
+        const {token} = getState().auth
         try {
             dispatch(isLoadingAC(true));
             const data = await cardsAPI.getCards(token, id, pageCount, page);

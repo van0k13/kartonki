@@ -1,43 +1,46 @@
 import React, {useEffect, useState} from 'react'
-import {useParams} from 'react-router-dom'
 import SingleCard from "./singleCard";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../bll/store";
-import {editCardTC, setCardAC, setCardPageAC} from "../../../../../bll/cards_reducer";
+import {editCardTC, getCardsTC, setCardAC, setCardPageAC} from "../../../../../bll/cards_reducer";
 import withAuth from '../../../../common/withAuth'
-
-
-
 
 
 const SingleCardContainer = () => {
     const dispatch = useDispatch();
-    // const {cardId} = useParams();
-    const {currentCard, cards, page, cardID} = useSelector(
+    const {currentCard, cards, pageCount, page, cardsTotalCount} = useSelector(
         (state: RootState) => state.cards);
     const [isShowed, setIsShowed] = useState<boolean>(false);
     const [isShowedNext, setIsShowedNext] = useState<boolean>(false);
     const [grade, setGrade] = useState<number>(0);
-    const [assignee, setAssignee] = useState<number>(0);
+    const [cardIndex, setCardIndex] = useState<number>(0);
+    const [passedCardsNumber, setPassedCardsNumber] = useState<number>(0);
     useEffect(() => {
-        const editedCard = {_id: cardID, grade}
-        dispatch(editCardTC(editedCard))
+        dispatch(setCardAC(cards[cardIndex]._id))
+    }, [cardIndex]);
+    useEffect(() => {
+        setPassedCardsNumber(passedCardsNumber + 1)
+        if(pageCount === (cardIndex + 1)) {
+            dispatch(setCardPageAC(page + 1))
+        }
+        const newCardGrade = {
+            _id: cards[cardIndex]._id,
+            grade
+        }
+        dispatch(editCardTC(newCardGrade))
     }, [grade])
-    useEffect(() => {
-            dispatch(setCardAC(cards[assignee]._id))
-    }, [assignee])
-    const onNextClicked = () => {
-        debugger
-        if(assignee === cards.length) {
-          dispatch(setCardPageAC(page+1))
-            setAssignee(0)
+    const onNextClicked = async() => {
+        if (pageCount === (cardIndex + 1)) {
+           await dispatch(getCardsTC(cards[cardIndex].cardsPack_id))
+            setCardIndex(0)
+        } else if (passedCardsNumber === cardsTotalCount) {
+                alert("that's all folks")
         } else {
             setIsShowed(false)
             setIsShowedNext(false)
-            setAssignee(assignee+1)
+            setCardIndex(cardIndex + 1)
         }
     }
-
     return <SingleCard isShowed={isShowed} setGrade={setGrade}
                        setIsShowed={setIsShowed}
                        isShowedNext={isShowedNext}

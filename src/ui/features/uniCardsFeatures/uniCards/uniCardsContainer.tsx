@@ -18,13 +18,12 @@ const UniCardsContainer = () => {
     const [cardQuestion, setCardQuestion] = useState<string>('')
     const [cardAnswer, setCardAnswer] = useState<string>('')
     const [card_Id, setCard_Id] = useState<string>('')
-    const [firstCard_id, setFirstCard_id] = useState<string>('')
     const [isOpenModalDelete, setIsOpenModalDelete] = useState<boolean>(false)
     const [isOpenModalNewCard, setIsOpenModalNewCard] = useState<boolean>(false)
 
 
     useEffect(() => {
-        dispatch(getCardsTC(token, deckId))
+        dispatch(getCardsTC(deckId))
     }, [deckId, page])
 
     const addCard = () => {
@@ -64,7 +63,7 @@ const UniCardsContainer = () => {
                       addCard={addCard} currentDeckName={currentDeckName}
                       deleteCard={deleteCard} onCurrentPageClick={onCurrentPageClick}
                       cardsTotalCount={cardsTotalCount} pageCount={pageCount}
-                      page={page} firstCard_id={firstCard_id} setFirstCard_id={setFirstCard_id}
+                      page={page}
             />
             <ModalContainerNewCard setIsOpenModalNewCard={setIsOpenModalNewCard}
                                    cardAnswer={cardAnswer}

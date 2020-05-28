@@ -16,7 +16,7 @@ export const TO_PROFILE = '/profile/';
 export const TO_RECOVER_PASSWORD = '/recover-password/';
 export const TO_REGISTRATION = '/registration/';
 export const TO_CARDS = '/cards/:id';
-export const TO_CARD = '/simple-card/:cardId';
+export const TO_CARD = '/simple-card/';
 export const TO_CARDSDECK = '/cards-deck/';
 export const TO_MODALS = '/test-modals/';
 
@@ -30,7 +30,7 @@ export const AllRoutes: React.FC = () => {
             <Route path={TO_REGISTRATION} render={()=> <RegistrationPage />} />
             <Route path={TO_CARDS + '/:deckId'} render={()=> <UniCardsPage />} />
             <Route path={TO_CARDSDECK} render={()=> <UniCardsDeckPage />} />
-            <Route path={TO_CARD + '/:cardId'} render={()=> <SingleCardContainer />} />
+            <Route path={TO_CARD} render={()=> <SingleCardContainer />} />
             <Route path={TO_MODALS} render={()=> <ModalsPage />} />
             <Route exact path='/' render={()=> <Redirect to={TO_AUTH}/>} />
             <Route render={()=> <div>404 BAD GATEWAY</div>} />
