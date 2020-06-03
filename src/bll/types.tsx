@@ -1,6 +1,10 @@
-export interface IState {
-
+export interface IStateProfile {
+  myDecks: Array<CardsDeckType>,
+  myName: string,
+  success: boolean,
+  avatar: string
 }
+
 export interface IStatePasswordRecover {
   success: boolean
   message: string
@@ -62,6 +66,7 @@ export const GET_DECK_ID = 'cardsDeck_reducer/GET_DECK_ID';
 export const SET_DECK_NAME = 'cardsDeck_reducer/SET_DECK_NAME';
 export const CREATE_DECK = 'cardsDeck_reducer/CREATE_DECK';
 export const DELETE_DECK = 'cardsDeck_reducer/DELETE_DECK';
+export const SET_MY_NAME = 'profile_reducer/SET_MY_NAME';
 export const SET_CARDS = 'SET_CARDS';
 export const SET_CARD = 'SET_CARD';
 
@@ -123,6 +128,11 @@ export interface ISetCardPage {
 export interface IGetDeckId {
   type: typeof GET_DECK_ID
   deckId: string
+}
+export interface ISetMyName {
+  type: typeof SET_MY_NAME
+  myName:string
+  avatar:string
 }
 export interface ISetDeckName {
   type: typeof SET_DECK_NAME
@@ -202,4 +212,4 @@ export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistra
     IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess |
     INewPasswordError | IisLoadingActionCreator | IEditCardActionCreator | IDeleteCardActionCreator |
     ICreateCardActionCreator | ICreateDeleteDeckActionCreator | IGetCardsDecks | ISetToken | ISetCards |
-    IGetDeckId | ISetCard | ISetDeckName | ISetDeckPage | ISetCardPage
+    IGetDeckId | ISetCard | ISetDeckName | ISetDeckPage | ISetCardPage | ISetMyName

@@ -1,7 +1,7 @@
 import React from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
 import LoginizationPage from "../features/authFeatures/loginization/loginizationPage";
-import ProfilePage from "../features/authFeatures/profile/profile";
+import ProfilePage from "../features/authFeatures/profile/profilePage";
 import RegistrationPage from "../features/authFeatures/registration/registrationPage";
 import NewPswdPage from "../features/authFeatures/newPassword/NewPswdPage";
 import PswdRecoverPage from "../features/authFeatures/passwordRecover/PswdRecoverPage";

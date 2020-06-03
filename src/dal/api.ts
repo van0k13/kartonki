@@ -17,8 +17,19 @@ export interface ILoginization {
 
 export interface IRegistration {
     success: boolean;
-
     error: string;
+}
+type authMeResponse = {
+    email: string,
+    isAdmin: false,
+    name: string,
+    rememberMe: false,
+    token: string,
+    tokenDeathTime: number,
+    __v: number,
+    _id: string,
+    success: boolean,
+    avatar: string
 }
 type CardsDecksDataType = {
     cardPacks: Array<CardsDeckType>;
@@ -75,6 +86,14 @@ export const authAPI = {
         const response = await instance.post<IRegistration>('/auth/set-new-password',
             {password, resetPasswordToken});
         return response.data;
+    },
+    getProfileAPI: async (token: string) => {
+        const response = await instance.post<authMeResponse>('/auth/me', {token});
+        return response.data
+    },
+    setProfileAPI: async(token: string, name?:string, avatar?: string) => {
+        const response = await instance.put('/auth/me', {token, name, avatar});
+        return response.data
     }
 };
 export const cardsDeckAPI = {
