@@ -1,19 +1,22 @@
 import React from 'react'
 import styles from "../profile.module.css";
+import {CardsDeckType} from "../../../../../bll/types";
 
-const MyDecks = () => {
 
+interface IProps {
+    decks: Array<CardsDeckType>
+}
+
+const MyDecks: React.FC<IProps> = ({decks}) => {
+    const decksElements = decks.map(d => <div className={styles.singleDeck} onClick={() => {
+        alert('clicked on deck')
+    }}>
+        <span>{d.name}</span>
+        <img src={'https://bgfons.com/upload/books_texture3035.jpg'} alt={'deck'}/>
+    </div>)
     return (
         <div className={styles.decks}>
-            <div className={styles.singleDeck} onClick={() => {
-                alert('clicked on deck')
-            }}>
-                <span>first deck</span>
-                <img src={'https://bgfons.com/upload/books_texture3035.jpg'} alt={'deck image'}/>
-            </div>
-            <div>second deck</div>
-            <div>third deck</div>
-            <div>fourth deck</div>
+            {decksElements}
         </div>
     )
 }

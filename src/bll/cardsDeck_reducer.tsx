@@ -82,7 +82,7 @@ export const getDecksTC = (token: string) =>
         const {pageCount, page} = getState().decks
         try {
             dispatch(isLoadingAC(true))
-            const data = await cardsDeckAPI.getCardsDecks(token, pageCount, page)
+            const data = await cardsDeckAPI.getAllCardsDecks(token, pageCount, page)
             dispatch(setCardsDecksAC(data.cardPacks, data.cardPacksTotalCount,
                 data.pageCount, data.page))
             dispatch(setTokenAC(data.token))
@@ -113,7 +113,7 @@ export const editDeckTC = (editedDeck: { grade: number; name: string; _id: strin
             dispatch(isLoadingAC(true))
             const data = await cardsDeckAPI.updateCardsDeck(editedDeck, token)
             if (data.success === true) {
-                const data2 = await cardsDeckAPI.getCardsDecks(data.token, pageCount, page)
+                const data2 = await cardsDeckAPI.getAllCardsDecks(data.token, pageCount, page)
                 dispatch(setCardsDecksAC(data2.cardPacks, data.cardPacksTotalCount,
                     data.pageCount, data.page))
                 dispatch(setTokenAC(data2.token))
@@ -131,7 +131,7 @@ export const deleteDeckTC = (token: string, deckId: string) =>
             const data = await cardsDeckAPI.deleteCardsDeck(token, deckId)
             dispatch(setTokenAC(data.token));
             if (data.success) {
-                const data2 = await cardsDeckAPI.getCardsDecks(data.token, pageCount, page)
+                const data2 = await cardsDeckAPI.getAllCardsDecks(data.token, pageCount, page)
                 dispatch(setCardsDecksAC(data2.cardPacks, data.cardPacksTotalCount,
                     data.pageCount, data.page))
                 dispatch(setTokenAC(data2.token))

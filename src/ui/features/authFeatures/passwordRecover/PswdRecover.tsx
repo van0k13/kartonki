@@ -10,11 +10,10 @@ interface IPropsPswdRecover {
     responseStatus: boolean,
     getDataFromServer: ()=> void,
     responseStatusMessage: string,
-    isLoading: boolean
 }
 
 const PswdRecover: React.FC<IPropsPswdRecover> = ({putUserEmail, userEmail,responseStatusMessage,
-                                                      getDataFromServer,isLoading  }) => {
+                                                      getDataFromServer  }) => {
   return (
     <div className={styles.pswdRecoverWrapper}>
         <h2>Password Recovering Page</h2>
@@ -27,7 +26,7 @@ const PswdRecover: React.FC<IPropsPswdRecover> = ({putUserEmail, userEmail,respo
         <div>
             <Button buttonName='Recover' buttonOnClick={getDataFromServer}/>
         </div>
-        {isLoading && <Loading />}
+        <Loading />
     </div>
   );
 };

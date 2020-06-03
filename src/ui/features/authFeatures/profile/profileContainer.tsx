@@ -1,32 +1,47 @@
 import React, {useEffect, useState} from 'react'
 import Profile from "./profile";
-import {setAvatarOrNameTC, setMyProfileTC} from "../../../../bll/profile_reducer";
+import {getMyDecksTC, setAvatarOrNameTC, setMyProfileTC} from "../../../../bll/profile_reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../bll/store";
 
 
 const ProfileContainer = () => {
     const dispatch = useDispatch();
-    const {myName, avatar} = useSelector((state: RootState) => state.profile)
-    const [myOrAllDecks, setMyOrAllDecks] = useState<boolean>(true)
-    const [changeMyName, setChangeMyName] = useState<boolean>(true)
-    const [newName, setNewName] = useState<string>(myName)
+    const {myName, avatar, myDecks} = useSelector((state: RootState) => state.profile)
+    const [myOrAllDecks, setMyOrAllDecks] = useState<boolean>(true) // switch between my decks and all decks
+    const [changeMyNameToggle, setChangeMyNameToggle] = useState<boolean>(true)
+    const [changeMyAvatarToggle, setChangeMyAvatarToggle] = useState<boolean>(true)
+    const [newNOURLChange, setNOURLChange] = useState<string>(myName) //NOURL = Name Or URL
     useEffect(()=>{
         dispatch(setMyProfileTC())
     },[])
-    const changeName = (name: string) => {
-        setChangeMyName(!changeMyName)
-        dispatch(setAvatarOrNameTC(name))
+    const getMyDecks = () => { // launches when we click on 'My Decks'
+        setMyOrAllDecks(!myOrAllDecks)
+        dispatch(getMyDecksTC())
     }
-    return <Profile decks={[]}
+    const changeName = (name: string) => {     // sending new information on server
+        setChangeMyNameToggle(!changeMyNameToggle)
+        dispatch(setAvatarOrNameTC(name))
+        setNOURLChange('')
+    }
+    const changeAvatar = (newAvatar: string) => {  // sending new information on server
+        setChangeMyAvatarToggle(!changeMyAvatarToggle)
+        dispatch(setAvatarOrNameTC('', newAvatar ))
+        setNOURLChange('')
+    }
+    return <Profile decks={myDecks}
                     myOrAllDecks={myOrAllDecks}
                     setMyOrAllDecks={setMyOrAllDecks}
-                    setChangeMyName={setChangeMyName}
-                    changeMyName={changeMyName}
+                    setChangeMyName={setChangeMyNameToggle}
+                    changeMyName={changeMyNameToggle}
                     myName={myName}
-                    newName={newName}
-                    setNewName={setNewName}
+                    getMyDecks={getMyDecks}
+                    newName={newNOURLChange}
+                    setNewName={setNOURLChange}
                     changeName={changeName}
+                    changeAvatar={changeAvatar}
+                    setChangeMyAvatarToggle={setChangeMyAvatarToggle}
+                    changeMyAvatarToggle={changeMyAvatarToggle}
                     avatar={avatar} />
 }
 

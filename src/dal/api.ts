@@ -91,13 +91,19 @@ export const authAPI = {
         const response = await instance.post<authMeResponse>('/auth/me', {token});
         return response.data
     },
-    setProfileAPI: async(token: string, name?:string, avatar?: string) => {
+    setProfileAPI: async(token: string, name:string, avatar: string) => {
         const response = await instance.put('/auth/me', {token, name, avatar});
         return response.data
     }
 };
+
 export const cardsDeckAPI = {
-    getCardsDecks: async (token: string, pageCount:number, page:number) => {
+    getMyDecks: async (token: string, userId:number) => {
+        const response = await instance.get<CardsDecksDataType>(
+            `/cards/pack?token=${token}&user_id=${userId}`);
+        return response.data;
+    },
+    getAllCardsDecks: async (token: string, pageCount:number, page:number) => {
         const response = await instance.get<CardsDecksDataType>(
             `/cards/pack?token=${token}&pageCount=${pageCount}&page=${page}`);
         return response.data;

@@ -6,7 +6,7 @@ import {RootState} from "../../../bll/store";
 
 const Loading = () => {
     let [points, setPoints] = useState<string>('.');
-    let isLoading = useSelector((state: RootState) => state.auth.isLoading);
+    let {isLoading} = useSelector((state: RootState) => state.auth);
     const loadingProgress = () => {
         setTimeout(() => {
             points.length < 5

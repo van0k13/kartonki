@@ -119,9 +119,10 @@ export const createCardTC = (card: { cardsPack_id: string, question: string }, t
     };
 export const editCardTC = (card: { answer?: string, question?: string, _id: string, grade?: number, }) =>
     async (dispatch: Dispatch<ChatActionTypes>, getState: () => RootState) => {
+    const {token} = getState().auth
         try {
             dispatch(isLoadingAC(true));
-            const data = await cardsAPI.updateCard(card, getState().auth.token);
+            const data = await cardsAPI.updateCard(card, token);
             dispatch(editCardAC(data.updatedCard))
             dispatch(setTokenAC(data.token))
         } catch (e) {

@@ -14,7 +14,7 @@ import {Dispatch} from "redux";
 import {authAPI} from "../dal/api";
 
 const initialState: IStateLogin = {
-    id: '',
+    id: 0,
     authSuccess: false,
     myName: '',
     errorMessage: '',
