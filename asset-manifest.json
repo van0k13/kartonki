@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/kartonki/static/css/main.6e401a04.chunk.css",
-    "main.js": "/kartonki/static/js/main.f1800a8b.chunk.js",
-    "main.js.map": "/kartonki/static/js/main.f1800a8b.chunk.js.map",
+    "main.css": "/kartonki/static/css/main.d36d23b9.chunk.css",
+    "main.js": "/kartonki/static/js/main.8a38b8d0.chunk.js",
+    "main.js.map": "/kartonki/static/js/main.8a38b8d0.chunk.js.map",
     "runtime-main.js": "/kartonki/static/js/runtime-main.42d09206.js",
     "runtime-main.js.map": "/kartonki/static/js/runtime-main.42d09206.js.map",
-    "static/js/2.f32cf282.chunk.js": "/kartonki/static/js/2.f32cf282.chunk.js",
-    "static/js/2.f32cf282.chunk.js.map": "/kartonki/static/js/2.f32cf282.chunk.js.map",
+    "static/js/2.06c0ca3d.chunk.js": "/kartonki/static/js/2.06c0ca3d.chunk.js",
+    "static/js/2.06c0ca3d.chunk.js.map": "/kartonki/static/js/2.06c0ca3d.chunk.js.map",
     "index.html": "/kartonki/index.html",
-    "precache-manifest.9fb23b63d514ea19288afafaaf8b915a.js": "/kartonki/precache-manifest.9fb23b63d514ea19288afafaaf8b915a.js",
+    "precache-manifest.02f93184f929f53f40f6669a76ad4f5a.js": "/kartonki/precache-manifest.02f93184f929f53f40f6669a76ad4f5a.js",
     "service-worker.js": "/kartonki/service-worker.js",
-    "static/css/main.6e401a04.chunk.css.map": "/kartonki/static/css/main.6e401a04.chunk.css.map",
-    "static/js/2.f32cf282.chunk.js.LICENSE.txt": "/kartonki/static/js/2.f32cf282.chunk.js.LICENSE.txt"
+    "static/css/main.d36d23b9.chunk.css.map": "/kartonki/static/css/main.d36d23b9.chunk.css.map",
+    "static/js/2.06c0ca3d.chunk.js.LICENSE.txt": "/kartonki/static/js/2.06c0ca3d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.42d09206.js",
-    "static/js/2.f32cf282.chunk.js",
-    "static/css/main.6e401a04.chunk.css",
-    "static/js/main.f1800a8b.chunk.js"
+    "static/js/2.06c0ca3d.chunk.js",
+    "static/css/main.d36d23b9.chunk.css",
+    "static/js/main.8a38b8d0.chunk.js"
   ]
 }
