@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CardsDeckType, CardsType} from "../bll/types";
+import {CardsDeckType, CardsType, IMyProfileType} from "../bll/types";
 
 export const baseURL = 'https://cards-nya-back.herokuapp.com/1.0/';
 
@@ -19,17 +19,10 @@ export interface IRegistration {
     success: boolean;
     error: string;
 }
-type authMeResponse = {
-    email: string,
-    isAdmin: false,
-    name: string,
-    rememberMe: false,
-    token: string,
-    tokenDeathTime: number,
-    __v: number,
-    _id: string,
+type updatingUserResponse = {
+    updatedUser: IMyProfileType,
     success: boolean,
-    avatar: string
+    token: string
 }
 type CardsDecksDataType = {
     cardPacks: Array<CardsDeckType>;
@@ -88,11 +81,15 @@ export const authAPI = {
         return response.data;
     },
     getProfileAPI: async (token: string) => {
-        const response = await instance.post<authMeResponse>('/auth/me', {token});
+        const response = await instance.post<IMyProfileType>('/auth/me', {token});
         return response.data
     },
-    setProfileAPI: async(token: string, name:string, avatar: string) => {
-        const response = await instance.put('/auth/me', {token, name, avatar});
+    setProfileAvatarAPI: async(token: string, avatar: string) => {
+        const response = await instance.put<updatingUserResponse>('/auth/me', {token, avatar});
+        return response.data
+    },
+    setProfileNameAPI: async(token: string, name:string) => {
+        const response = await instance.put<updatingUserResponse>('/auth/me', {token, name});
         return response.data
     }
 };

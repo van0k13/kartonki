@@ -1,8 +1,7 @@
 export interface IStateProfile {
   myDecks: Array<CardsDeckType>,
-  myName: string,
+  myProfile: IMyProfileType,
   success: boolean,
-  avatar: string
 }
 
 export interface IStatePasswordRecover {
@@ -43,6 +42,19 @@ export type IStateCardsDeck  = {
   page: number,
   pageCount: number
 }
+export type IMyProfileType = {
+  email: string,
+  verified: boolean,
+  isAdmin: false,
+  name: string,
+  rememberMe: false,
+  token: string,
+  tokenDeathTime: number,
+  __v: number,
+  _id: string,
+  success: boolean,
+  avatar: string
+}
 
 export const FIRST_ACTION = 'FIRST_ACTION'
 export const SECOND_ACTION = 'SECOND_ACTION'
@@ -67,7 +79,7 @@ export const SET_DECK_NAME = 'cardsDeck_reducer/SET_DECK_NAME';
 export const CREATE_DECK = 'cardsDeck_reducer/CREATE_DECK';
 export const DELETE_DECK = 'cardsDeck_reducer/DELETE_DECK';
 export const SET_MY_DECKS = 'profile_reducer/SET_MY_DECKS';
-export const SET_MY_NAME = 'profile_reducer/SET_MY_NAME';
+export const SET_MY_PROFILE = 'profile_reducer/SET_MY_PROFILE';
 export const SET_CARDS = 'SET_CARDS';
 export const SET_CARD = 'SET_CARD';
 
@@ -134,10 +146,9 @@ export interface IGetDeckId {
   type: typeof GET_DECK_ID
   deckId: string
 }
-export interface ISetMyName {
-  type: typeof SET_MY_NAME
-  myName:string
-  avatar:string
+export interface ISetMyProfile {
+  type: typeof SET_MY_PROFILE
+  updatedUser: IMyProfileType
 }
 export interface ISetDeckName {
   type: typeof SET_DECK_NAME
@@ -217,4 +228,4 @@ export type ChatActionTypes = firstActionCreator| secondActionCreator| IRegistra
     IPasswordRecoverSuccess | IPasswordRecoverError | ILoginSuccess | ILoginError | INewPasswordSuccess |
     INewPasswordError | IisLoadingActionCreator | IEditCardActionCreator | IDeleteCardActionCreator |
     ICreateCardActionCreator | ICreateDeleteDeckActionCreator | IGetCardsDecks | ISetToken | ISetCards |
-    IGetDeckId | ISetCard | ISetDeckName | ISetDeckPage | ISetCardPage | ISetMyName | ISetMyDecks
+    IGetDeckId | ISetCard | ISetDeckName | ISetDeckPage | ISetCardPage | ISetMyProfile | ISetMyDecks
