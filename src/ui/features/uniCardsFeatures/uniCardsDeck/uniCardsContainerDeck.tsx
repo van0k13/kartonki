@@ -5,11 +5,11 @@ import {
     deleteDeckTC,
     editDeckTC,
     getDecksTC,
-    setCurrentDeckIdAC, setCurrentDeckNameAC, setDeckPageAC
 } from "../../../../bll/cardsDeck_reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../bll/store";
 import ModalContainerDelete from "../../modalsFeatures/modalForDeletes/modalContainerDelete";
+import {actions} from "../../../../bll/actions";
 
 const UniCardsContainerDeck = () => {
 
@@ -27,7 +27,7 @@ const UniCardsContainerDeck = () => {
     }, [page])
 
     const setDeckName = (deckName: string) => {
-        dispatch(setCurrentDeckNameAC(deckName))
+        dispatch(actions.setCurrentDeckNameAC(deckName))
     }
     const createNewDeck = () => {
         const cardsDeck = {
@@ -46,7 +46,7 @@ const UniCardsContainerDeck = () => {
         dispatch(editDeckTC(editedDeck, token))
     }
     const deleteDeck = (deckId: string) => {
-        dispatch(setCurrentDeckIdAC(deckId))
+        dispatch(actions.setCurrentDeckIdAC(deckId))
         setIsOpenModalDelete(true)
     }
     const answerFromDeleteModal = (answer: boolean) => {
@@ -56,7 +56,7 @@ const UniCardsContainerDeck = () => {
         } else setIsOpenModalDelete(false)
     }
     const onCurrentPageClick = (currentPage: number) => {
-        dispatch(setDeckPageAC(currentPage))
+        dispatch(actions.setDeckPageAC(currentPage))
     }
 
     return (

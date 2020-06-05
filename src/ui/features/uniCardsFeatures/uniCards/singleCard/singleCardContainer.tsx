@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react'
 import SingleCard from "./singleCard";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../bll/store";
-import {editCardTC, getCardsTC, setCardAC, setCardPageAC} from "../../../../../bll/cards_reducer";
+import {editCardTC, getCardsTC} from "../../../../../bll/cards_reducer";
 import withAuth from '../../../../common/withAuth'
+import {actions} from "../../../../../bll/actions";
 
 
 const SingleCardContainer = () => {
@@ -15,26 +16,27 @@ const SingleCardContainer = () => {
     const [grade, setGrade] = useState<number>(0);
     const [cardIndex, setCardIndex] = useState<number>(0);
     const [passedCardsNumber, setPassedCardsNumber] = useState<number>(0);
+    const {cardsPack_id, _id} = cards[cardIndex];
     useEffect(() => {
-        dispatch(setCardAC(cards[cardIndex]._id))
+        dispatch(actions.setCardAC(_id))
     }, [cardIndex]);
     useEffect(() => {
         const {answer, question} = currentCard
         setPassedCardsNumber(passedCardsNumber + 1)
         if(pageCount === (cardIndex + 1)) {
-            dispatch(setCardPageAC(page + 1))
+            dispatch(actions.setCardPageAC(page + 1))
         }
         const newCardGrade = {
             answer,
             question,
-            _id: cards[cardIndex]._id,
+            _id: _id,
             grade
         }
         dispatch(editCardTC(newCardGrade))
     }, [grade])
-    const onNextClicked = async() => {
+    const onNextClicked = () => {
         if (pageCount === (cardIndex + 1)) {
-           await dispatch(getCardsTC(cards[cardIndex].cardsPack_id))
+            dispatch(getCardsTC(cardsPack_id))
             setCardIndex(0)
         } else if (passedCardsNumber === cardsTotalCount) {
                 alert("that's all folks")

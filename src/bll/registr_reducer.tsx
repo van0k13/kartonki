@@ -1,25 +1,20 @@
-import {
-    ChatActionTypes,
-    REGISTRATE_ERROR,
-    REGISTRATE_SUCCESS,
-    IRegistrateSuccess,
-    IRegistrateError, IStateRegistr, ThunkType
-} from "./types";
+import {ThunkType} from "./actions";
 import {authAPI} from "../dal/api";
-import {isLoadingAC} from "./auth_reducer";
 import {ThunkDispatch} from "redux-thunk";
 import {RootState} from "./store";
+import {actions, ActionTypes} from "./actions";
 
-const initialState:IStateRegistr = {
+const initialState = {
     message: '',
     registeredSuccess: false
 };
 
-const registrationReducer = (state:IStateRegistr = initialState, action: ChatActionTypes): IStateRegistr => {
+
+const registrationReducer = (state:typeof initialState = initialState, action: ActionTypes) => {
     switch (action.type) {
-        case REGISTRATE_SUCCESS:
+        case "registr_reducer/REGISTRATE_SUCCESS":
             return {...state, message: 'successich', registeredSuccess: action.registeredSuccess}
-        case REGISTRATE_ERROR:
+        case "registr_reducer/REGISTRATE_ERROR":
             return {...state, message: action.errorMessage}
         default:
             return state;
@@ -27,25 +22,25 @@ const registrationReducer = (state:IStateRegistr = initialState, action: ChatAct
 };
 
 
-const registrationSuccessAC = (registeredSuccess: boolean)
-    : IRegistrateSuccess => ({type: REGISTRATE_SUCCESS, registeredSuccess});
-export const registrationErrorAC = (errorMessage: string)
-    : IRegistrateError => ({type: REGISTRATE_ERROR, errorMessage});
+// const registrationSuccessAC = (registeredSuccess: boolean)
+//     : IRegistrateSuccess => ({type: REGISTRATE_SUCCESS, registeredSuccess});
+// export const registrationErrorAC = (errorMessage: string)
+//     : IRegistrateError => ({type: REGISTRATE_ERROR, errorMessage});
 
 
 export const registrationTC = (email:string, password:string):ThunkType =>
-     async(dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>)  => {
+     async(dispatch: ThunkDispatch<RootState, unknown, ActionTypes>)  => {
         try {
-            dispatch(isLoadingAC(true));
+            dispatch(actions.isLoadingAC(true));
             const data = await authAPI.registrationAPI(email, password);
             if(data.error) {
-                dispatch(registrationErrorAC(data.error));
+                dispatch(actions.registrationErrorAC(data.error));
             } else
-                dispatch(registrationSuccessAC(data.success))
+                dispatch(actions.registrationSuccessAC(data.success))
         } catch (e) {
-            dispatch(registrationErrorAC(e.response.data.error))
+            dispatch(actions.registrationErrorAC(e.response.data.error))
         }
-         dispatch(isLoadingAC(false));
+         dispatch(actions.isLoadingAC(false));
 }
 
 export default registrationReducer;

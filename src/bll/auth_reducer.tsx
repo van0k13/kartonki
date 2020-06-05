@@ -1,20 +1,10 @@
-import {
-    ChatActionTypes,
-    IisLoadingActionCreator,
-    ILoginError,
-    ILoginSuccess,
-    IS_LOADING,
-    ISetToken,
-    IStateLogin,
-    LOGIN_ERROR,
-    LOGIN_SUCCESS,
-    SET_TOKEN, ThunkType
-} from "./types";
+import {ThunkType} from "./actions";
 import {authAPI} from "../dal/api";
 import {ThunkDispatch} from "redux-thunk";
 import {RootState} from "./store";
+import {actions, ActionTypes} from "./actions";
 
-const initialState: IStateLogin = {
+const initialState = {
     id: '',
     authSuccess: false,
     myName: '',
@@ -24,23 +14,23 @@ const initialState: IStateLogin = {
 }
 
 
-const authReducer = (state: IStateLogin = initialState, action: ChatActionTypes): IStateLogin => {
+const authReducer = (state: typeof initialState = initialState, action: ActionTypes) => {
     switch (action.type) {
-        case LOGIN_SUCCESS:
+        case 'auth_reducer/LOGIN_SUCCESS':
             return {
                 ...state, authSuccess: action.loginSuccess, myName: action.myName,
                 token: action.token, id: action.id
             }
-        case LOGIN_ERROR:
+        case 'auth_reducer/LOGIN_ERROR':
             return {
                 ...state, errorMessage: action.errorMessage
             }
-        case IS_LOADING:
+        case 'auth_reducer/IS_LOADING':
             return {
                 ...state,
                 isLoading: action.value
             }
-        case SET_TOKEN:
+        case 'auth_reducer/SET_TOKEN':
             return {
                 ...state,
                 token: action.token
@@ -51,27 +41,27 @@ const authReducer = (state: IStateLogin = initialState, action: ChatActionTypes)
 }
 
 // global loading Action Creator
-export const isLoadingAC = (value: boolean):IisLoadingActionCreator => ({type: IS_LOADING, value});
-export const setTokenAC = (token: string):ISetToken => ({type: SET_TOKEN, token});
+// export const isLoadingAC = (value: boolean):IisLoadingActionCreator => ({type: IS_LOADING, value});
+// export const setTokenAC = (token: string):ISetToken => ({type: SET_TOKEN, token});
 
 
-const loginizationSuccessAC = (loginSuccess: boolean, myName:string, token:string, id: string):ILoginSuccess =>
-    ({type: LOGIN_SUCCESS, loginSuccess, myName, token, id})
-const loginizationErrorAC = (errorMessage: string):ILoginError => ({type: LOGIN_ERROR, errorMessage})
+// const loginizationSuccessAC = (loginSuccess: boolean, myName:string, token:string, id: string):ILoginSuccess =>
+//     ({type: LOGIN_SUCCESS, loginSuccess, myName, token, id})
+// const loginizationErrorAC = (errorMessage: string):ILoginError => ({type: LOGIN_ERROR, errorMessage})
 
 
 
 export const loginizationTC = (email:string, password:string, rememberMe: boolean): ThunkType =>
-    async(dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>)  => {
+    async(dispatch: ThunkDispatch<RootState, unknown, ActionTypes>)  => {
         try {
-            dispatch(isLoadingAC(true));
+            dispatch(actions.isLoadingAC(true));
             const data = await authAPI.loginizationAPI(email, password, rememberMe);
             if (data.error)
-                dispatch(loginizationErrorAC(data.error))
-            else dispatch(loginizationSuccessAC(data.success, data.name, data.token, data._id ))
+                dispatch(actions.loginizationErrorAC(data.error))
+            else dispatch(actions.loginizationSuccessAC(data.success, data.name, data.token, data._id ))
         } catch (e) {
-            dispatch(loginizationErrorAC(e.response.data.error))
+            dispatch(actions.loginizationErrorAC(e.response.data.error))
         }
-        dispatch(isLoadingAC(false))
+        dispatch(actions.isLoadingAC(false))
     }
 export default authReducer;

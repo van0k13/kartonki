@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Registration from "./registration";
 import {useDispatch, useSelector} from "react-redux";
-import {registrationErrorAC, registrationTC} from "../../../../bll/registr_reducer";
+import {registrationTC} from "../../../../bll/registr_reducer";
 import {RootState} from "../../../../bll/store";
 import {Redirect} from 'react-router-dom';
 import {TO_AUTH} from "../../../common/routes";
+import {actions} from "../../../../bll/actions";
 
 
 const RegistrationContainer = () => {
@@ -23,7 +24,7 @@ const RegistrationContainer = () => {
     const registerMe = () => {dispatch(registrationTC(login, password))
     }
     const wrongRepeatingPassword = () => {
-        dispatch(registrationErrorAC('wrong credentials'))
+        dispatch(actions.registrationErrorAC('wrong credentials'))
     }
 
     return (

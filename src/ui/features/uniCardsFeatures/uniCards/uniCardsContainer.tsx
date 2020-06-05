@@ -1,19 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import UniCards from "./uniCards";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../bll/store";
-import {
-    createCardTC,
-    deleteCardTC,
-    editCardTC,
-    getCardsTC,
-    setCardAC,
-    setCardPageAC
-} from "../../../../bll/cards_reducer";
+import {createCardTC, deleteCardTC, editCardTC, getCardsTC} from "../../../../bll/cards_reducer";
 import {useParams} from 'react-router-dom';
 import ModalContainerNewCard from "../../modalsFeatures/modalForNewCard/modalContainerNewCard";
 import ModalContainerDelete from "../../modalsFeatures/modalForDeletes/modalContainerDelete";
 import ModalContainerEditCard from "../../modalsFeatures/modalForEditCard/modalContainerEditCard";
+import {actions} from "../../../../bll/actions";
 
 
 const UniCardsContainer = () => {
@@ -48,10 +42,10 @@ const UniCardsContainer = () => {
         setIsOpenModalDelete(true)
     }
     const onCurrentPageClick = (currentPage: number) => {
-        dispatch(setCardPageAC(currentPage))
+        dispatch(actions.setCardPageAC(currentPage))
     }
     const onCurrentCardEditClick = async (cardId: string) => {          // when clicked on specific card to edit
-        await dispatch(setCardAC(cardId))
+        await dispatch(actions.setCardAC(cardId))
         setCard_Id(cardId)
         setIsOpenModalEditCard(true)
     }
@@ -76,7 +70,8 @@ const UniCardsContainer = () => {
     }
     const answerFromEditCardModal = (answer: boolean) => {
         if (answer) {
-            const card = { answer: cardAnswer, question: cardQuestion, _id: currentCard._id, grade: cardGrade}
+            const {_id} = currentCard;
+            const card = { answer: cardAnswer, question: cardQuestion, _id: _id, grade: cardGrade}
             dispatch(editCardTC(card))
             setIsOpenModalEditCard(false)
             setCardQuestion('')

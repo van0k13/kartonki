@@ -1,31 +1,24 @@
-import {
-    ChatActionTypes,
-    PASSWORD_RECOVER_ERROR,
-    PASSWORD_RECOVER_SUCCESS,
-    IPasswordRecoverSuccess,
-    IPasswordRecoverError, IStatePasswordRecover, ThunkType
-} from "./types";
+import {ThunkType} from "./actions";
 import {authAPI} from "../dal/api";
-import {isLoadingAC} from "./auth_reducer";
 import {ThunkDispatch} from "redux-thunk";
 import {RootState} from "./store";
+import {actions, ActionTypes} from "./actions";
 
-const initialState: IStatePasswordRecover = {
+const initialState = {
     success: false,
     message: ''
 };
 
 
-const passwordRecoveringReducer = (state: IStatePasswordRecover = initialState,
-                                   action: ChatActionTypes):IStatePasswordRecover => {
+const passwordRecoveringReducer = (state: typeof initialState = initialState,action: ActionTypes) => {
     switch (action.type) {
-        case PASSWORD_RECOVER_SUCCESS:
+        case "pswdRecover_reducer/PASSWORD_RECOVER_SUCCESS":
             return {
                 ...state,
                 success: action.recoverSuccess,
                 message: 'Успешно! Проверьте свой email.'
             };
-        case PASSWORD_RECOVER_ERROR:
+        case "pswdRecover_reducer/PASSWORD_RECOVER_ERROR":
             return {
                 ...state,
                 message: action.errorMessage
@@ -37,26 +30,26 @@ const passwordRecoveringReducer = (state: IStatePasswordRecover = initialState,
 
 //Thunk
 export const passwordRecoverTC = (email:string): ThunkType =>
-    async(dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>)  => {
+    async(dispatch: ThunkDispatch<RootState, unknown, ActionTypes>)  => {
         try {
-            dispatch(isLoadingAC(true))
+            dispatch(actions.isLoadingAC(true))
             const data = await authAPI.passwordRecoverAPI(email);
             if(data.error) {
-                dispatch(passwordRecoverErrorAC(data.error));
+                dispatch(actions.passwordRecoverErrorAC(data.error));
             } else
-                dispatch(passwordRecoverSuccessAC(data.success))
+                dispatch(actions.passwordRecoverSuccessAC(data.success))
         } catch (e) {
-            dispatch(passwordRecoverErrorAC(e.response.data.error));
+            dispatch(actions.passwordRecoverErrorAC(e.response.data.error));
         }
-        dispatch(isLoadingAC(false))
+        dispatch(actions.isLoadingAC(false))
     };
 
 //Action Creators (success error)
-const passwordRecoverSuccessAC = (recoverSuccess: boolean)
-    : IPasswordRecoverSuccess => ({type: PASSWORD_RECOVER_SUCCESS, recoverSuccess});
-
-export const passwordRecoverErrorAC = (errorMessage: string)
-    : IPasswordRecoverError => ({type: PASSWORD_RECOVER_ERROR, errorMessage});
+// const passwordRecoverSuccessAC = (recoverSuccess: boolean)
+//     : IPasswordRecoverSuccess => ({type: PASSWORD_RECOVER_SUCCESS, recoverSuccess});
+//
+// export const passwordRecoverErrorAC = (errorMessage: string)
+//     : IPasswordRecoverError => ({type: PASSWORD_RECOVER_ERROR, errorMessage});
 
 
 

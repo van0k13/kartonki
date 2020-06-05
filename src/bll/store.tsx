@@ -17,7 +17,8 @@ const reducerPack = combineReducers({
     cards: cardsReducer,
     decks: cardsDeckReducer
 })
-export type RootState = ReturnType<typeof reducerPack>
+export type RootState = ReturnType<typeof reducerPack>;
+
 
 const store = createStore(reducerPack, applyMiddleware(thunkMiddleware) );
 
