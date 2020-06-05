@@ -5,14 +5,14 @@ import store from '../bll/store';
 import {HashRouter} from 'react-router-dom';
 import s from './App.module.css';
 import {AllRoutes} from "./common/routes";
-import HedaerContainer from "./common/header/headerContainer";
+import HeaderContainer from "./common/header/headerContainer";
 
 
 const App = () => {
     return (
         <div className={s.App}>
 
-            <HedaerContainer/>
+            <HeaderContainer/>
 
                 <AllRoutes/>
 
@@ -21,7 +21,7 @@ const App = () => {
 };
 
 
-const Main: React.FC = () => {
+const Main = () => {
     return (
         <HashRouter>
             <Provider store={store}>

@@ -8,13 +8,14 @@ import {
     IStateLogin,
     LOGIN_ERROR,
     LOGIN_SUCCESS,
-    SET_TOKEN
+    SET_TOKEN, ThunkType
 } from "./types";
-import {Dispatch} from "redux";
 import {authAPI} from "../dal/api";
+import {ThunkDispatch} from "redux-thunk";
+import {RootState} from "./store";
 
 const initialState: IStateLogin = {
-    id: 0,
+    id: '',
     authSuccess: false,
     myName: '',
     errorMessage: '',
@@ -23,7 +24,7 @@ const initialState: IStateLogin = {
 }
 
 
-const authReducer = (state: IStateLogin = initialState, action: ChatActionTypes) => {
+const authReducer = (state: IStateLogin = initialState, action: ChatActionTypes): IStateLogin => {
     switch (action.type) {
         case LOGIN_SUCCESS:
             return {
@@ -60,8 +61,8 @@ const loginizationErrorAC = (errorMessage: string):ILoginError => ({type: LOGIN_
 
 
 
-export const loginizationTC = (email:string, password:string, rememberMe: boolean) =>
-    async(dispatch: Dispatch<ChatActionTypes>)  => {
+export const loginizationTC = (email:string, password:string, rememberMe: boolean): ThunkType =>
+    async(dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>)  => {
         try {
             dispatch(isLoadingAC(true));
             const data = await authAPI.loginizationAPI(email, password, rememberMe);

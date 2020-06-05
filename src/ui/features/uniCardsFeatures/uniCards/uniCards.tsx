@@ -11,12 +11,13 @@ interface IProps {
     setSearchInput: (value: string) => void,
     deleteCard: (value: string) => void,
     onCurrentPageClick: (value: number) => void,
+    onCurrentCardEditClick: (cardId:string) => void,
+    setIsOpenModalNewCard: (value:boolean) => void,
     searchInput: string,
     cardsTotalCount: number,
     pageCount: number,
     page: number,
     cards: Array<CardsType>,
-    addCard: () => void,
     currentDeckName: string,
 
 }
@@ -24,7 +25,8 @@ interface IProps {
 const UniCards: React.FC<IProps> = ({
                                         onCurrentPageClick, cardsTotalCount, pageCount,
                                         setSearchInput, searchInput, cards,
-                                        addCard, currentDeckName, deleteCard, page,
+                                        currentDeckName, deleteCard, page,
+                                        onCurrentCardEditClick, setIsOpenModalNewCard,
                                     }) => {
 
     return (
@@ -34,7 +36,7 @@ const UniCards: React.FC<IProps> = ({
                    inputType={'text'} inputOnChange={setSearchInput}/>
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
-                <Button buttonOnClick={addCard} buttonName={'add new Item'}/>
+                <Button buttonOnClickBoolean={()=>setIsOpenModalNewCard(true)} buttonName={'add new Item'}/>
                 <NavLink to={TO_CARD} className={styles.startLink}>Start now!</NavLink>
                 <Paginator3000 itemsTotalCount={cardsTotalCount} pageCount={pageCount}
                                onCurrentPageClick={onCurrentPageClick}
@@ -50,7 +52,8 @@ const UniCards: React.FC<IProps> = ({
                     </div>
                     <div className={styles.itemScore}>{c.grade}</div>
                     <div className={styles.buttonsInTheList}>
-                        <Button buttonName={'edit'}/>
+                        <Button buttonName={'edit'}
+                                buttonOnClickBoolean={()=>onCurrentCardEditClick(c._id)}/>
                         <Button buttonName={'delete'} buttonOnClick={() => deleteCard(c._id)}/>
                     </div>
                 </div>)}

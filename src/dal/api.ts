@@ -95,7 +95,7 @@ export const authAPI = {
 };
 
 export const cardsDeckAPI = {
-    getMyDecks: async (token: string, userId:number) => {
+    getMyDecks: async (token: string, userId:string) => {
         const response = await instance.get<CardsDecksDataType>(
             `/cards/pack?token=${token}&user_id=${userId}`);
         return response.data;
@@ -135,7 +135,7 @@ export const cardsDeckAPI = {
          });
          return response.data;
      },
-     updateCard: async (card: {answer?: string, question?:string, _id: string, grade?:number, }, token: string) => {
+     updateCard: async (card: {answer: string, question:string, _id: string, grade:number, }, token: string) => {
          const response = await instance.put<UpdatedCard>(`/cards/card`, {
              card,
              token

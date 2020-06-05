@@ -3,11 +3,12 @@ import {
     PASSWORD_RECOVER_ERROR,
     PASSWORD_RECOVER_SUCCESS,
     IPasswordRecoverSuccess,
-    IPasswordRecoverError, IStatePasswordRecover
+    IPasswordRecoverError, IStatePasswordRecover, ThunkType
 } from "./types";
-import {Dispatch} from "redux";
 import {authAPI} from "../dal/api";
 import {isLoadingAC} from "./auth_reducer";
+import {ThunkDispatch} from "redux-thunk";
+import {RootState} from "./store";
 
 const initialState: IStatePasswordRecover = {
     success: false,
@@ -15,7 +16,8 @@ const initialState: IStatePasswordRecover = {
 };
 
 
-const passwordRecoveringReducer = (state: IStatePasswordRecover = initialState, action: ChatActionTypes) => {
+const passwordRecoveringReducer = (state: IStatePasswordRecover = initialState,
+                                   action: ChatActionTypes):IStatePasswordRecover => {
     switch (action.type) {
         case PASSWORD_RECOVER_SUCCESS:
             return {
@@ -34,8 +36,8 @@ const passwordRecoveringReducer = (state: IStatePasswordRecover = initialState, 
 };
 
 //Thunk
-export const passwordRecoverTC = (email:string) =>
-    async(dispatch: Dispatch<ChatActionTypes>)  => {
+export const passwordRecoverTC = (email:string): ThunkType =>
+    async(dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>)  => {
         try {
             dispatch(isLoadingAC(true))
             const data = await authAPI.passwordRecoverAPI(email);

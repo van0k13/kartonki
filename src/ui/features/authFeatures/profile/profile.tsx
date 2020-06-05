@@ -19,7 +19,7 @@ interface IProps {
 
 const Profile: React.FC<IProps> = ({
                                        myOrAllDecks, myName, avatar, setMyOrAllDecks,
-                                       decks, getMyDecks,setIsOpenModalNewAvatar,
+                                       decks, getMyDecks, setIsOpenModalNewAvatar,
                                        setIsOpenModalNewName,
                                    }) => {
     return (
@@ -28,17 +28,22 @@ const Profile: React.FC<IProps> = ({
                 <img src={avatar}
                      alt={myName}/>
                 <Button buttonName={'Change'}
-                        buttonOnClickBoolean={() => {setIsOpenModalNewAvatar(true)}}/>
+                        buttonOnClickBoolean={() => {
+                            setIsOpenModalNewAvatar(true)
+                        }}/>
             </div>
             <div className={styles.myInfo}>
-                <div className={styles.nameBlock} onClick={() => {setIsOpenModalNewName(true)}}>
+                <div className={styles.nameBlock} onClick={() => {
+                    setIsOpenModalNewName(true)
+                }}>
                     <h2>{myName}</h2>
                     <span>(click to change)</span>
                 </div>
                 {
                     myOrAllDecks
                         ? <div className={styles.deckBlock}>
-                            <div className={styles.nameBlock} onClick={() => setMyOrAllDecks(!myOrAllDecks)}>
+                            <div className={styles.nameBlock}
+                                 onClick={() => setMyOrAllDecks(!myOrAllDecks)}>
                                 <h3>my decks</h3>
                                 <span>(go to all decks)</span>
                             </div>

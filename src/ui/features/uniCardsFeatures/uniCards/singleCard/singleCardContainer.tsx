@@ -19,11 +19,14 @@ const SingleCardContainer = () => {
         dispatch(setCardAC(cards[cardIndex]._id))
     }, [cardIndex]);
     useEffect(() => {
+        const {answer, question} = currentCard
         setPassedCardsNumber(passedCardsNumber + 1)
         if(pageCount === (cardIndex + 1)) {
             dispatch(setCardPageAC(page + 1))
         }
         const newCardGrade = {
+            answer,
+            question,
             _id: cards[cardIndex]._id,
             grade
         }

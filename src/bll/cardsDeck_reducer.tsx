@@ -12,12 +12,12 @@ import {
     ISetDeckPage,
     IStateCardsDeck,
     SET_DECK_NAME,
-    SET_DECK_PAGE,
+    SET_DECK_PAGE, ThunkType,
 } from "./types";
-import {Dispatch} from "redux";
 import {isLoadingAC, setTokenAC} from "./auth_reducer";
 import {cardsDeckAPI} from "../dal/api";
 import {RootState} from "./store";
+import {ThunkDispatch} from "redux-thunk";
 
 
 const initialState: IStateCardsDeck = {
@@ -32,7 +32,7 @@ const initialState: IStateCardsDeck = {
 };
 
 
-const cardsDeckReducer = (state: IStateCardsDeck = initialState, action: ChatActionTypes) => {
+const cardsDeckReducer = (state: IStateCardsDeck = initialState, action: ChatActionTypes): IStateCardsDeck => {
     switch (action.type) {
         case GET_DECKS:
             return {
@@ -77,8 +77,8 @@ const setNewCardsDeckAC = (newCardsDeck: CardsDeckType)
     : ICreateDeleteDeckActionCreator => ({type: CREATE_DECK, cardsDeck: newCardsDeck})
 
 
-export const getDecksTC = (token: string) =>
-    async (dispatch: Dispatch<ChatActionTypes>, getState: () => RootState) => {
+export const getDecksTC = (token: string): ThunkType =>
+    async (dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>, getState: () => RootState) => {
         const {pageCount, page} = getState().decks
         try {
             dispatch(isLoadingAC(true))
@@ -92,8 +92,8 @@ export const getDecksTC = (token: string) =>
         dispatch(isLoadingAC(false))
     };
 
-export const createNewCardDeckTC = (cardsDeck: { user_id: string; name: string }, token: string) =>
-    async (dispatch: Dispatch<ChatActionTypes>) => {
+export const createNewCardDeckTC = (cardsDeck: { user_id: string; name: string }, token: string):ThunkType =>
+    async (dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>) => {
         try {
             dispatch(isLoadingAC(true))
             const data = await cardsDeckAPI.addNewCardsDeck(cardsDeck, token)
@@ -106,35 +106,28 @@ export const createNewCardDeckTC = (cardsDeck: { user_id: string; name: string }
         dispatch(isLoadingAC(false))
     }
 
-export const editDeckTC = (editedDeck: { grade: number; name: string; _id: string }, token: string) =>
-    async (dispatch: Dispatch<ChatActionTypes>, getState: () => RootState) => {
-        const {pageCount, page} = getState().decks
+export const editDeckTC = (editedDeck: { grade: number; name: string; _id: string }, token: string): ThunkType =>
+    async (dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>) => {
         try {
             dispatch(isLoadingAC(true))
             const data = await cardsDeckAPI.updateCardsDeck(editedDeck, token)
-            if (data.success === true) {
-                const data2 = await cardsDeckAPI.getAllCardsDecks(data.token, pageCount, page)
-                dispatch(setCardsDecksAC(data2.cardPacks, data.cardPacksTotalCount,
-                    data.pageCount, data.page))
-                dispatch(setTokenAC(data2.token))
+            if (data.success) {
+                getDecksTC(data.token)
             }
         } catch (e) {
             dispatch(isLoadingAC(false))
         }
         dispatch(isLoadingAC(false))
     }
-export const deleteDeckTC = (token: string, deckId: string) =>
-    async (dispatch: Dispatch<ChatActionTypes>, getState: () => RootState) => {
-        const {pageCount, page} = getState().decks
+
+export const deleteDeckTC = (token: string, deckId: string):ThunkType =>
+    async (dispatch: ThunkDispatch<RootState, unknown, ChatActionTypes>) => {
         try {
             dispatch(isLoadingAC(true))
             const data = await cardsDeckAPI.deleteCardsDeck(token, deckId)
             dispatch(setTokenAC(data.token));
             if (data.success) {
-                const data2 = await cardsDeckAPI.getAllCardsDecks(data.token, pageCount, page)
-                dispatch(setCardsDecksAC(data2.cardPacks, data.cardPacksTotalCount,
-                    data.pageCount, data.page))
-                dispatch(setTokenAC(data2.token))
+                getDecksTC(data.token)
             }
         } catch (e) {
             dispatch(isLoadingAC(false))

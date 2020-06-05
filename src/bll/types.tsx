@@ -1,3 +1,31 @@
+import {ThunkAction} from "redux-thunk";
+import {RootState} from "./store";
+
+
+
+// ThunkAction
+// 1 параметр - описываем, что возвращает thunk
+// 2 параметр - state всего приложения
+// 3 параметр - экстра аргументы
+// 4 параметр - все action всего App
+
+// ThunkDispatch
+// 1 параметр - state всего приложения
+// 2 параметр - экстра аргументы
+// 3 параметр - все action всего App
+
+// const getTodolists = ():ThunkType  => {
+//     return (dispatch: ThunkDispatch<AppStateType, unknown, TodoActionType>,
+//             getState: ()=> AppStateType) => {
+//         api.getTodolists()
+//             .then(res => {
+//                 dispatch(getTodolistsSuccess(res.data));
+//             })
+//     };
+// };
+export type ThunkType = ThunkAction<void, RootState, unknown, ChatActionTypes>
+
+
 export interface IStateProfile {
   myDecks: Array<CardsDeckType>,
   myProfile: IMyProfileType,
@@ -13,7 +41,7 @@ export interface IStateRegistr {
   registeredSuccess: boolean
 }
 export interface IStateLogin {
-  id: number,
+  id: string,
   myName: string,
   authSuccess: boolean,
   errorMessage: string,
@@ -31,6 +59,19 @@ export interface IStateCards {
   minGrade: number
   page: number
   pageCount: number
+}
+export const defCurrentCard = {
+  answer: "default",
+  question: "default",
+  cardsPack_id: "default",
+  grade: 0.00,
+  rating: 0,
+  shots: 0,
+  type: "card",
+  created: "2020-05-13T11:05:44.867Z",
+  updated: "2020-05-13T11:05:44.867Z",
+  __v: 0,
+  _id: "default",
 }
 export type IStateCardsDeck  = {
   decks: Array<CardsDeckType>,

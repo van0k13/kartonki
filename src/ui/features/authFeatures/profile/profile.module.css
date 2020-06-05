@@ -47,14 +47,15 @@
     flex-wrap: wrap;
 
 }
-.decks div {
+.decks a {
     margin: 5px;
     border: 3px solid #a74255;
     border-radius: 5px;
     width: 150px;
     height: 150px;
+    text-decoration: none;
 }
-.decks div:hover {
+.decks a:hover {
     cursor: pointer;
     border: 3px solid #2ba2df;
 }
