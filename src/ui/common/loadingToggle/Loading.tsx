@@ -6,7 +6,7 @@ import {RootState} from "../../../bll/store";
 
 const Loading = () => {
     let [points, setPoints] = useState<string>('.');
-    let {isLoading} = useSelector((state: RootState) => state.auth);
+    let {isLoading} = useSelector((state: RootState) => state.features);
     const loadingProgress = () => {
         setTimeout(() => {
             points.length < 5
@@ -17,7 +17,7 @@ const Loading = () => {
     };
     if(isLoading) {return (
         <div>
-            <span className={s.loadingWrapper}></span>
+            <span className={s.loadingWrapper}/>
             <span className={s.loadingProgress}>
                 { 'LOADING' + loadingProgress()}
 

@@ -14,7 +14,7 @@ const NewPswdContainer = () => {
     let [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
     const [differentPassword, setDifferentPassword] = useState<string>('');
     let {message} = useSelector((state: RootState) => state.newPass);
-    const {isLoading} = useSelector((state: RootState) => state.auth);
+    const {isLoading} = useSelector((state: RootState) => state.features);
 
     useEffect(()=> {
         if(newPassword === newPasswordRepeat && newPasswordRepeat) {

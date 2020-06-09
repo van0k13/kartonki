@@ -9,8 +9,8 @@ const initialState = {
     registeredSuccess: false
 };
 
-
-const registrationReducer = (state:typeof initialState = initialState, action: ActionTypes) => {
+type InitialStateType = typeof initialState
+const registrationReducer = (state:InitialStateType = initialState, action: ActionTypes):InitialStateType => {
     switch (action.type) {
         case "registr_reducer/REGISTRATE_SUCCESS":
             return {...state, message: 'successich', registeredSuccess: action.registeredSuccess}
@@ -22,23 +22,14 @@ const registrationReducer = (state:typeof initialState = initialState, action: A
 };
 
 
-// const registrationSuccessAC = (registeredSuccess: boolean)
-//     : IRegistrateSuccess => ({type: REGISTRATE_SUCCESS, registeredSuccess});
-// export const registrationErrorAC = (errorMessage: string)
-//     : IRegistrateError => ({type: REGISTRATE_ERROR, errorMessage});
-
-
 export const registrationTC = (email:string, password:string):ThunkType =>
      async(dispatch: ThunkDispatch<RootState, unknown, ActionTypes>)  => {
         try {
             dispatch(actions.isLoadingAC(true));
             const data = await authAPI.registrationAPI(email, password);
-            if(data.error) {
-                dispatch(actions.registrationErrorAC(data.error));
-            } else
-                dispatch(actions.registrationSuccessAC(data.success))
+            dispatch(actions.registrationSuccessAC(data.success))
         } catch (e) {
-            dispatch(actions.registrationErrorAC(e.response.data.error))
+            dispatch(actions.isErrorAC(true, e.response.data.error))
         }
          dispatch(actions.isLoadingAC(false));
 }

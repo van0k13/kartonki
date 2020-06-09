@@ -3,10 +3,11 @@ import {cardsDeckAPI} from "../dal/api";
 import {RootState} from "./store";
 import {ThunkDispatch} from "redux-thunk";
 import {actions, ActionTypes} from "./actions";
+import {CardsDeckType} from "./types";
 
 
 const initialState = {
-    decks: [],
+    decks: [] as Array<CardsDeckType>,
     currentDeckId: '',
     currentDeckName: '',
     cardPacksTotalCount: 0, // количество колод
@@ -16,8 +17,8 @@ const initialState = {
     pageCount: 3 // количество элементов на странице
 };
 
-
-const cardsDeckReducer = (state: typeof initialState = initialState, action: ActionTypes) => {
+type InitialStateType = typeof initialState
+const cardsDeckReducer = (state: InitialStateType = initialState, action: ActionTypes):InitialStateType => {
     switch (action.type) {
         case 'cardsDeck_reducer/GET_DECKS':
             return {
@@ -47,17 +48,6 @@ const cardsDeckReducer = (state: typeof initialState = initialState, action: Act
 };
 
 
-// const setCardsDecksAC = (decks: Array<CardsDeckType>,
-//                          cardPacksTotalCount: number,
-//                          pageCount: number, page: number): IGetCardsDecks =>
-//     ({type: GET_DECKS, decks, cardPacksTotalCount, pageCount, page})
-// export const setDeckPageAC = (page: number): ISetDeckPage => ({type: SET_DECK_PAGE, page})
-// export const setCurrentDeckIdAC = (deckId: string): IGetDeckId => ({type: GET_DECK_ID, deckId})
-// export const setCurrentDeckNameAC = (deckName: string): ISetDeckName => ({type: SET_DECK_NAME, deckName})
-// const setNewCardsDeckAC = (newCardsDeck: CardsDeckType)
-//     : ICreateDeleteDeckActionCreator => ({type: CREATE_DECK, cardsDeck: newCardsDeck})
-
-
 export const getDecksTC = (token: string): ThunkType =>
     async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
         const {pageCount, page} = getState().decks
@@ -68,7 +58,7 @@ export const getDecksTC = (token: string): ThunkType =>
                 data.pageCount, data.page))
             dispatch(actions.setTokenAC(data.token))
         } catch (e) {
-            dispatch(actions.isLoadingAC(false))
+            dispatch(actions.isErrorAC(true, e.response.data.error))
         }
         dispatch(actions.isLoadingAC(false))
     };
@@ -82,8 +72,7 @@ export const createNewCardDeckTC = (cardsDeck: { user_id: string; name: string }
                 dispatch(actions.setNewCardsDeckAC(data.newCardsPack,))
             dispatch(actions.setTokenAC(data.token))
         } catch (e) {
-            dispatch(actions.isLoadingAC(false))
-        }
+            dispatch(actions.isErrorAC(true, e.response.data.error))        }
         dispatch(actions.isLoadingAC(false))
     }
 
@@ -96,8 +85,7 @@ export const editDeckTC = (editedDeck: { grade: number; name: string; _id: strin
                 getDecksTC(data.token)
             }
         } catch (e) {
-            dispatch(actions.isLoadingAC(false))
-        }
+            dispatch(actions.isErrorAC(true, e.response.data.error))        }
         dispatch(actions.isLoadingAC(false))
     }
 
@@ -111,8 +99,7 @@ export const deleteDeckTC = (token: string, deckId: string):ThunkType =>
                 getDecksTC(data.token)
             }
         } catch (e) {
-            dispatch(actions.isLoadingAC(false))
-        }
+            dispatch(actions.isErrorAC(true, e.response.data.error))        }
         dispatch(actions.isLoadingAC(false))
     };
 

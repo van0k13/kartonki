@@ -12,13 +12,13 @@ const RegistrationContainer = () => {
 
     const dispatch = useDispatch()
     const {registeredSuccess, message} = useSelector((state: RootState) => state.registr)
-    const {isLoading} = useSelector((state: RootState) => state.auth);
+    const {isLoading} = useSelector((state: RootState) => state.features);
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [repeatingPassword, setRepeatingPassword] = useState<string>('');
     const [similar, setSimilar] = useState<boolean>(false);
     useEffect(()=> {
-        if(repeatingPassword === password && repeatingPassword) setSimilar(true)
+        if(repeatingPassword === password && repeatingPassword.length > 0) setSimilar(true)
             else setSimilar(false)
     }, [repeatingPassword, password]);
     const registerMe = () => {dispatch(registrationTC(login, password))

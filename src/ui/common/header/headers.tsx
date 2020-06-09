@@ -10,6 +10,7 @@ import {
 } from "../routes";
 import Button from "../button/Button";
 import Loading from "../loadingToggle/Loading";
+import ErrorMessage from "../errorMessageToggle/ErrorMessage";
 
 
 interface IHeaderProps {
@@ -52,7 +53,8 @@ const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess}) 
                 <NavLink to={TO_AUTH}>Ultimate cards Teaching application</NavLink>
                 <a href={'https://send.monobank.ua/jar/3xVyeLd7sE?fbclid=IwAR0ZhTWJWQ1OQs-zBmjOggfYxD_tOekdvDjPVNITQ6yWZT5jZ_UGKAS7cTY'}>Try
                     now! for free (20$)</a>
-                <Loading/>
+                <Loading />
+                <ErrorMessage />
             </div>
         </div>
     )

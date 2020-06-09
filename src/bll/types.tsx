@@ -34,7 +34,6 @@ export type IMyProfileType = {
   avatar: string
 }
 
-                                                      // typos
 
 export type CardsDeckType = {
   _id: string
@@ -61,4 +60,12 @@ export type CardsType = {
   updated: string
   __v: number
   _id: string
+}
+
+
+export type CardUpdateAPIType = {
+  answer: string,
+  question:string,
+  _id: string,
+  grade:number,
 }

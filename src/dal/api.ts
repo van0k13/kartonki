@@ -1,13 +1,13 @@
 import axios from "axios";
-import {CardsDeckType, CardsType, IMyProfileType} from "../bll/types";
+import {CardsDeckType, CardsType, CardUpdateAPIType, IMyProfileType} from "../bll/types";
 
-export const baseURL = 'https://cards-nya-back.herokuapp.com/1.0/';
+const baseURL = 'https://cards-nya-back.herokuapp.com/1.0/';
 
 export const instance = axios.create({
     baseURL
 });
 
-export interface ILoginization {
+interface ILoginisation {
     _id: string;
     success: boolean;
     name: string;
@@ -15,17 +15,13 @@ export interface ILoginization {
     token: string;
 }
 
-export interface IRegistration {
+interface IRegistration {
     success: boolean;
     error: string;
 }
-type updatingUserResponse = {
-    updatedUser: IMyProfileType,
-    success: boolean,
-    token: string
-}
+
 type CardsDecksDataType = {
-    cardPacks: Array<CardsDeckType>;
+    cardPacks: CardsDeckType[];
     success: boolean;
     token: string;
     error: string;
@@ -36,7 +32,7 @@ type CardsDecksDataType = {
     pageCount: number // количество элементов на странице
 }
 type CardsDataType = {
-    cards: Array<CardsType>;
+    cards: CardsType[];
     success: boolean;
     token: string;
     error: string;
@@ -46,12 +42,17 @@ type CardsDataType = {
     page: number // выбранная страница
     pageCount: number // количество элементов на странице
 }
-type UpdatedCard = {
-    updatedCard: CardsType,
+type updatingUserResponse = {
+    updatedUser: IMyProfileType,
     success: boolean,
     token: string
 }
-interface IAddNewCardsDeck {
+type updatedCardType = {
+    updatedCard: CardsType
+    success: boolean,
+    token: string,
+}
+type updatedCardDeckType = {
     newCardsPack: CardsDeckType,
     success: boolean,
     token: string,
@@ -60,7 +61,7 @@ interface IAddNewCardsDeck {
 
 export const authAPI = {
     loginizationAPI: async (email: string, password: string, rememberMe: boolean) => {
-        const response = await instance.post<ILoginization>('/auth/login', {email, password, rememberMe});
+        const response = await instance.post<ILoginisation>('/auth/login', {email, password, rememberMe});
         return response.data;
     },
     registrationAPI: async (email: string, password: string) => {
@@ -106,7 +107,7 @@ export const cardsDeckAPI = {
         return response.data;
     },
     addNewCardsDeck: async (cardsPack: { user_id: string; name: string }, token: string) => {
-        const response = await instance.post<IAddNewCardsDeck>(
+        const response = await instance.post<updatedCardDeckType>(
             `/cards/pack`, {cardsPack, token});
         return response.data;
     },
@@ -135,8 +136,8 @@ export const cardsDeckAPI = {
          });
          return response.data;
      },
-     updateCard: async (card: {answer: string, question:string, _id: string, grade:number, }, token: string) => {
-         const response = await instance.put<UpdatedCard>(`/cards/card`, {
+     updateCard: async (card: CardUpdateAPIType, token: string) => {
+         const response = await instance.put<updatedCardType>(`/cards/card`, {
              card,
              token
          });

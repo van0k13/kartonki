@@ -9,19 +9,14 @@ const initialState = {
     message: ''
 };
 
-
-const passwordRecoveringReducer = (state: typeof initialState = initialState,action: ActionTypes) => {
+type InitialStateType = typeof initialState;
+const passwordRecoveringReducer = (state:InitialStateType=initialState,action: ActionTypes):InitialStateType => {
     switch (action.type) {
         case "pswdRecover_reducer/PASSWORD_RECOVER_SUCCESS":
             return {
                 ...state,
                 success: action.recoverSuccess,
-                message: 'Успешно! Проверьте свой email.'
-            };
-        case "pswdRecover_reducer/PASSWORD_RECOVER_ERROR":
-            return {
-                ...state,
-                message: action.errorMessage
+                message: 'Successful! Check your email.'
             };
         default:
             return state;
@@ -34,23 +29,12 @@ export const passwordRecoverTC = (email:string): ThunkType =>
         try {
             dispatch(actions.isLoadingAC(true))
             const data = await authAPI.passwordRecoverAPI(email);
-            if(data.error) {
-                dispatch(actions.passwordRecoverErrorAC(data.error));
-            } else
-                dispatch(actions.passwordRecoverSuccessAC(data.success))
+            dispatch(actions.passwordRecoverSuccessAC(data.success))
         } catch (e) {
-            dispatch(actions.passwordRecoverErrorAC(e.response.data.error));
+            dispatch(actions.isErrorAC(true, e.response.data.error))
         }
         dispatch(actions.isLoadingAC(false))
     };
-
-//Action Creators (success error)
-// const passwordRecoverSuccessAC = (recoverSuccess: boolean)
-//     : IPasswordRecoverSuccess => ({type: PASSWORD_RECOVER_SUCCESS, recoverSuccess});
-//
-// export const passwordRecoverErrorAC = (errorMessage: string)
-//     : IPasswordRecoverError => ({type: PASSWORD_RECOVER_ERROR, errorMessage});
-
 
 
 export default passwordRecoveringReducer;

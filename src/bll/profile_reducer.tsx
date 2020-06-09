@@ -3,9 +3,10 @@ import {RootState} from "./store";
 import {authAPI, cardsDeckAPI} from "../dal/api";
 import {ThunkDispatch} from "redux-thunk";
 import {actions, ActionTypes} from "./actions";
+import {CardsDeckType} from "./types";
 
 const initialState = {
-    myDecks: [],
+    myDecks: [] as Array<CardsDeckType>,
     myProfile: {
         email: "",
         isAdmin: false,
@@ -21,9 +22,9 @@ const initialState = {
     },
     success: false
 }
+type InitialStateType = typeof initialState
 
-
-const profileReducer = (state: typeof initialState= initialState, action: ActionTypes) => {
+const profileReducer = (state: InitialStateType = initialState, action: ActionTypes):InitialStateType => {
     switch (action.type) {
         case 'profile_reducer/SET_MY_PROFILE':
             return {
@@ -38,8 +39,6 @@ const profileReducer = (state: typeof initialState= initialState, action: Action
     }
 }
 
-// const setMyProfileAC = (updatedUser: IMyProfileType): ISetMyProfile => ({type: SET_MY_PROFILE, updatedUser})
-// const setMyDecksAC = (decks: Array<CardsDeckType>): ISetMyDecks => ({type: SET_MY_DECKS, decks})
 
 export const getMyDecksTC = ():ThunkType =>
     async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
@@ -50,7 +49,7 @@ export const getMyDecksTC = ():ThunkType =>
         dispatch(actions.setMyDecksAC(data.cardPacks))
         dispatch(actions.setTokenAC(data.token))
     } catch (e) {
-        dispatch(actions.isLoadingAC(false))
+        dispatch(actions.isErrorAC(true, e.response.data.error))
     }
     dispatch(actions.isLoadingAC(false))
 }
@@ -62,9 +61,10 @@ export const setMyProfileTC = ():ThunkType =>
         dispatch(actions.isLoadingAC(true))
         const data = await authAPI.getProfileAPI(token)
         dispatch(actions.setTokenAC(data.token))
-        dispatch(actions.setMyProfileAC(data))
+        await dispatch(actions.setMyProfileAC(data))
+       dispatch(getMyDecksTC())
     } catch (e) {
-        dispatch(actions.isLoadingAC(false))
+        dispatch(actions.isErrorAC(true, e.response.data.error))
     }
     dispatch(actions.isLoadingAC(false))
 }
@@ -77,7 +77,7 @@ export const setAvatarTC = (newAvatar: string):ThunkType => async (
         dispatch(actions.setTokenAC(data.token))
         dispatch(actions.setMyProfileAC(data.updatedUser))
     } catch (e) {
-        dispatch(actions.isLoadingAC(false))
+        dispatch(actions.isErrorAC(true, e.response.data.error))
     }
     dispatch(actions.isLoadingAC(false))
 }
@@ -90,7 +90,7 @@ export const setNameTC = (newName: string):ThunkType => async (
         dispatch(actions.setTokenAC(data.token))
         dispatch(actions.setMyProfileAC(data.updatedUser))
     } catch (e) {
-        dispatch(actions.isLoadingAC(false))
+        dispatch(actions.isErrorAC(true, e.response.data.error))
     }
     dispatch(actions.isLoadingAC(false))
 }
