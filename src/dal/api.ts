@@ -60,6 +60,10 @@ type updatedCardDeckType = {
 }
 
 export const authAPI = {
+    getAllUsersAPI: async(token: string) => {
+        const res = await instance.get(`/social/users?token=${token}`)
+    return res.data
+},
     loginizationAPI: async (email: string, password: string, rememberMe: boolean) => {
         const response = await instance.post<ILoginisation>('/auth/login', {email, password, rememberMe});
         return response.data;

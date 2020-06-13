@@ -18,8 +18,9 @@ const RegistrationContainer = () => {
     const [repeatingPassword, setRepeatingPassword] = useState<string>('');
     const [similar, setSimilar] = useState<boolean>(false);
     useEffect(()=> {
-        if(repeatingPassword === password && repeatingPassword.length > 0) setSimilar(true)
-            else setSimilar(false)
+        repeatingPassword === password && repeatingPassword.length > 0
+            ? setSimilar(true)
+            : setSimilar(false)
     }, [repeatingPassword, password]);
     const registerMe = () => {dispatch(registrationTC(login, password))
     }

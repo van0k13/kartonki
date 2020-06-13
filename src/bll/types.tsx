@@ -33,7 +33,17 @@ export type IMyProfileType = {
   success: boolean,
   avatar: string
 }
-
+export type IUserProfile = {
+  avatar: string
+  created: string
+  email: string
+  isAdmin: boolean
+  name: string
+  publicCardPacksCount: number
+  updated: string
+  verified: boolean
+  _id: string
+}
 
 export type CardsDeckType = {
   _id: string

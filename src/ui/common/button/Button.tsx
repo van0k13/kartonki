@@ -20,7 +20,7 @@ const Button: React.FC<IPropsButton> = ({
         else if (buttonOnClickBoolean) buttonOnClickBoolean(booleanValue)
     }
     const {isLoading} = useSelector(
-        (state: RootState) => state.auth);
+        (state: RootState) => state.features);
 
     return (
         <div className={s.buttonWrapper}>

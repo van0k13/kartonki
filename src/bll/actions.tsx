@@ -1,7 +1,7 @@
 import {
     CardsDeckType,
     CardsType,
-    IMyProfileType
+    IMyProfileType, IUserProfile
 } from "./types";
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "./store";
@@ -16,6 +16,9 @@ export const actions = {
     setTokenAC: (token: string) => ({type: 'auth_reducer/SET_TOKEN', token}as const),
     loginizationSuccessAC: (loginSuccess: boolean, myName:string, token:string, id: string) =>
         ({type: 'auth_reducer/LOGIN_SUCCESS', loginSuccess, myName, token, id}as const),
+
+    //****************************all users reducer****************************
+    setAllUsers: (newUsers: IUserProfile[]) => ({type: 'auth_reducer/SET_ALL_USERS', newUsers}as const),
 
     //****************************cards reducer****************************
     editCardAC: (updatedCard: CardsType) => ({type: 'cards_reducer/EDIT_CARD', updatedCard}as const),

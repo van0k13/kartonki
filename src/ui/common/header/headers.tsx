@@ -6,7 +6,7 @@ import {
     TO_CARDS,
     TO_CARDSDECK, TO_MODALS,
     TO_PROFILE,
-    TO_RECOVER_PASSWORD,
+    TO_RECOVER_PASSWORD, TO_USERS,
 } from "../routes";
 import Button from "../button/Button";
 import Loading from "../loadingToggle/Loading";
@@ -41,6 +41,7 @@ const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess}) 
                                 setLinks(!links)
                             }}/>
                             <NavLink to={TO_CARDSDECK}>All Decks</NavLink>
+                            <NavLink to={TO_USERS}>Other Profiles</NavLink>
                             <Loading/>
                             <NavLink to={TO_PROFILE}>{myName}</NavLink>
                         </div>

@@ -8,7 +8,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState;
 
-const commonFeaturesReducer = (state:InitialStateType = initialState, action:ActionTypes):InitialStateType => {
+const globalFeaturesReducer = (state:InitialStateType = initialState, action:ActionTypes):InitialStateType => {
     switch (action.type) {
         case 'commonFeatures_reducer/IS_LOADING':
             return {
@@ -26,4 +26,4 @@ const commonFeaturesReducer = (state:InitialStateType = initialState, action:Act
     }
 }
 
-export default commonFeaturesReducer;
+export default globalFeaturesReducer;

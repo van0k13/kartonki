@@ -7,7 +7,8 @@ import passwordRecoveringReducer from "./pswdRecover_reducer";
 import registrationReducer from "./registr_reducer";
 import cardsReducer from "./cards_reducer";
 import cardsDeckReducer from "./cardsDeck_reducer";
-import commonFeaturesReducer from "./commonFeatures_reducer";
+import globalFeaturesReducer from "./commonFeatures_reducer";
+import allUsersReducer from "./allUsers_reducer";
 
 const reducerPack = combineReducers({
     auth: authReducer,
@@ -17,7 +18,8 @@ const reducerPack = combineReducers({
     registr: registrationReducer,
     cards: cardsReducer,
     decks: cardsDeckReducer,
-    features: commonFeaturesReducer
+    features: globalFeaturesReducer,
+    allUsers: allUsersReducer
 })
 export type RootState = ReturnType<typeof reducerPack>;
 
