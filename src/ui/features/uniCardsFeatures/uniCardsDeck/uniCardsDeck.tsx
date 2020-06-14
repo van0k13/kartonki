@@ -5,6 +5,7 @@ import Button from "../../../common/button/Button";
 import {CardsDeckType} from "../../../../bll/types";
 import SingleDeck from "./singleDeck";
 import Paginator3000 from "../../../common/PaginationComponent";
+import ErrorMessage from "../../../common/errorMessageToggle/ErrorMessage";
 
 interface IProps {
     createNewDeck: () => void,
@@ -49,6 +50,7 @@ const UniCardsDeck: React.FC<IProps> = ({
 
     return (
         <div className={styles.uniCardsDeckWrapper}>
+            <ErrorMessage />
             <h2>All Decks</h2>
             <Input inputPlaceholder={'item name'} inputType={'text'}
                    value={searchInput} inputOnChange={setSearchInput}/>

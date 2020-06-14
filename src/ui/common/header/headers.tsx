@@ -43,7 +43,7 @@ const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess}) 
                             <NavLink to={TO_CARDSDECK}>All Decks</NavLink>
                             <NavLink to={TO_USERS}>Other Profiles</NavLink>
                             <Loading/>
-                            <NavLink to={TO_PROFILE}>{myName}</NavLink>
+                            <NavLink to={TO_PROFILE + `/${myName}`}>{myName}</NavLink>
                         </div>
                     }
                 </div>
@@ -54,8 +54,8 @@ const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess}) 
                 <NavLink to={TO_AUTH}>Ultimate cards Teaching application</NavLink>
                 <a href={'https://send.monobank.ua/jar/3xVyeLd7sE?fbclid=IwAR0ZhTWJWQ1OQs-zBmjOggfYxD_tOekdvDjPVNITQ6yWZT5jZ_UGKAS7cTY'}>Try
                     now! for free (20$)</a>
-                <Loading />
                 <ErrorMessage />
+                <Loading />
             </div>
         </div>
     )

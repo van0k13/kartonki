@@ -20,28 +20,11 @@
 //     };
 // };
 
-export type IMyProfileType = {
-  email: string,
-  verified: boolean,
-  isAdmin: false,
-  name: string,
-  rememberMe: false,
-  token: string,
-  tokenDeathTime: number,
-  __v: number,
-  _id: string,
-  success: boolean,
-  avatar: string
-}
 export type IUserProfile = {
   avatar: string
-  created: string
   email: string
-  isAdmin: boolean
   name: string
   publicCardPacksCount: number
-  updated: string
-  verified: boolean
   _id: string
 }
 

@@ -1,16 +1,14 @@
 import {
     CardsDeckType,
-    CardsType,
-    IMyProfileType, IUserProfile
+    CardsType, IUserProfile
 } from "./types";
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "./store";
 
-
 export const actions = {
     //****************************common features reducer****************************
     isLoadingAC: (value: boolean) => ({type: 'commonFeatures_reducer/IS_LOADING', value}as const),
-    isErrorAC: (value: boolean, message: string) => ({type: 'commonFeatures_reducer/IS_ERROR', value,message}as const),
+    isErrorAC: (value: boolean, message: string) =>({type: 'commonFeatures_reducer/IS_ERROR', value,message}as const),
 
     //****************************auth reducer****************************
     setTokenAC: (token: string) => ({type: 'auth_reducer/SET_TOKEN', token}as const),
@@ -43,8 +41,11 @@ export const actions = {
         ({type: 'newPswd_reducer/NEW_PASSWORD_SUCCESS', recoverSuccess}as const),
     setNewPasswordErrorAC: (errorMessage: string) =>
          ({type: 'newPswd_reducer/NEW_PASSWORD_ERROR', errorMessage}as const),
-    setMyProfileAC: (updatedUser: IMyProfileType) => ({type: 'profile_reducer/SET_MY_PROFILE', updatedUser}as const),
-    setMyDecksAC: (decks: Array<CardsDeckType>) => ({type: 'profile_reducer/SET_MY_DECKS', decks}as const),
+
+    //****************************profile reducer****************************
+    setMyProfileAC: (updatedUser: IUserProfile) => ({type: 'profile_reducer/SET_MY_PROFILE', updatedUser}as const),
+    setDecksAC: (decks: Array<CardsDeckType>) => ({type: 'profile_reducer/SET_CURRENT_DECKS', decks}as const),
+    setChosenUserNameAC: (userName: string) => ({type: 'profile_reducer/SET_CHOSEN_USER_NAME', userName}as const),
 
     //****************************password recover reducer****************************
     passwordRecoverSuccessAC: (recoverSuccess: boolean) =>

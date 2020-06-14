@@ -14,8 +14,8 @@ const ErrorMessage = () => {
     if (isError)
         return (
             <ModalContainerNotify errorMessage={errorMessage}
-                titleName={'Error'} setIsOpenModalNotify={setIsOpenModalNotify}
-                isOpenModalNotify={isOpenModalNotify} answerFromModal={answerFromModal}/>
+                                  titleName={'Error'} setIsOpenModalNotify={setIsOpenModalNotify}
+                                  isOpenModalNotify={isOpenModalNotify} answerFromModal={answerFromModal}/>
         )
     else return null
 }

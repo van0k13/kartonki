@@ -8,28 +8,34 @@ interface IProps {
     decks: Array<CardsDeckType>,
     myName: string,
     avatar: string,
-    setIsOpenModalNewAvatar: (value: boolean) => void,
-    setIsOpenModalNewName: (value: boolean) => void,
+    similarity: boolean
+    setIsOpenModalNewAvatar?: (value: boolean) => void,
+    setIsOpenModalNewName?: (value: boolean) => void,
 }
 
 const Profile: React.FC<IProps> = ({
                                        myName, avatar,
                                        decks, setIsOpenModalNewAvatar,
-                                       setIsOpenModalNewName,
+                                       setIsOpenModalNewName,similarity
                                    }) => {
     return (
         <div className={styles.profileWrapper}>
             <div className={styles.avatarWrapper}>
                 <img src={avatar}
                      alt={myName}/>
-                <Button buttonName={'Change'}
-                        buttonOnClickBoolean={() => {
-                            setIsOpenModalNewAvatar(true)
-                        }}/>
+                {similarity && <Button buttonName={'Change'}
+                                       buttonOnClickBoolean={() => {
+                                           if (setIsOpenModalNewAvatar) {
+                                               setIsOpenModalNewAvatar(true)
+                                           }
+                                       }}/>
+                }
             </div>
             <div className={styles.myInfo}>
                 <div className={styles.nameBlock} onClick={() => {
-                    setIsOpenModalNewName(true)
+                    if (setIsOpenModalNewName && similarity) {
+                        setIsOpenModalNewName(true)
+                    }
                 }}>
                     <h2>{myName}</h2>
                     <span>(click to change)</span>

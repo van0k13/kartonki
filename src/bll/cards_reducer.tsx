@@ -85,6 +85,7 @@ export const createCardTC = (card: { cardsPack_id: string, question: string }, t
             dispatch(actions.setTokenAC(data.token));
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
+            dispatch(actions.setTokenAC(e.response.data.token))
         }
         dispatch(actions.isLoadingAC(false));
     };
@@ -99,6 +100,7 @@ export const editCardTC = (card: { answer: string, question: string, _id: string
             dispatch(actions.setTokenAC(data.token))
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
+            dispatch(actions.setTokenAC(e.response.data.token))
         }
         dispatch(actions.isLoadingAC(false));
     };
@@ -112,6 +114,7 @@ export const deleteCardTC = (token: string, cardID: string): ThunkType =>
             data.success && getCardsTC(cardsPack_id)
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
+            dispatch(actions.setTokenAC(e.response.data.token))
         }
         dispatch(actions.isLoadingAC(false));
     };

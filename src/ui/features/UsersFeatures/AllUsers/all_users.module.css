@@ -21,7 +21,12 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-}
+    text-decoration: none;
+    color: black;
+}.user:hover {
+    transition: 0.4s ease-in-out;
+    background-color: #a74255;
+ }
 .user img {
     height: 30%;
     width: 30%;

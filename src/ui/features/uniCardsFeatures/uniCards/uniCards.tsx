@@ -6,13 +6,14 @@ import {CardsType} from '../../../../bll/types';
 import {TO_CARD} from "../../../common/routes";
 import {NavLink} from 'react-router-dom';
 import Paginator3000 from "../../../common/PaginationComponent";
+import ErrorMessage from "../../../common/errorMessageToggle/ErrorMessage";
 
 interface IProps {
     setSearchInput: (value: string) => void,
     deleteCard: (value: string) => void,
     onCurrentPageClick: (value: number) => void,
-    onCurrentCardEditClick: (cardId:string) => void,
-    setIsOpenModalNewCard: (value:boolean) => void,
+    onCurrentCardEditClick: (cardId: string) => void,
+    setIsOpenModalNewCard: (value: boolean) => void,
     searchInput: string,
     cardsTotalCount: number,
     pageCount: number,
@@ -31,12 +32,13 @@ const UniCards: React.FC<IProps> = ({
 
     return (
         <div className={styles.uniCardsWrapper}>
+            <ErrorMessage />
             <h2>{currentDeckName}</h2>
             <Input inputPlaceholder={'item name'} value={searchInput}
                    inputType={'text'} inputOnChange={setSearchInput}/>
             <Button buttonName={'search'}/>
             <div className={styles.mainListWrapper}>
-                <Button buttonOnClickBoolean={()=>setIsOpenModalNewCard(true)} buttonName={'add new Item'}/>
+                <Button buttonOnClickBoolean={() => setIsOpenModalNewCard(true)} buttonName={'add new Item'}/>
                 <NavLink to={TO_CARD} className={styles.startLink}>Start now!</NavLink>
                 <Paginator3000 itemsTotalCount={cardsTotalCount} pageCount={pageCount}
                                onCurrentPageClick={onCurrentPageClick}
@@ -53,7 +55,7 @@ const UniCards: React.FC<IProps> = ({
                     <div className={styles.itemScore}>{c.grade}</div>
                     <div className={styles.buttonsInTheList}>
                         <Button buttonName={'edit'}
-                                buttonOnClickBoolean={()=>onCurrentCardEditClick(c._id)}/>
+                                buttonOnClickBoolean={() => onCurrentCardEditClick(c._id)}/>
                         <Button buttonName={'delete'} buttonOnClick={() => deleteCard(c._id)}/>
                     </div>
                 </div>)}

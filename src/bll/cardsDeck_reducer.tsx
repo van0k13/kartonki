@@ -13,7 +13,7 @@ const initialState = {
     cardPacksTotalCount: 0, // количество колод
     maxGrade: 0,
     minGrade: 0,
-    page: 3, // выбранная страница
+    page: 1, // выбранная страница
     pageCount: 3 // количество элементов на странице
 };
 
@@ -72,7 +72,9 @@ export const createNewCardDeckTC = (cardsDeck: { user_id: string; name: string }
                 dispatch(actions.setNewCardsDeckAC(data.newCardsPack,))
             dispatch(actions.setTokenAC(data.token))
         } catch (e) {
-            dispatch(actions.isErrorAC(true, e.response.data.error))        }
+            dispatch(actions.isErrorAC(true, e.response.data.error))
+            dispatch(actions.setTokenAC(e.response.data.token))
+        }
         dispatch(actions.isLoadingAC(false))
     }
 
@@ -85,7 +87,9 @@ export const editDeckTC = (editedDeck: { grade: number; name: string; _id: strin
                 getDecksTC(data.token)
             }
         } catch (e) {
-            dispatch(actions.isErrorAC(true, e.response.data.error))        }
+            dispatch(actions.isErrorAC(true, e.response.data.error))
+            dispatch(actions.setTokenAC(e.response.data.token))
+        }
         dispatch(actions.isLoadingAC(false))
     }
 
@@ -99,7 +103,9 @@ export const deleteDeckTC = (token: string, deckId: string):ThunkType =>
                 getDecksTC(data.token)
             }
         } catch (e) {
-            dispatch(actions.isErrorAC(true, e.response.data.error))        }
+            dispatch(actions.isErrorAC(true, e.response.data.error))
+            dispatch(actions.setTokenAC(e.response.data.token))
+        }
         dispatch(actions.isLoadingAC(false))
     };
 

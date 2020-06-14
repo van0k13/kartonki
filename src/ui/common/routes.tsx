@@ -13,7 +13,7 @@ import AllUsersPage from "../features/UsersFeatures/AllUsers/all_usersPage";
 
 export const TO_AUTH = '/auth/';
 export const TO_NEW_PASSWORD = '/new-password/:token';
-export const TO_PROFILE = '/profile/';
+export const TO_PROFILE = '/profile/:userName';
 export const TO_RECOVER_PASSWORD = '/recover-password/';
 export const TO_REGISTRATION = '/registration/';
 export const TO_CARDS = '/cards/:id';
@@ -27,7 +27,7 @@ export const AllRoutes: React.FC = () => {
         <Switch>
             <Route path={TO_AUTH} render={()=> <LoginizationPage />} />
             <Route path={TO_NEW_PASSWORD + '/:token'} render={()=> <NewPswdPage />} />
-            <Route path={TO_PROFILE} render={()=> <ProfilePage />} />
+            <Route path={TO_PROFILE + `/:userName`} render={()=> <ProfilePage />} />
             <Route path={TO_RECOVER_PASSWORD} render={()=> <PswdRecoverPage />} />
             <Route path={TO_REGISTRATION} render={()=> <RegistrationPage />} />
             <Route path={TO_CARDS + '/:deckId'} render={()=> <UniCardsPage />} />

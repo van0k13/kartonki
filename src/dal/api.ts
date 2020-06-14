@@ -1,18 +1,34 @@
 import axios from "axios";
-import {CardsDeckType, CardsType, CardUpdateAPIType, IMyProfileType} from "../bll/types";
+import {CardsDeckType, CardsType, CardUpdateAPIType, IUserProfile} from "../bll/types";
 
 const baseURL = 'https://cards-nya-back.herokuapp.com/1.0/';
 
 export const instance = axios.create({
     baseURL
 });
-
+type IAuthMeData = {
+    email: string,
+    isAdmin: boolean,
+    name: string,
+    rememberMe: boolean,
+    token: string,
+    tokenDeathTime: number,
+    __v: number,
+    _id: string,
+    success: boolean,
+    avatar: string,
+    publicCardPacksCount: number
+}
 interface ILoginisation {
     _id: string;
     success: boolean;
     name: string;
     error: string;
     token: string;
+}
+interface getUserProfileData {
+    users: Array<IUserProfile>,
+    token: string
 }
 
 interface IRegistration {
@@ -43,7 +59,7 @@ type CardsDataType = {
     pageCount: number // количество элементов на странице
 }
 type updatingUserResponse = {
-    updatedUser: IMyProfileType,
+    updatedUser: IUserProfile,
     success: boolean,
     token: string
 }
@@ -85,8 +101,12 @@ export const authAPI = {
             {password, resetPasswordToken});
         return response.data;
     },
-    getProfileAPI: async (token: string) => {
-        const response = await instance.post<IMyProfileType>('/auth/me', {token});
+    getMyProfileAPI: async (token: string) => {
+        const response = await instance.post<IAuthMeData>('/auth/me', {token});
+        return response.data
+    },
+    getUserProfileAPI: async (token: string, userName: string) => {
+        const response = await instance.get<getUserProfileData>(`/social/users?token=${token}&userName=${userName}`);
         return response.data
     },
     setProfileAvatarAPI: async(token: string, avatar: string) => {
@@ -100,7 +120,7 @@ export const authAPI = {
 };
 
 export const cardsDeckAPI = {
-    getMyDecks: async (token: string, userId:string) => {
+    getDecks: async (token: string, userId:string) => {
         const response = await instance.get<CardsDecksDataType>(
             `/cards/pack?token=${token}&user_id=${userId}`);
         return response.data;

@@ -15,15 +15,17 @@ const Loading = () => {
         }, 1000);
         return points
     };
-    if(isLoading) {return (
-        <div>
-            <span className={s.loadingWrapper}/>
-            <span className={s.loadingProgress}>
-                { 'LOADING' + loadingProgress()}
+    if (isLoading)
+        return (
+            <div>
+                <span className={s.loadingWrapper}/>
+                <span className={s.loadingProgress}>
+                {'LOADING' + loadingProgress()}
 
             </span>
-        </div>
-    )} else return null
+            </div>
+        )
+    else return null
 };
 
 export default Loading;

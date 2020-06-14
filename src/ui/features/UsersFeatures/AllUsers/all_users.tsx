@@ -1,6 +1,8 @@
 import React from 'react'
 import s from './all_users.module.css'
 import {IUserProfile} from "../../../../bll/types";
+import { NavLink } from 'react-router-dom';
+import {TO_PROFILE} from "../../../common/routes";
 
 interface IProps {
     users: Array<IUserProfile>
@@ -8,14 +10,14 @@ interface IProps {
 
 const AllUsers: React.FC<IProps> = ({users}) => {
     const usersElements = users.map(u =>
-        <div className={s.user}>
+        <NavLink to={TO_PROFILE + `/${u.name}`} key={u._id} className={s.user}>
             <img src={u.avatar? u.avatar
                 : 'https://cdn4.iconfinder.com/data/icons/e-commerce-181/512/477_profile__avatar__man_-512.png'}
                  alt="user's avatar"/>
-            <span>{u.email}</span>
-            <span>{u.name}</span>
+            <span>email: {u.email}</span>
+            <span>name: {u.name}</span>
             <span>publicCardPacksCount: {u.publicCardPacksCount}</span>
-        </div>
+        </NavLink>
     )
     return (
         <div className={s.componentWrapper}>
