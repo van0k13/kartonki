@@ -14,6 +14,7 @@ export const actions = {
     setTokenAC: (token: string) => ({type: 'auth_reducer/SET_TOKEN', token}as const),
     loginizationSuccessAC: (loginSuccess: boolean, myName:string, token:string, id: string) =>
         ({type: 'auth_reducer/LOGIN_SUCCESS', loginSuccess, myName, token, id}as const),
+    logOutAC: () => ({type: 'auth_reducer/LOG_OUT'}as const),
 
     //****************************all users reducer****************************
     setAllUsers: (newUsers: IUserProfile[]) => ({type: 'auth_reducer/SET_ALL_USERS', newUsers}as const),

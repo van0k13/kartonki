@@ -18,23 +18,23 @@ const ProfileContainer = () => {
     const [URLonChange, setURLonChange] = useState<string>(avatar) //NOURL = Name Or URL
     const [isOpenModalNewAvatar, setIsOpenModalNewAvatar] = useState<boolean>(false)
     const [isOpenModalNewName, setIsOpenModalNewName] = useState<boolean>(false)
-
     useEffect(()=>{
+        setNameOnChange(name); setURLonChange(avatar);
         if(name === myName) setSimilarity(true)
+        else setSimilarity(false)
     },[name])
     useEffect(()=>{if(userName === myName) dispatch(setMyProfileTC())},[])
     useEffect(() => {
        dispatch(actions.setChosenUserNameAC(userName))
        if(userName !== myName) dispatch(setUserProfileTC())
+        else dispatch(setMyProfileTC())
     }, [userName])
     const changeName = (newNOURLChange: string) => {     // sending new NAME information on server
         dispatch(setNameTC(newNOURLChange))
-        setNameOnChange('')
         setIsOpenModalNewName(false)
     }
     const changeAvatar = (newNOURLChange: string) => {  // sending new AVATAR information on server
         dispatch(setAvatarTC(newNOURLChange))
-        setURLonChange('')
         setIsOpenModalNewAvatar(false)
     }
     return (

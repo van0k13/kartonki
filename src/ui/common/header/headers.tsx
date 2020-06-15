@@ -17,10 +17,12 @@ interface IHeaderProps {
     setLinks: (value: boolean) => void,
     authSuccess: boolean,
     links: boolean,
-    myName: string
+    myName: string,
+    logOut: () => void
 }
 
-const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess}) => {
+const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess,
+                                            logOut}) => {
     if (authSuccess)
         return (
                 <div className={styles.headerWrapper}>
@@ -44,6 +46,7 @@ const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess}) 
                             <NavLink to={TO_USERS}>Other Profiles</NavLink>
                             <Loading/>
                             <NavLink to={TO_PROFILE + `/${myName}`}>{myName}</NavLink>
+                            <Button buttonOnClick={logOut} buttonName={'log out'}/>
                         </div>
                     }
                 </div>
