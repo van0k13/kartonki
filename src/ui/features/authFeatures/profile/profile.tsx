@@ -11,12 +11,13 @@ interface IProps {
     similarity: boolean
     setIsOpenModalNewAvatar?: (value: boolean) => void,
     setIsOpenModalNewName?: (value: boolean) => void,
+    createNewDeck: (value: boolean) => void,
 }
 
 const Profile: React.FC<IProps> = ({
-                                       myName, avatar,
+                                       myName, avatar, createNewDeck,
                                        decks, setIsOpenModalNewAvatar,
-                                       setIsOpenModalNewName,similarity
+                                       setIsOpenModalNewName, similarity
                                    }) => {
     return (
         <div className={styles.profileWrapper}>
@@ -40,8 +41,20 @@ const Profile: React.FC<IProps> = ({
                     <h2>{myName}</h2>
                     <span>(click to change)</span>
                 </div>
-                <div className={styles.myDecksTitle}>My Decks</div>
-                <MyDecks decks={decks}/>
+                <div className={styles.myDecksTitle}>
+                    {similarity
+                    ?<div className={styles.myDecksTitleSubSection}>
+                        <span> My Decks </span>
+                        <Button buttonName={'create new deck'}
+                                buttonOnClickBoolean={() => createNewDeck(true)}/>
+                    </div>
+                        : <div> Decks</div>
+                    }
+                <hr/>
+                    <MyDecks decks={decks}/>
+                </div>
+
+
             </div>
         </div>
     );

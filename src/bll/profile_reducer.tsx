@@ -59,7 +59,8 @@ export const setMyProfileTC = (): ThunkType =>
                 email: data.email,
                 name: data.name,
                 publicCardPacksCount: data.publicCardPacksCount,
-                _id: data._id}
+                _id: data._id
+            }
             dispatch(actions.setMyProfileAC(setMyData))
             dispatch(getDecksTC(id))
         } catch (e) {
@@ -82,6 +83,7 @@ export const setUserProfileTC = (): ThunkType =>
         }
         dispatch(actions.isLoadingAC(false))
     }
+
 export const setAvatarTC = (newAvatar: string): ThunkType => async (
     dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
     const {token} = getState().auth
@@ -95,6 +97,7 @@ export const setAvatarTC = (newAvatar: string): ThunkType => async (
     }
     dispatch(actions.isLoadingAC(false))
 }
+
 export const setNameTC = (newName: string): ThunkType => async (
     dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
     const {token} = getState().auth
@@ -108,4 +111,6 @@ export const setNameTC = (newName: string): ThunkType => async (
     }
     dispatch(actions.isLoadingAC(false))
 }
+
+
 export default profileReducer;

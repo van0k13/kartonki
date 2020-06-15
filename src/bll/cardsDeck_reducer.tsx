@@ -100,7 +100,7 @@ export const deleteDeckTC = (token: string, deckId: string):ThunkType =>
             const data = await cardsDeckAPI.deleteCardsDeck(token, deckId)
             dispatch(actions.setTokenAC(data.token));
             if (data.success) {
-                getDecksTC(data.token)
+                dispatch(getDecksTC(data.token))
             }
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
