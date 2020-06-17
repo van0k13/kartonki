@@ -22,13 +22,11 @@ const allUsersReducer = (state: initialStateType = initialState, action: ActionT
 }
 
 export const getAllUsersTC = (): ThunkType =>
-    async(dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState)  => {
-    const {token} = getState().auth
+    async(dispatch: ThunkDispatch<RootState, unknown, ActionTypes>)  => {
         try {
             dispatch(actions.isLoadingAC(true));
-            const usersData = await authAPI.getAllUsersAPI(token)
+            const usersData = await authAPI.getAllUsersAPI()
             dispatch(actions.setAllUsers(usersData.users))
-            dispatch(actions.setTokenAC(usersData.token))
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
         }

@@ -13,7 +13,6 @@ import {actions} from "../../../../bll/actions";
 const UniCardsContainer = () => {
     const dispatch = useDispatch()
     const {deckId} = useParams()
-    const {token} = useSelector((state: RootState) => state.auth)
     const {currentDeckName} = useSelector((state: RootState) => state.decks)
     const {cards, cardsTotalCount, pageCount, page, currentCard} = useSelector((state: RootState) => state.cards)
     const [searchInput, setSearchInput] = useState<string>('')
@@ -52,7 +51,7 @@ const UniCardsContainer = () => {
     const answerFromNewCardModal = (answer: boolean) => {
         if (answer) {
             const card = {cardsPack_id: deckId, question: cardQuestion, answer: cardAnswer}
-            dispatch(createCardTC(card, token))
+            dispatch(createCardTC(card))
             setIsOpenModalDelete(false)
             setCardQuestion('')
             setCardAnswer('')
@@ -64,7 +63,7 @@ const UniCardsContainer = () => {
     }
     const answerFromDeleteModal = (answer: boolean) => {
         if (answer) {
-            dispatch(deleteCardTC(token, card_Id))
+            dispatch(deleteCardTC(card_Id))
             setIsOpenModalDelete(false)
         } else setIsOpenModalDelete(false)
     }

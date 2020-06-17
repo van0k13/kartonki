@@ -11,7 +11,7 @@ export const actions = {
     isErrorAC: (value: boolean, message: string) =>({type: 'commonFeatures_reducer/IS_ERROR', value,message}as const),
 
     //****************************auth reducer****************************
-    setTokenAC: (token: string) => ({type: 'auth_reducer/SET_TOKEN', token}as const),
+    setAuthSuccessAC: () => ({type: 'auth_reducer/SET_AUTH_SUCCESS'}as const),
     loginizationSuccessAC: (loginSuccess: boolean, myName:string, token:string, id: string) =>
         ({type: 'auth_reducer/LOGIN_SUCCESS', loginSuccess, myName, token, id}as const),
     logOutAC: () => ({type: 'auth_reducer/LOG_OUT'}as const),

@@ -1,5 +1,6 @@
 import axios from "axios";
 import {CardsDeckType, CardsType, CardUpdateAPIType, IUserProfile} from "../bll/types";
+import { takeTokenFromLS, saveTokenToLS } from "../ui/common/save&takeToken";
 
 const baseURL = 'https://cards-nya-back.herokuapp.com/1.0/';
 
@@ -76,12 +77,16 @@ type updatedCardDeckType = {
 }
 
 export const authAPI = {
-    getAllUsersAPI: async(token: string) => {
-        const res = await instance.get(`/social/users?token=${token}`)
-    return res.data
+    getAllUsersAPI: async() => {
+        const token = takeTokenFromLS();
+        const response = await instance.get(`/social/users?token=${token}`)
+        saveTokenToLS(response.data.token)
+    return response.data
 },
     loginizationAPI: async (email: string, password: string, rememberMe: boolean) => {
         const response = await instance.post<ILoginisation>('/auth/login', {email, password, rememberMe});
+        saveTokenToLS(response.data.token)
+        console.log('after login token: ' + response.data.token)
         return response.data;
     },
     registrationAPI: async (email: string, password: string) => {
@@ -101,76 +106,100 @@ export const authAPI = {
             {password, resetPasswordToken});
         return response.data;
     },
-    getMyProfileAPI: async (token: string) => {
+    getMyProfileAPI: async () => {
+        const token = takeTokenFromLS();
         const response = await instance.post<IAuthMeData>('/auth/me', {token});
+        saveTokenToLS(response.data.token)
         return response.data
     },
-    getUserProfileAPI: async (token: string, userName: string) => {
+    getUserProfileAPI: async (userName: string) => {
+        const token = takeTokenFromLS();
         const response = await instance.get<getUserProfileData>(`/social/users?token=${token}&userName=${userName}`);
+        saveTokenToLS(response.data.token)
         return response.data
     },
-    setProfileAvatarAPI: async(token: string, avatar: string) => {
+    setProfileAvatarAPI: async(avatar: string) => {
+        const token = takeTokenFromLS();
         const response = await instance.put<updatingUserResponse>('/auth/me', {token, avatar});
+        saveTokenToLS(response.data.token)
         return response.data
     },
-    setProfileNameAPI: async(token: string, name:string) => {
+    setProfileNameAPI: async(name:string) => {
+        const token = takeTokenFromLS();
         const response = await instance.put<updatingUserResponse>('/auth/me', {token, name});
+        saveTokenToLS(response.data.token)
         return response.data
     }
 };
 
 export const cardsDeckAPI = {
-    getDecks: async (token: string, userId:string) => {
+    getDecks: async (userId:string) => {
+        const token = takeTokenFromLS();
         const response = await instance.get<CardsDecksDataType>(
             `/cards/pack?token=${token}&user_id=${userId}`);
+        saveTokenToLS(response.data.token)
         return response.data;
     },
-    getAllCardsDecks: async (token: string, pageCount:number, page:number) => {
+    getAllCardsDecks: async (pageCount:number, page:number) => {
+        const token = takeTokenFromLS();
         const response = await instance.get<CardsDecksDataType>(
             `/cards/pack?token=${token}&pageCount=${pageCount}&page=${page}`);
+        saveTokenToLS(response.data.token)
         return response.data;
     },
-    addNewCardsDeck: async (cardsPack: { user_id: string; name: string }, token: string) => {
+    addNewCardsDeck: async (cardsPack: { user_id: string; name: string }) => {
+        const token = takeTokenFromLS();
         const response = await instance.post<updatedCardDeckType>(
             `/cards/pack`, {cardsPack, token});
+        saveTokenToLS(response.data.token)
         return response.data;
     },
-    updateCardsDeck: async(cardsPack: { grade: number; name: string; _id: string },token:string,) => {
+    updateCardsDeck: async(cardsPack: { grade: number; name: string; _id: string }) => {
+        const token = takeTokenFromLS();
         const response = await instance.put<CardsDecksDataType>(
             `/cards/pack`, {cardsPack, token });
+        saveTokenToLS(response.data.token)
         return response.data;
     },
-    deleteCardsDeck: async(token:string, id: string) => {
+    deleteCardsDeck: async(id: string) => {
+        const token = takeTokenFromLS();
         const response = await instance.delete<CardsDecksDataType>(
             `/cards/pack?token=${token}&id=${id}`);
+        saveTokenToLS(response.data.token)
         return response.data;
     },
 };
 
  export const cardsAPI = {
-     getCards: async (token: string, id: string, pageCount:number, page:number) => {
+     getCards: async (id: string, pageCount:number, page:number) => {
+         const token = takeTokenFromLS();
          const response =await instance.get<CardsDataType>(
              `/cards/card?token=${token}&cardsPack_id=${id}&pageCount=${pageCount}&page=${page}`);
+         saveTokenToLS(response.data.token)
          return response.data;
      },
-     addCard: async (card: { cardsPack_id:string, question:string }, token: string) => {
+     addCard: async (card: { cardsPack_id:string, question:string }) => {
+         const token = takeTokenFromLS();
          const response = await instance.post(`/cards/card`, {
              card,
              token,
          });
+         saveTokenToLS(response.data.token)
          return response.data;
      },
-     updateCard: async (card: CardUpdateAPIType, token: string) => {
+     updateCard: async (card: CardUpdateAPIType) => {
+         const token = takeTokenFromLS();
          const response = await instance.put<updatedCardType>(`/cards/card`, {
              card,
              token
          });
-
+         saveTokenToLS(response.data.token)
          return response.data;
      },
-     deleteCard: async (token: string, id: string) => {
+     deleteCard: async (id: string) => {
+         const token = takeTokenFromLS();
          const response = await instance.delete(`/cards/card?token=${token}&id=${id}`);
-
+         saveTokenToLS(response.data.token)
          return response.data;
      },
  };

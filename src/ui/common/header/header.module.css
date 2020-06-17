@@ -21,7 +21,6 @@
     color: aliceblue;
     text-decoration: underline;
     text-transform: capitalize;
-    padding: 0 150px;
     font-weight: 600;
     font-size: 20px;
     letter-spacing: 2px;
@@ -34,4 +33,15 @@
 }
 .headerWrapper button {
     cursor: pointer;
+}
+.logOutLink {
+    color: rgba(255, 255, 255, 0);
+    transition: all 0.5s;
+    position: relative;
+    height: 40px;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgba(28, 28, 35, 0.73);
+    font-family:'Josefin Sans', sans-serif;
 }

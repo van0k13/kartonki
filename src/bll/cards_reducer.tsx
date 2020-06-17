@@ -4,6 +4,7 @@ import {RootState} from "./store";
 import {ThunkDispatch} from "redux-thunk";
 import {actions, ActionTypes} from "./actions";
 import {CardsType} from "./types";
+import {saveTokenToLS} from "../ui/common/save&takeToken";
 
 const defCurrentCard = {
     answer: "default",
@@ -65,56 +66,50 @@ const cardsReducer = (state: initialStateType = initialState, action: ActionType
 export const getCardsTC = (id: string): ThunkType =>
     async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
         const {pageCount, page} = getState().cards
-        const {token} = getState().auth
         try {
             dispatch(actions.isLoadingAC(true));
-            const data = await cardsAPI.getCards(token, id, pageCount, page);
+            const data = await cardsAPI.getCards(id, pageCount, page);
             dispatch(actions.getCardsAC(data.cards, data.cardsTotalCount, data.pageCount, data.page));
-            dispatch(actions.setTokenAC(data.token));
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
         }
         dispatch(actions.isLoadingAC(false));
     };
-export const createCardTC = (card: { cardsPack_id: string, question: string }, token: string):ThunkType =>
+export const createCardTC = (card: { cardsPack_id: string, question: string }):ThunkType =>
     async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
         try {
             dispatch(actions.isLoadingAC(true));
-            const data = await cardsAPI.addCard(card, token);
+            const data = await cardsAPI.addCard(card);
             dispatch(actions.createCardAC(data.newCard, data.success));
-            dispatch(actions.setTokenAC(data.token));
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
-            dispatch(actions.setTokenAC(e.response.data.token))
+            saveTokenToLS(e.response.data.token)
         }
         dispatch(actions.isLoadingAC(false));
     };
 
 export const editCardTC = (card: { answer: string, question: string, _id: string, grade: number, }): ThunkType =>
-    async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
-    const {token} = getState().auth
+    async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
         try {
             dispatch(actions.isLoadingAC(true));
-            const data = await cardsAPI.updateCard(card, token);
+            const data = await cardsAPI.updateCard(card);
             dispatch(actions.editCardAC(data.updatedCard))
-            dispatch(actions.setTokenAC(data.token))
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
-            dispatch(actions.setTokenAC(e.response.data.token))
+            saveTokenToLS(e.response.data.token)
         }
         dispatch(actions.isLoadingAC(false));
     };
-export const deleteCardTC = (token: string, cardID: string): ThunkType =>
+export const deleteCardTC =(cardID: string): ThunkType =>
     async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
         const {currentCard: {cardsPack_id}} = getState().cards
         try {
             dispatch(actions.isLoadingAC(true));
-            const data = await cardsAPI.deleteCard(token, cardID);
-            dispatch(actions.setTokenAC(data.token));
+            const data = await cardsAPI.deleteCard(cardID);
             data.success && getCardsTC(cardsPack_id)
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
-            dispatch(actions.setTokenAC(e.response.data.token))
+            saveTokenToLS(e.response.data.token)
         }
         dispatch(actions.isLoadingAC(false));
     };

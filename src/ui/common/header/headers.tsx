@@ -15,15 +15,15 @@ import ErrorMessage from "../errorMessageToggle/ErrorMessage";
 
 interface IHeaderProps {
     setLinks: (value: boolean) => void,
-    authSuccess: boolean,
+    token: string,
     links: boolean,
     myName: string,
     logOut: () => void
 }
 
-const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess,
+const Header: React.FC<IHeaderProps> = ({setLinks, links, myName,token,
                                             logOut}) => {
-    if (authSuccess)
+    if (token)
         return (
                 <div className={styles.headerWrapper}>
                     {!links
@@ -46,7 +46,7 @@ const Header: React.FC<IHeaderProps> = ({setLinks, links, myName, authSuccess,
                             <NavLink to={TO_USERS}>Other Profiles</NavLink>
                             <Loading/>
                             <NavLink to={TO_PROFILE + `/${myName}`}>{myName}</NavLink>
-                            <Button buttonOnClick={logOut} buttonName={'log out'}/>
+                            <NavLink className={styles.logOutLink} to={TO_AUTH} onClick={logOut} >Log Out</NavLink>
                         </div>
                     }
                 </div>

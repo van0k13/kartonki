@@ -15,7 +15,7 @@ const ProfileContainer = () => {
 
     const {currentDecks, currentUserProfile: {name, avatar, _id}} =
         useSelector((state: RootState) => state.profile)
-    const {myName,token} = useSelector((state: RootState) => state.auth)
+    const {myName} = useSelector((state: RootState) => state.auth)
 
     const [similarity, setSimilarity] = useState<boolean>(false) // if I am on my profile page
     const [nameOnChange, setNameOnChange] = useState<string>(name) // input on change
@@ -49,7 +49,7 @@ const ProfileContainer = () => {
             user_id: _id,
             name: newDeckName
         }
-        dispatch(createNewCardDeckTC(newDeck, token));
+        dispatch(createNewCardDeckTC(newDeck));
         setIsOpenModalNewCardDeck(false)
         setNewDeckOnChange('')
     }

@@ -1,15 +1,15 @@
 import React from 'react'
-import {useSelector} from "react-redux";
-import {RootState} from "../../bll/store";
 import {TO_AUTH, TO_REGISTRATION} from "./routes";
 import {NavLink} from "react-router-dom";
+import {takeTokenFromLS} from "./save&takeToken";
+
 
 
 
 const WithAuthHOC = (Component: any) => {
     const WrapperContainer = () => {
-        const {authSuccess} = useSelector((state: RootState) => state.auth)
-        if (authSuccess)
+        const token = takeTokenFromLS()
+        if (token)
             return <Component/>
         return (
             <>

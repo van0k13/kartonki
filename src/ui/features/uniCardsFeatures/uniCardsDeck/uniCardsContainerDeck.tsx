@@ -16,7 +16,7 @@ import {actions} from "../../../../bll/actions";
 const UniCardsContainerDeck = () => {
 
     const dispatch = useDispatch()
-    const {token, id} = useSelector((state: RootState) => state.auth)
+    const {id} = useSelector((state: RootState) => state.auth)
     const {decks, currentDeckId, cardPacksTotalCount, pageCount, page} =
         useSelector((state: RootState) => state.decks)
     const [newDeckName, setNewDeckName] = useState<string>('')
@@ -25,7 +25,7 @@ const UniCardsContainerDeck = () => {
     const [editNameInput, setEditNameInput] = useState<string>('')
     const [editGradeInput, setEditGradeInput] = useState<number>(0)
     useEffect(() => {
-        dispatch(getDecksTC(token))
+        dispatch(getDecksTC())
     }, [page])
 
     const setDeckName = (deckName: string) => {
@@ -36,7 +36,7 @@ const UniCardsContainerDeck = () => {
             user_id: id,
             name: newDeckName
         };
-        dispatch(createNewCardDeckTC(cardsDeck, token));
+        dispatch(createNewCardDeckTC(cardsDeck));
         setNewDeckName('');
     }
     const editDeck = (_deckId: string) => {
@@ -45,7 +45,7 @@ const UniCardsContainerDeck = () => {
             grade: editGradeInput,
             name: editNameInput
         }
-        dispatch(editDeckTC(editedDeck, token))
+        dispatch(editDeckTC(editedDeck))
     }
     const deleteDeck = (deckId: string) => {
         dispatch(actions.setCurrentDeckIdAC(deckId))
@@ -53,7 +53,7 @@ const UniCardsContainerDeck = () => {
     }
     const answerFromDeleteModal = (answer: boolean) => {
         if (answer) {
-            dispatch(deleteDeckTC(token, currentDeckId))
+            dispatch(deleteDeckTC(currentDeckId))
             setIsOpenModalDelete(false)
         } else setIsOpenModalDelete(false)
     }

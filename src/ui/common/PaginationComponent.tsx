@@ -22,11 +22,11 @@ const Paginator3000: React.FC<IProps> = ({
         <div className={styles.pages}>
             {pages.map(p => {
                 return (
-                    <span key={p +1 } onClick={() => onCurrentPageClick(p)}
+                    <span key={p + 1} onClick={() => onCurrentPageClick(p)}
                           className={currentPage === p
                               ? styles.selectedPage
                               : styles.spanPage}>{p}
-                            </span>
+                    </span>
                 )
             })}
         </div>

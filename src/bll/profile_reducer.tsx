@@ -34,13 +34,11 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionTy
 
 
 export const getDecksTC = (id: string): ThunkType =>
-    async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
-        const {token} = getState().auth
+    async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
         try {
             dispatch(actions.isLoadingAC(true))
-            const data = await cardsDeckAPI.getDecks(token, id)
+            const data = await cardsDeckAPI.getDecks(id)
             dispatch(actions.setDecksAC(data.cardPacks))
-            dispatch(actions.setTokenAC(data.token))
         } catch (e) {
             dispatch(actions.isErrorAC(true, e.response.data.error))
         }
@@ -49,11 +47,10 @@ export const getDecksTC = (id: string): ThunkType =>
 
 export const setMyProfileTC = (): ThunkType =>
     async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
-        const {id, token} = getState().auth
+        const {id} = getState().auth
         try {
             dispatch(actions.isLoadingAC(true))
-            const data = await authAPI.getMyProfileAPI(token)
-            dispatch(actions.setTokenAC(data.token))
+            const data = await authAPI.getMyProfileAPI()
             const setMyData = {
                 avatar: data.avatar,
                 email: data.email,
@@ -68,14 +65,13 @@ export const setMyProfileTC = (): ThunkType =>
         }
         dispatch(actions.isLoadingAC(false))
     }
+
 export const setUserProfileTC = (): ThunkType =>
     async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
-        const {token} = getState().auth
         const {chosenUserName} = getState().profile
         try {
             dispatch(actions.isLoadingAC(true))
-            const data = await authAPI.getUserProfileAPI(token, chosenUserName)
-            dispatch(actions.setTokenAC(data.token))
+            const data = await authAPI.getUserProfileAPI(chosenUserName)
             dispatch(actions.setMyProfileAC(data.users[0]))
             dispatch(getDecksTC(data.users[0]._id))
         } catch (e) {
@@ -85,12 +81,10 @@ export const setUserProfileTC = (): ThunkType =>
     }
 
 export const setAvatarTC = (newAvatar: string): ThunkType => async (
-    dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
-    const {token} = getState().auth
+    dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
     try {
         dispatch(actions.isLoadingAC(true))
-        const data = await authAPI.setProfileAvatarAPI(token, newAvatar)
-        dispatch(actions.setTokenAC(data.token))
+        const data = await authAPI.setProfileAvatarAPI(newAvatar)
         dispatch(actions.setMyProfileAC(data.updatedUser))
     } catch (e) {
         dispatch(actions.isErrorAC(true, e.response.data.error))
@@ -99,12 +93,10 @@ export const setAvatarTC = (newAvatar: string): ThunkType => async (
 }
 
 export const setNameTC = (newName: string): ThunkType => async (
-    dispatch: ThunkDispatch<RootState, unknown, ActionTypes>, getState: () => RootState) => {
-    const {token} = getState().auth
+    dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
     try {
         dispatch(actions.isLoadingAC(true))
-        const data = await authAPI.setProfileNameAPI(token, newName)
-        dispatch(actions.setTokenAC(data.token))
+        const data = await authAPI.setProfileNameAPI(newName)
         dispatch(actions.setMyProfileAC(data.updatedUser))
     } catch (e) {
         dispatch(actions.isErrorAC(true, e.response.data.error))
